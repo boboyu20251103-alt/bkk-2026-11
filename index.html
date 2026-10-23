@@ -1,0 +1,1135 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>曼谷 2026-11 行程</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ctext y='14' font-size='14'%3E%F0%9F%8C%BF%3C/text%3E%3C/svg%3E">
+<meta name="theme-color" content="#f6f5f2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141317" media="(prefers-color-scheme: dark)">
+<style>
+:root {
+  --bg:#f6f5f2; --fg:#1b1a18; --dim:#5c5852; --mute:#7a746c;
+  --line:#e5e1d9; --soft:#efece6; --card:#fff;
+  --accent:#a85a2f; --on-accent:#fff;
+  --warn:#b94a2f; --warnbg:#fdeee7; --warnln:#f0b89f;
+  --radius:12px;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#141317; --fg:#ece9e3;
+           --line:#2b2830; --soft:#1c1a1f; --card:#1f1d23;
+           --dim:#b0aaa1; --mute:#948d84;
+           --accent:#e49268; --on-accent:#1a110a;
+           --warn:#f0a083; --warnbg:#2d1d17; --warnln:#8a4a30;
+           color-scheme: dark; }
+}
+* { box-sizing:border-box; }
+html { -webkit-text-size-adjust:100%; text-size-adjust:100%; }
+body { margin:0; background:var(--bg); color:var(--fg);
+  font:16px/1.6 system-ui,-apple-system,"Noto Sans TC","PingFang TC",sans-serif;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:0 40px; max-width:720px; margin-inline:auto; }
+h1 { font-size:1.35rem; margin:20px 0 2px; }
+h2 { font-size:1.05rem; margin:22px 0 8px; }
+h3 { font-size:1rem; margin:0 0 4px; }
+.sub2,.dim { color:var(--dim); font-size:.85rem; }
+.stamp { color:var(--dim); font-size:.75rem; margin:0 0 12px; }
+nav { display:flex; gap:6px; position:sticky; top:0; z-index:5;
+  background:var(--bg); padding-block:8px; border-bottom:1px solid var(--line);
+  margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));
+  padding-inline:max(16px,env(safe-area-inset-left,0px)); }
+nav button { flex:1; padding:11px 4px; font:inherit; font-size:.9rem; font-weight:500; cursor:pointer;
+  background:transparent; color:var(--dim); border:0; border-bottom:2px solid transparent;
+  min-height:44px; }
+nav button[aria-selected="true"] { color:var(--accent); border-bottom-color:var(--accent); font-weight:600; }
+section[hidden] { display:none; }
+details { background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+  padding:12px 14px; margin:12px 0; }
+summary { cursor:pointer; font-weight:600; list-style:none;
+  padding:4px 0; min-height:32px; display:flex; align-items:center; }
+summary::-webkit-details-marker { display:none; }
+summary::before { content:"▸"; color:var(--mute); display:inline-block; width:18px;
+  font-size:.9em; }
+details[open] > summary::before { transform:rotate(90deg); }
+.dlabel { color:var(--accent); letter-spacing:.02em; margin-right:.34em; }
+.area { color:var(--dim); font-size:.85rem; margin:8px 0; }
+ul.warn { background:var(--warnbg); border-left:3px solid var(--warn); border-radius:6px;
+  list-style:none; padding:10px 12px 10px 14px; margin:10px 0; font-size:.9rem; color:var(--fg);
+  text-wrap:pretty; }
+ul.warn li { padding:2px 0; text-wrap:balance; }
+ul.warn li::before { content:"⚠ "; color:var(--warn); margin-right:4px; }
+.pack { font-size:.86rem; background:var(--soft); border-radius:8px; padding:8px 12px;
+  color:var(--dim); }
+ol.timeline { list-style:none; padding:0; margin:10px 0 0; }
+li.stop { display:grid; grid-template-columns:52px 1fr; gap:14px; padding:0 0 18px;
+  position:relative; min-width:0; align-items:start; }
+/* 貫穿的軸線 */
+li.stop::before { content:""; position:absolute; left:60px; top:20px; bottom:0;
+  width:2px; background:var(--line); pointer-events:none; }
+li.stop:last-child::before { display:none; }
+/* 節點：實心圓，對齊首行 */
+li.stop::after { content:""; position:absolute; left:56px; top:7px; width:10px; height:10px;
+  border-radius:50%; background:var(--accent); pointer-events:none; }
+.t { font-variant-numeric:tabular-nums; font-weight:600; font-size:.86rem; color:var(--dim);
+  padding-top:1px; text-align:right; }
+.body { padding-left:6px; min-width:0; }
+.body p { margin:0; }
+.nm { font-weight:600; font-size:.98rem; line-height:1.5; text-wrap:balance; }
+.nm a { color:var(--fg); text-decoration:underline dashed var(--line); text-underline-offset:3px;
+  text-decoration-thickness:1px; text-decoration-skip-ink:auto; }
+.nm > * + * { margin-left:6px; }
+.what { font-size:.9rem; color:var(--dim); margin-top:5px !important; line-height:1.55; }
+.next { font-size:.82rem; color:var(--mute); margin-top:5px !important; }
+.star { text-decoration:none; color:var(--accent); font-size:.9rem;
+  display:inline-flex; align-items:center; justify-content:center;
+  min-width:28px; min-height:28px; margin:-4px 0; }
+.warnmark { text-decoration:none; font-size:.8rem; line-height:1;
+  background:var(--warnbg); border:1px solid var(--warnln); border-radius:6px;
+  display:inline-flex; align-items:center; justify-content:center;
+  min-width:28px; min-height:28px; margin:-4px 0; }
+.cost { color:var(--accent); font-size:.78rem; font-weight:600; }
+.ico { margin-right:2px; }
+details.sub { background:transparent; border:0; padding:0; margin:8px 0 0 62px; }
+details.sub summary { font-weight:400; font-size:.9rem; color:var(--dim);
+  padding:6px 0; min-height:36px; }
+.addr-en { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86rem;
+  margin:0 0 8px; padding:8px 10px; background:var(--soft); border-radius:8px;
+  line-height:1.5; word-break:break-word; user-select:all; -webkit-user-select:all; }
+.btn-map { display:inline-flex; align-items:center; justify-content:center;
+  min-height:44px; padding:10px 18px; border-radius:10px; font-size:.9rem;
+  font-weight:600; text-decoration:none; background:var(--accent);
+  color:var(--on-accent); }
+.to { color:var(--dim); font-size:.8rem; font-weight:400; }
+.place { background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+  padding:14px 16px; margin:12px 0; scroll-margin-top:64px; }
+.place .ph { display:flex; gap:12px; align-items:flex-start; margin-bottom:8px; }
+.place .icw { font-size:1.6rem; line-height:1; flex-shrink:0;
+  background:var(--soft); width:44px; height:44px; border-radius:12px;
+  display:flex; align-items:center; justify-content:center; }
+.place h3 { font-size:1.05rem; margin:2px 0 4px; }
+.place .tagrow { margin:0; display:flex; flex-wrap:wrap; gap:4px; }
+.place .tag { font-size:.72rem; color:var(--dim); background:var(--soft);
+  padding:2px 8px; border-radius:999px; }
+.place .what { font-size:.92rem; color:var(--fg); margin:8px 0; line-height:1.6; }
+.place .blk { margin-top:12px; padding-top:10px; border-top:1px solid var(--line); }
+.place .blk h4 { font-size:.75rem; margin:0 0 4px; color:var(--mute);
+  letter-spacing:.1em; text-transform:none; font-weight:600; }
+.place .blk p { font-size:.9rem; margin:0; line-height:1.65; }
+/* info 裡的「｜」在手機上會落到行首，改成一條一行的清單 */
+.place .blk ul { margin:0; padding-left:16px; font-size:.9rem; line-height:1.6; }
+.place .blk ul li { margin:2px 0; }
+.empty { color:var(--mute); font-size:.82rem; text-align:center; margin:14px 0 4px; }
+ul.watch { list-style:none; padding:10px 12px 10px 14px; margin:10px 0;
+  background:var(--warnbg); border-left:3px solid var(--warn); border-radius:6px;
+  font-size:.88rem; }
+ul.watch li { padding:2px 0; }
+ul.watch li::before { content:"❗ "; color:var(--warn); margin-right:2px; }
+ul.watch.sm { margin:6px 0 0; padding:6px 10px 6px 12px; font-size:.84rem; }
+ul { padding-left:20px; }
+.catblock h2 { font-size:.78rem; color:var(--mute); letter-spacing:.1em;
+  text-transform:none; margin:20px 0 6px; padding:0 2px; font-weight:600;
+  scroll-margin-top:64px; }
+/* 地點分頁：7 個分類的快速跳轉 */
+.chipbar { display:flex; flex-wrap:wrap; gap:6px; margin:14px 0 2px; }
+.chip { font-size:.82rem; padding:7px 12px; border:1px solid var(--line);
+  border-radius:999px; color:var(--dim); text-decoration:none; background:var(--card);
+  display:inline-flex; align-items:center; gap:5px; min-height:34px; }
+.chip b { color:var(--mute); font-weight:500; font-size:.76rem; }
+@media print { details { break-inside:avoid; } details:not([open]) > *:not(summary) { display:block; } }
+dialog#place-dlg { max-width:min(560px,94vw); width:94vw; border:0; border-radius:14px;
+  background:var(--card); color:var(--fg); padding:22px 20px 18px;
+  font-size:1rem; max-height:86vh; overflow:auto;
+  overscroll-behavior:contain; }
+dialog#place-dlg::backdrop { background:rgba(0,0,0,.66); }
+.dlg-x { position:absolute; top:10px; right:10px; width:40px; height:40px;
+  display:flex; align-items:center; justify-content:center; border:0; border-radius:50%;
+  background:var(--soft); color:var(--dim); font-size:1.1rem; line-height:1; cursor:pointer;
+  z-index:2; }
+.dlg-x:active { background:var(--line); }
+dialog#place-dlg article { margin:0; padding:0; border:0; background:transparent; }
+dialog#place-dlg article .ph { display:flex; gap:12px; align-items:center;
+  margin-bottom:10px; padding-bottom:10px; border-bottom:1px solid var(--line); }
+dialog#place-dlg article h3 { margin:0; font-size:1.15rem; }
+dialog#place-dlg article .what { font-size:.95rem; line-height:1.65; }
+dialog#place-dlg article .blk h4 { font-size:.78rem; }
+dialog#place-dlg article .blk p { font-size:.95rem; line-height:1.75; }
+dialog#place-dlg article .tag { font-size:.76rem; }
+.dlg-close { margin-top:20px; }.dlg-close button { width:100%; padding:13px 24px; border-radius:12px; border:0;
+  background:var(--accent); color:var(--on-accent); font-weight:600; font-size:1rem;
+  cursor:pointer; min-height:48px; }
+.dlg-close button:focus { outline:none; }
+.dlg-close button:focus-visible { box-shadow:0 0 0 3px var(--accent); outline:2px solid var(--bg); }
+/* 準備 */
+.outlist { margin:0 0 8px; padding-left:20px; font-size:.9rem; line-height:1.7; }
+.pblk { background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+  padding:12px 16px; margin:12px 0; }
+.pblk h3 { font-size:.98rem; margin:0 0 4px; color:var(--accent); }
+.plead { font-size:.86rem; color:var(--dim); margin:0 0 6px; line-height:1.6; }
+.pblk ul { margin:0; padding-left:20px; font-size:.9rem; line-height:1.7; }
+.pblk li { margin:3px 0; }
+/* 泰語 */
+details.lsec { padding:10px 12px; }
+.lnote { font-size:.84rem; color:var(--dim); margin:6px 0; line-height:1.6;
+  background:var(--soft); border-radius:8px; padding:6px 10px; }
+.ltbl { width:100%; border-collapse:collapse; margin-top:6px; font-size:.86rem; }
+.ltbl th { text-align:left; font-size:.72rem; color:var(--mute); font-weight:600;
+  padding:4px 6px 6px; border-bottom:1px solid var(--line); }
+.ltbl td { padding:7px 6px; border-bottom:1px solid var(--soft); vertical-align:top;
+  line-height:1.5; }
+.ltbl tr:last-child td { border-bottom:0; }
+.ltbl .lz { width:30%; color:var(--dim); }
+.ltbl .le { width:37%; font-weight:600; font-size:.98rem; }
+.ltbl .lt { width:33%; }
+.ltbl th:last-child:nth-child(2),.ltbl td:last-child:nth-child(2) { width:70%; }
+.ltbl .ro { display:block; font-style:normal; font-size:.74rem; color:var(--mute); margin-top:3px; }
+</style>
+</head>
+<body>
+
+<h1>曼谷 2026-11</h1>
+<p class="sub2">七天六夜 · 2 人情侶</p>
+<p class="stamp">建置 2026-10-23 18:12</p>
+
+<nav role="tablist">
+  <button role="tab" data-view="today" aria-selected="true">今日</button>
+  <button role="tab" data-view="days" aria-selected="false">行程</button>
+  <button role="tab" data-view="places" aria-selected="false">地點</button>
+  <button role="tab" data-view="prep" aria-selected="false">準備</button>
+  <button role="tab" data-view="lang" aria-selected="false">泰語</button>
+</nav>
+
+<section id="view-today"><p id="today-note" class="dim" hidden></p><div id="today-days">
+  <details class="day" data-date="2026-11-01">
+    <summary><span class="dlabel">D1</span> 11/1（日）<br><small>落地・處方・第一隻蟹</small></summary>
+    <p class="area">Sukhumvit 49–63（Thonglor／Ekkamai）｜落地後最快拿到處方、買好花，第一餐直接吃蟹，晚上串燒。今天不去酒吧（長途飛行＋新環境，早點休息）。</p>
+    <ul class="warn"><li>① 診所要兩人各自面談，護照正本一定要帶；醫師要等超過 1 小時就改去 Stash。</li><li>② 1 樓 EDIBLELAND 的 edibles 不要買（50 mg 軟糖＝第 5 類毒品）。</li><li>③ 買完花直接叫 Grab 回住宿，不在街上走。</li></ul>
+    <p class="pack">🎒 出門前：🪪 護照正本（診所要查） · 💵 現金（Here Hai 只收現金） · SIM 已買。</p>
+    <ol class="timeline">
+      <li class="stop">
+        <div class="t">07:55</div>
+        <div class="body">
+          <p class="nm"><span class="ico">✈️</span>桃園 → 曼谷（TG637 泰航） </p>
+          <p class="what">泰航 TG637，10:50 抵達</p>
+          
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">10:50</div>
+        <div class="body">
+          <p class="nm"><span class="ico">✈️</span>BKK 曼谷機場 </p>
+          <p class="what">入境、領行李，順便買 SIM（入境大廳 2 樓，AIS 15 天 ฿699 ×2）</p>
+          <p class="next">行李轉盤 6–22 號附近有 AIS 櫃檯；上車前先在 Grab 設好 Thong Lor 21 巷</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">約 13:20</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🚕</span><a href="#place-jasmine-villa" data-place="jasmine-villa">放行李（Jasmine Villa）</a> </p>
+          <p class="what">機場過來 Grab 約 64 分（高速過路費另付），只放行李 5–10 分</p>
+          <p class="next">13:45 再出門｜Grab 約 5 分到 Choo Choo</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">13:45</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🌿</span><a href="#place-choo-choo-hemp" data-place="choo-choo-hemp">Choo Choo Hemp（大麻店＋診所）</a> <a class="star" href="#place-choo-choo-hemp" data-place="choo-choo-hemp" aria-label="看完整介紹">★</a></p>
+          <p class="what">2 樓診所兩人各自面談領處方，再上 3 樓買花；1 樓 EDIBLELAND 不買</p>
+          <p class="next">Grab 約 5 分｜🪪 護照正本</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">15:30</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🚕</span><a href="#place-here-hai" data-place="here-hai">→ Here Hai（炒蟹）</a> </p>
+          <p class="what">排 16:00 的下午段</p>
+          <p class="next">Grab 約 12 分（座標為約略值 ⚠）</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">16:00</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🍜</span><a href="#place-here-hai" data-place="here-hai">Here Hai（炒蟹）</a> <a class="star" href="#place-here-hai" data-place="here-hai" aria-label="看完整介紹">★</a> 💵</p>
+          <p class="what">第一餐：炒蟹</p>
+          <p class="next">只收現金、週一休</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">17:15</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🏠</span><a href="#place-jasmine-villa" data-place="jasmine-villa">回住宿（Jasmine Villa）</a> <a class="star" href="#place-jasmine-villa" data-place="jasmine-villa" aria-label="看完整介紹">★</a> <a class="warnmark" href="#place-jasmine-villa" data-place="jasmine-villa" aria-label="有注意事項">❗</a></p>
+          <p class="what">沖澡休息，日落 17:50；花先不用，等晚餐吃完</p>
+          <p class="next">Grab（約 10–15 分 ⚠ 估算）</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">19:45</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🍜</span><a href="#place-gen" data-place="gen">Gen（日式串燒）</a> <a class="star" href="#place-gen" data-place="gen" aria-label="看完整介紹">★</a></p>
+          <p class="what">日式串燒晚餐</p>
+          <p class="next">Grab｜可刷卡</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">21:30</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🏠</span><a href="#place-jasmine-villa" data-place="jasmine-villa">回住宿陽台</a> <a class="star" href="#place-jasmine-villa" data-place="jasmine-villa" aria-label="看完整介紹">★</a> <a class="warnmark" href="#place-jasmine-villa" data-place="jasmine-villa" aria-label="有注意事項">❗</a></p>
+          <p class="what">吃完回來才開始用花；餓了 7-Eleven／Grab Food</p>
+          <p class="next">Grab｜🍜 宵夜：7-Eleven（24 小時）或 Grab Food</p>
+        </div>
+      </li>
+    </ol>
+    <details class="sub"><summary>備案</summary><ul><li><b>醫師要等超過 1 小時或沒營業</b> → Stash BKK Ekkamai（24 小時，跟 Here Hai 同在 Soi 63）；再不行 Kush House（Sukhumvit 22，⚠ 未查證）。</li><li><b>想找 edibles 的替代品</b> → 不要買，也不要臨時改成 vape 或滴劑——萃取物同樣屬第 5 類毒品。想放鬆就用花。</li></ul></details>
+    <details class="sub"><summary>下雨怎麼辦</summary><p>Grab 上下車時在店內等車。</p></details>
+  </details>
+  <details class="day" data-date="2026-11-02">
+    <summary><span class="dlabel">D2</span> 11/2（一）<br><small>老城・河畔・中國城的夜</small></summary>
+    <p class="area">Wat Pho → 老城 → 中國城｜週一很多店公休，所以今天只去週一有開的。路線：臥佛寺 → Pad Thai 午餐 → 芒果糯米飯 → 河畔露台看鄭王廟日落吃晚餐 → 中國城酒吧 → 琴酒吧，先吃飽再喝。</p>
+    <ul class="warn"><li>① Teens 在中國城的 Soi Nana，不是 Sukhumvit 那個，跟司機說清楚。</li><li>② Kor Panich 17:00 打烊，別拖到。</li><li>③ 寺廟要長褲＋有袖；Opium 不可無袖、男生要包鞋、女生不穿夾腳拖。</li><li>④ Teens 店很小（12–15 座），21:45 要用 IG 先訂。</li></ul>
+    <p class="pack">🎒 出門前：💵 現金（按摩亭 ฿1,040、Pad Thai、Kor Panich；Teens 與備案 T&amp;K 也帶現金） · 長褲＋有袖上衣＋好脫的鞋（寺廟） · 🪪 護照（酒吧）。</p>
+    <ol class="timeline">
+      <li class="stop">
+        <div class="t">11:00</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🚕</span><a href="#place-wat-pho" data-place="wat-pho">→ Wat Pho（臥佛寺）</a> </p>
+          <p class="what">出發</p>
+          <p class="next">Grab 約 36 分｜高速過路費另付</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">11:45</div>
+        <div class="body">
+          <p class="nm"><span class="ico">⛩️</span><a href="#place-wat-pho" data-place="wat-pho">Wat Pho（臥佛寺）</a> <a class="star" href="#place-wat-pho" data-place="wat-pho" aria-label="看完整介紹">★</a> 💵</p>
+          <p class="what">看臥佛（門票 ฿300／人）；長褲、有袖、進殿脫鞋</p>
+          <p class="next">門票、進殿脫鞋</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">13:00</div>
+        <div class="body">
+          <p class="nm"><span class="ico">💆</span><a href="#place-wat-pho-massage" data-place="wat-pho-massage">Wat Pho Massage（寺內按摩亭）</a> <a class="star" href="#place-wat-pho-massage" data-place="wat-pho-massage" aria-label="看完整介紹">★</a> 💵</p>
+          <p class="what">60 分鐘泰式按摩 ฿520／人（現場排隊，旺季可能等 30 分鐘以上）</p>
+          <p class="next">步行（寺內）｜💵 現場排隊別走</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">14:15</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🍜</span><a href="#place-pad-thai-fai-ta-lu" data-place="pad-thai-fai-ta-lu">Pad Thai Fai Ta Lu（帕泰）</a> <a class="star" href="#place-pad-thai-fai-ta-lu" data-place="pad-thai-fai-ta-lu" aria-label="看完整介紹">★</a></p>
+          <p class="what">炭烤 Pad Thai 當午餐（兩人分著吃）</p>
+          <p class="next">Grab（從臥佛寺；分鐘數 ⚠ 未查證）｜帶現金</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">15:30</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🍜</span><a href="#place-kor-panich" data-place="kor-panich">Kor Panich（芒果糯米飯）</a> <a class="star" href="#place-kor-panich" data-place="kor-panich" aria-label="看完整介紹">★</a> 💵</p>
+          <p class="what">芒果糯米飯（17:00 打烊）；吃完在附近散步，16:45 叫車</p>
+          <p class="next">步行或短程車｜💵 17:00 打烊別拖</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">17:15</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🍜</span><a href="#place-supanniga-tha-tien" data-place="supanniga-tha-tien">Supanniga Tha Tien（河畔泰菜）</a> <a class="star" href="#place-supanniga-tha-tien" data-place="supanniga-tha-tien" aria-label="看完整介紹">★</a></p>
+          <p class="what">露台晚餐，隔河看鄭王廟日落（約 17:50）和亮燈；訂位時要求露台座位</p>
+          <p class="next">Grab 約 8 分｜坐露台、別點太滿</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">19:15</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🚕</span><a href="#place-opium-bar" data-place="opium-bar">去中國城（Yaowarat 耀華力路一帶）</a> </p>
+          <p class="what">Grab 直接到 Opium 門口，不要自己走耀華力路（人多、扒手多）。上車前先確認司機知道中國城的 Soi Nana，不是 Sukhumvit 的</p>
+          <p class="next">Grab（Tha Tien → 中國城；分鐘數 ⚠ 未查證）</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">19:45</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🍸</span><a href="#place-opium-bar" data-place="opium-bar">Opium Bar（中國城老樓酒吧）</a> <a class="star" href="#place-opium-bar" data-place="opium-bar" aria-label="看完整介紹">★</a></p>
+          <p class="what">🔴 先線上訂位；第一輪</p>
+          <p class="next">🪪 護照｜不可無袖、男生包鞋、女生不穿夾腳拖</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">21:45</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🍸</span><a href="#place-teens-of-thailand" data-place="teens-of-thailand">Teens of Thailand（琴酒吧）</a> <a class="star" href="#place-teens-of-thailand" data-place="teens-of-thailand" aria-label="看完整介紹">★</a></p>
+          <p class="what">中國城 Soi Nana 兩層琴酒專門吧；Chili-Salted Pineapple Gin Tonic、Thai Tea Gin Tonic</p>
+          <p class="next">Grab（Opium → Soi Nana，分鐘 ⚠ 未查）｜跟司機說中國城 Soi Nana</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">約 23:30</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🏠</span>回 Thonglor（通羅） </p>
+          <p class="what">回陽台用花；餓了 7-Eleven／Grab Food</p>
+          <p class="next">Grab（Teens → Thonglor，分鐘 ⚠ 未查）</p>
+        </div>
+      </li>
+    </ol>
+    <details class="sub"><summary>備案</summary><ul><li><b>想改路邊海鮮宵夜</b> → T&amp;K Seafood（耀華力 Soi Texas 路口，每日 16:30–02:00，烤河蝦，帶現金）。沒有官方或 Michelin 來源 ⚠，出發前用 Google Maps 確認有開。</li><li><b>想換晚餐（預算多一級）</b> → Potong（Michelin 1 星，就在 Opium Bar 樓下，15:30–23:00，週三休；要先訂位）。</li><li><b>Supanniga 露台客滿</b> → 坐室內照吃；或隔壁 Rongros（17:00–22:00），露台同樣看 Wat Arun。</li><li><b>想再看一家大麻店</b> → 中國城 Canabangka Trok Sai 分店（11:00–23:59），19:15 去 Opium 前順路。</li><li><b>想早睡</b> → Opium 喝完直接回住宿，跳過 Teens of Thailand。</li></ul></details>
+    <details class="sub"><summary>下雨怎麼辦</summary><p>先去按摩亭（室內）避雨，雨停再看臥佛；Supanniga 露台下雨就坐室內；Opium Bar 與 Teens 都是室內；備案的 T&amp;K 是路邊座，大雨就從備案列表改別的。</p></details>
+  </details>
+  <details class="day" data-date="2026-11-03">
+    <summary><span class="dlabel">D3</span> 11/3（二）<br><small>四面佛・必比登午餐・泰絲老宅・雙高空夜</small></summary>
+    <p class="area">拉差帕頌（Ratchaprasong）／奇隆（Chit Lom），全程搭空鐵加步行</p>
+    <ul class="warn"><li>藍儂酒吧要包鞋；紅天不可無袖、拖鞋、運動短褲</li><li>泰絲大王故居 大包要寄物、不得閃光與自拍</li><li>有人說「今天休館」是詐騙，不要理</li></ul>
+    <p class="pack">🎒 出門前：🪪 護照 · 💵 泰絲大王故居 門票 ฿250×2 · 👟 包鞋＋smart casual（正式休閒）</p>
+    <ol class="timeline">
+      <li class="stop">
+        <div class="t">11:00</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🚆</span>BTS Thong Lo → Chit Lom（通羅 → 奇隆） </p>
+          <p class="what">空鐵 5 站；先試感應信用卡，不成買單程票</p>
+          <p class="next">空鐵 5 站 ฿35／人｜感應不成買票</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">11:30</div>
+        <div class="body">
+          <p class="nm"><span class="ico">⛩️</span><a href="#place-erawan-shrine" data-place="erawan-shrine">Erawan Shrine（四面佛）</a> <a class="star" href="#place-erawan-shrine" data-place="erawan-shrine" aria-label="看完整介紹">★</a></p>
+          <p class="what">拜拜（免費）</p>
+          <p class="next">空橋步行｜別穿太露</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">12:15</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🍜</span><a href="#place-thai-niyom" data-place="thai-niyom">Thai Niyom（泰味）</a> <a class="star" href="#place-thai-niyom" data-place="thai-niyom" aria-label="看完整介紹">★</a></p>
+          <p class="what">必比登午餐（週二有開；不接受訂位，可電話問位）</p>
+          <p class="next">步行（瑪哈吞廣場 Mahatun Plaza）｜客滿就改 Jaan</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">13:30</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🛍️</span><a href="#place-centralworld" data-place="centralworld">CentralWorld（中央世界・選項）</a> <a class="star" href="#place-centralworld" data-place="centralworld" aria-label="看完整介紹">★</a></p>
+          <p class="what">想先買就逛約 1 小時；不逛就慢慢吃完午餐</p>
+          <p class="next">步行｜同店同天滿 ฿2,000 才辦退稅</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">14:30</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🚕</span><a href="#place-jim-thompson-house" data-place="jim-thompson-house">→ Jim Thompson House（泰絲大王故居）</a> </p>
+          <p class="what">叫車直達（省掉在暹羅 Siam 轉車）</p>
+          <p class="next">叫車（Grab）｜分鐘數 ⚠ 未查</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">15:00</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🏛️</span><a href="#place-jim-thompson-house" data-place="jim-thompson-house">Jim Thompson House（泰絲大王故居）</a> <a class="star" href="#place-jim-thompson-house" data-place="jim-thompson-house" aria-label="看完整介紹">★</a> 💵 <span class="cost">฿500（฿250×2 人）</span></p>
+          <p class="what">跟導覽進泰絲大王的柚木老宅（進屋脫鞋、不得閃光與自拍、超過 20 cm 的包寄物）</p>
+          <p class="next">門票 ฿250｜大包先寄物、別自拍</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">16:30</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🚕</span><a href="#place-lennons" data-place="lennons">→ Lennon&#x27;s（藍儂酒吧）</a> </p>
+          <p class="what">出來就走</p>
+          <p class="next">叫車直達（省掉空鐵轉車）</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">17:15</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🍸</span><a href="#place-lennons" data-place="lennons">Lennon&#x27;s（藍儂酒吧）</a> <a class="star" href="#place-lennons" data-place="lennons" aria-label="看完整介紹">★</a></p>
+          <p class="what">日落 17:50、第一杯</p>
+          <p class="next">步行（瑰麗酒店 Rosewood）｜👟 包鞋、🪪 護照</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">19:15</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🍜</span><a href="#place-red-sky" data-place="red-sky">Red Sky（紅天酒吧）</a> <a class="star" href="#place-red-sky" data-place="red-sky" aria-label="看完整介紹">★</a> <a class="warnmark" href="#place-red-sky" data-place="red-sky" aria-label="有注意事項">❗</a></p>
+          <p class="what">晚餐看夜景；之後可上 56 樓酒吧</p>
+          <p class="next">步行（聖塔拉大酒店 Centara Grand）｜不要無袖、拖鞋、運動短褲</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">22:00</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🚕</span>回 Thonglor（通羅） </p>
+          <p class="what">往東末班 00:13</p>
+          <p class="next">空鐵｜末班往東 00:13</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">22:45</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🏠</span><a href="#place-jasmine-villa" data-place="jasmine-villa">回住宿陽台</a> <a class="star" href="#place-jasmine-villa" data-place="jasmine-villa" aria-label="看完整介紹">★</a> <a class="warnmark" href="#place-jasmine-villa" data-place="jasmine-villa" aria-label="有注意事項">❗</a></p>
+          <p class="what">喝酒量自己抓，回來才用花</p>
+          <p class="next">Grab｜🍜 宵夜：7-Eleven（24 小時）或 Grab Food</p>
+        </div>
+      </li>
+    </ol>
+    <details class="sub"><summary>備案</summary><ul><li><b>想今天一次買完品牌</b> → Jim Thompson House 換回 CentralWorld 13:30–16:30（可辦退稅）</li><li><b>想逛便宜貨</b> → 換 MBK Center（BTS National Stadium，跟 Jim Thompson House 同一站）</li><li><b>想吃南部菜</b> → 午餐換 Jaan（Chong Nonsi，多繞約 40 分 ⚠）</li></ul></details>
+    <details class="sub"><summary>下雨怎麼辦</summary><p>四面佛拜完就走；泰絲大王故居主屋是室內；藍儂酒吧看不到日落也有室內夜景</p></details>
+  </details>
+  <details class="day" data-date="2026-11-04">
+    <summary><span class="dlabel">D4</span> 11/4（三）<br><small>通羅休閒日：比品種・SPA・日落・最佳酒吧</small></summary>
+    <p class="area">Thonglor／Ekkamai，不跨區｜週三 Opium 公休，所以整天留在 Thonglor。早上去第二家大麻店比品種，下午雙人 SPA，傍晚 Octave 看日落，晚上最佳酒吧。</p>
+    <ul class="warn"><li>① Divana 提早 15 分到，15:00 起做 120 分、約 17:00 才結束——Octave 改 18:00 就是為了不趕。</li><li>② Octave、Dry Wave 要 smart casual（不可涼鞋、無袖背心、運動短褲）。</li><li>③ Dry Wave 客滿要看 IG。</li></ul>
+    <p class="pack">🎒 出門前：🪪 護照 · smart casual（Octave、Dry Wave） · Divana 的付款確認信（email 或 LINE）。</p>
+    <ol class="timeline">
+      <li class="stop">
+        <div class="t">11:30</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🌿</span><a href="#place-stash-bkk" data-place="stash-bkk">Stash BKK（大麻店・Ekkamai）</a> <a class="star" href="#place-stash-bkk" data-place="stash-bkk" aria-label="看完整介紹">★</a></p>
+          <p class="what">第二家大麻店，比品種（可問店內座位區規定）</p>
+          <p class="next">Grab（Soi 63）｜座位區禁菸，問清楚</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">13:00</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🍜</span><a href="#place-the-commons" data-place="the-commons">The Commons（社區商場）</a> <a class="star" href="#place-the-commons" data-place="the-commons" aria-label="看完整介紹">★</a></p>
+          <p class="what">午餐（Soi 17；先到先得不訂位）</p>
+          <p class="next">Grab｜先到先得，現場挑一家</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">14:45</div>
+        <div class="body">
+          <p class="nm"><span class="ico">💆</span><a href="#place-divana" data-place="divana">Divana（花園 SPA）</a> <a class="star" href="#place-divana" data-place="divana" aria-label="看完整介紹">★</a></p>
+          <p class="what">提早 15 分到；15:00 雙人 120 分精油，約 17:00 結束；結束後 Grab 到 Marriott</p>
+          <p class="next">步行（同一條 Soi 17）｜提早 15 分到、帶確認信</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">18:00</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🍸</span><a href="#place-octave" data-place="octave">Octave（高空酒吧）</a> <a class="star" href="#place-octave" data-place="octave" aria-label="看完整介紹">★</a></p>
+          <p class="what">看日落末段（日落 17:50，此時天色最好）、第一輪</p>
+          <p class="next">Grab｜smart casual、🪪 護照</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">19:30</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🍜</span><a href="#place-supanniga-thonglor" data-place="supanniga-thonglor">Supanniga Thonglor（泰東部菜）</a> <a class="star" href="#place-supanniga-thonglor" data-place="supanniga-thonglor" aria-label="看完整介紹">★</a></p>
+          <p class="what">晚餐，最後點餐 21:00</p>
+          <p class="next">Grab｜最後點餐 21:00</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">21:30</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🍸</span><a href="#place-dry-wave" data-place="dry-wave">Dry Wave（酒吧）</a> <a class="star" href="#place-dry-wave" data-place="dry-wave" aria-label="看完整介紹">★</a></p>
+          <p class="what">泰國最佳酒吧</p>
+          <p class="next">Grab｜smart casual</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">約 00:00</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🏠</span><a href="#place-jasmine-villa" data-place="jasmine-villa">回住宿陽台</a> <a class="star" href="#place-jasmine-villa" data-place="jasmine-villa" aria-label="看完整介紹">★</a> <a class="warnmark" href="#place-jasmine-villa" data-place="jasmine-villa" aria-label="有注意事項">❗</a></p>
+          <p class="what">回來才用花</p>
+          <p class="next">Grab｜🍜 宵夜：7-Eleven（24 小時）或 Grab Food</p>
+        </div>
+      </li>
+    </ol>
+    <details class="sub"><summary>備案</summary><ul><li><b>Divana 約不到、或想多一段按摩</b> → Health Land Ekkamai（96/1 Soi Sukhumvit 63，跟 Stash 同一條巷）；</li><li><b>Divana 與 Health Land 都約不到</b> → Let&#x27;s Relax Ginza Thonglor（Nikko 飯店 2 樓），泰式 120 分 ฿1,300，每日 10:00–24:00。</li></ul></details>
+    <details class="sub"><summary>下雨怎麼辦</summary><p>Octave 頂樓部分空間有遮蔽；不行就先去 Supanniga，再去 Dry Wave，晚點再回 Octave。</p></details>
+  </details>
+  <details class="day" data-date="2026-11-05">
+    <summary><span class="dlabel">D5</span> 11/5（四）<br><small>Asok 逛街・按摩・酒吧 Bar Us・缸養海鮮（早回家的輕夜）</small></summary>
+    <p class="area">Asok／Sukhumvit 26｜同一帶：平價豬肉麵午餐、Terminal 21 逛街、Health Land Asoke 60 分泰式按摩（鄰 Terminal 21、排在前會路線最短）、傍晚 Bar Us、晚餐缸養海鮮。今晚不去夜店，留體力給明天最後一個大夜。</p>
+    <ul class="warn"><li>① Rung Rueang 只開到 17:00，排中午。</li><li>② Bar Us 只有 18:00 與 20:00 兩場，訂 18:00 場。</li><li>③ Sornthong 22:00 打烊，週四傍晚會塞，19:45 就要出發。</li><li>④ Bar Us 要 smart casual。</li></ul>
+    <p class="pack">🎒 出門前：💵 現金（Rung Rueang） · 🪪 護照（Bar Us） · Bar Us 要 smart casual，逛完街別穿太休閒。</p>
+    <ol class="timeline">
+      <li class="stop">
+        <div class="t">11:15</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🚕</span><a href="#place-rung-rueang" data-place="rung-rueang">去 Sukhumvit 26（素坤逸 26 巷）</a> </p>
+          <p class="what">出發</p>
+          <p class="next">Grab 約 15–20 分（⚠ 估算）</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">11:45</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🍜</span><a href="#place-rung-rueang" data-place="rung-rueang">Rung Rueang（豬肉麵）</a> <a class="star" href="#place-rung-rueang" data-place="rung-rueang" aria-label="看完整介紹">★</a> 💵</p>
+          <p class="what">豬肉麵</p>
+          <p class="next">只收現金、只開到 17:00</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">13:15</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🛍️</span><a href="#place-terminal-21" data-place="terminal-21">Terminal 21（商場）</a> <a class="star" href="#place-terminal-21" data-place="terminal-21" aria-label="看完整介紹">★</a></p>
+          <p class="what">逛 1–3 樓設計師品牌，練習退稅</p>
+          <p class="next">Grab 約 12 分｜同店同天滿 ฿2,000 辦退稅</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">15:30</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🚕</span><a href="#place-health-land-asoke" data-place="health-land-asoke">→ Health Land（按摩・Asoke）</a> </p>
+          <p class="what">走到 Sukhumvit 21，Terminal 21 隔壁</p>
+          <p class="next">步行或 Grab 短程（3–5 分，⚠ 未查證）</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">16:00</div>
+        <div class="body">
+          <p class="nm"><span class="ico">💆</span><a href="#place-health-land-asoke" data-place="health-land-asoke">Health Land（按摩・Asoke）</a> <a class="star" href="#place-health-land-asoke" data-place="health-land-asoke" aria-label="看完整介紹">★</a></p>
+          <p class="what">60 分泰式按摩 ×2（實際選項與價格官網沒列 ⚠，預約頁登記時確認）</p>
+          <p class="next">價錢到現場預約頁確認</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">17:15</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🚕</span><a href="#place-bar-us" data-place="bar-us">→ Bar Us（套餐式調酒）</a> </p>
+          <p class="what">18:00 訂位場，按摩完步行或短程 Grab</p>
+          <p class="next">步行或 Grab</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">18:00</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🍸</span><a href="#place-bar-us" data-place="bar-us">Bar Us（套餐式調酒）</a> <a class="star" href="#place-bar-us" data-place="bar-us" aria-label="看完整介紹">★</a></p>
+          <p class="what">套餐式調酒（Starter → Main → After）</p>
+          <p class="next">🪪 護照｜smart casual，只有 18:00／20:00 兩場</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">19:45</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🚕</span><a href="#place-sornthong" data-place="sornthong">→ Sornthong（缸養海鮮）</a> </p>
+          <p class="what">週四傍晚可能塞車，早出發</p>
+          <p class="next">Grab 約 20 分</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">20:15</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🍜</span><a href="#place-sornthong" data-place="sornthong">Sornthong（缸養海鮮）</a> <a class="star" href="#place-sornthong" data-place="sornthong" aria-label="看完整介紹">★</a></p>
+          <p class="what">缸養海鮮晚餐</p>
+          <p class="next">22:00 打烊，別拖</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">約 21:45</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🏠</span><a href="#place-jasmine-villa" data-place="jasmine-villa">回住宿陽台</a> <a class="star" href="#place-jasmine-villa" data-place="jasmine-villa" aria-label="看完整介紹">★</a> <a class="warnmark" href="#place-jasmine-villa" data-place="jasmine-villa" aria-label="有注意事項">❗</a></p>
+          <p class="what">回來才用花；餓了 7-Eleven</p>
+          <p class="next">Grab｜🍜 宵夜：7-Eleven（24 小時）或 Grab Food</p>
+        </div>
+      </li>
+    </ol>
+    <details class="sub"><summary>備案</summary><ul><li><b>想試大麻按摩</b> → Wanpho Massage &amp; Wellness（Wat Pho 體系）Master-Blend Cannabis Thai Massage 60 分 ×2，官網 ฿1,300／人；官網沒寫地址 ⚠，要去得先 LINE wanphowellness 問地址與是否含 THC，地點在老城就要另排（替掉 D2 按摩亭或剪掉其他行程）。</li><li><b>想改看泰拳</b> → Rajadamnern Stadium（rajadamnern.com 線上買票；11/5 場次 10/22 後才看得到，價格官網沒列 ⚠）。排法：Terminal 21 逛到 15:30 → 16:30 Grab 去拳場 → 約 20:00 看完 → Grab 去 Sornthong（22:00 打烊，21:00 前要到）；這樣就不去 Bar Us。</li></ul></details>
+    <details class="sub"><summary>下雨怎麼辦</summary><p>Terminal 21、Bar Us 都在室內；去 Sornthong 的 Grab 傍晚會塞，19:45 就出發。</p></details>
+  </details>
+  <details class="day" data-date="2026-11-06">
+    <summary><span class="dlabel">D6</span> 11/6（五）<br><small>空訕海鮮（Khlong San）・河畔購物・最後大夜 Sing Sing</small></summary>
+    <p class="area">河西岸 Khlong San → 回 Thonglor → Sukhumvit 45｜中午海鮮、下午 ICONSIAM 補買、傍晚蒸蟹，回 Thonglor 休息一下再出門；晚上 Sing Sing（週五夜最熱鬧）。最後一晚，不再排別的酒吧。</p>
+    <ul class="warn"><li>① Ann、Somsak 只收現金。</li><li>② Sing Sing 不可涼鞋、露趾鞋，要帶護照；訂位時順便問有沒有入場費或低消。</li><li>③ 退稅要同一家店、同一天滿 ฿2,000 才拿得到 P.P.10。</li><li>④ 最後一晚：剩下的花 D7 退房要丟。</li></ul>
+    <p class="pack">🎒 出門前：💵 現金（Ann、Somsak） · 🪪 護照 · 👟 包鞋（Sing Sing 不可涼鞋、露趾鞋）。</p>
+    <ol class="timeline">
+      <li class="stop">
+        <div class="t">11:30</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🚕</span><a href="#place-ann-tha-din-daeng" data-place="ann-tha-din-daeng">去 Khlong San（空訕）</a> </p>
+          <p class="what">出發</p>
+          <p class="next">Grab 約 30 分（TomTom）</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">12:15</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🍜</span><a href="#place-ann-tha-din-daeng" data-place="ann-tha-din-daeng">Ann Tha Din Daeng（海鮮）</a> <a class="star" href="#place-ann-tha-din-daeng" data-place="ann-tha-din-daeng" aria-label="看完整介紹">★</a> 💵</p>
+          <p class="what">海鮮午餐（週五有開）</p>
+          <p class="next">只收現金</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">13:45</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🛍️</span><a href="#place-iconsiam" data-place="iconsiam">ICONSIAM（河畔商場）</a> <a class="star" href="#place-iconsiam" data-place="iconsiam" aria-label="看完整介紹">★</a></p>
+          <p class="what">Naraya、Thann、Harnn、Jim Thompson；同一家店滿 ฿2,000 辦退稅</p>
+          <p class="next">Grab（分鐘 ⚠ 未查）｜同店同天滿 ฿2,000 拿 P.P.10</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">16:30</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🍜</span><a href="#place-somsak-pu-ob" data-place="somsak-pu-ob">Somsak Pu Ob（街頭蒸蟹）</a> <a class="star" href="#place-somsak-pu-ob" data-place="somsak-pu-ob" aria-label="看完整介紹">★</a> 💵</p>
+          <p class="what">街頭蒸蟹與蝦冬粉（16:00 開）</p>
+          <p class="next">Grab（分鐘 ⚠ 未查）｜💵 只收現金</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">18:00</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🏠</span>回 Thonglor（通羅） </p>
+          <p class="what">沖澡、換 smart casual；喝酒前不用花</p>
+          <p class="next">Grab 約 42 分</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">19:00</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🏠</span><a href="#place-jasmine-villa" data-place="jasmine-villa">住宿休息（Jasmine Villa）</a> <a class="star" href="#place-jasmine-villa" data-place="jasmine-villa" aria-label="看完整介紹">★</a> <a class="warnmark" href="#place-jasmine-villa" data-place="jasmine-villa" aria-label="有注意事項">❗</a></p>
+          <p class="what">睡 1 小時、吃點 7-Eleven</p>
+          <p class="next">換 smart casual</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">21:15</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🚕</span><a href="#place-sing-sing" data-place="sing-sing">→ Sing Sing Theater（夜店）</a> </p>
+          <p class="what">訂位時 WhatsApp 問一句有沒有入場費或低消</p>
+          <p class="next">Grab 約 13 分｜🪪 護照、👟 包鞋</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">21:30</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🍸</span><a href="#place-sing-sing" data-place="sing-sing">Sing Sing Theater（夜店）</a> <a class="star" href="#place-sing-sing" data-place="sing-sing" aria-label="看完整介紹">★</a></p>
+          <p class="what">1930 年代上海風夜店；週五夜最熱鬧</p>
+          <p class="next">不可涼鞋、露趾鞋</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">約 00:30</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🏠</span><a href="#place-jasmine-villa" data-place="jasmine-villa">回住宿陽台</a> <a class="star" href="#place-jasmine-villa" data-place="jasmine-villa" aria-label="看完整介紹">★</a> <a class="warnmark" href="#place-jasmine-villa" data-place="jasmine-villa" aria-label="有注意事項">❗</a></p>
+          <p class="what">回來才用花</p>
+          <p class="next">Grab｜🍜 宵夜：7-Eleven（24 小時）或 Grab Food</p>
+        </div>
+      </li>
+    </ol>
+    <details class="sub"><summary>備案</summary><ul><li><b>想升級晚餐（預算多很多）</b> → Potong（Michelin 1 星，中國城，週三休）取代 Somsak 與回家休息，餐後再去 Sing Sing。</li><li><b>不想再出門</b> → 改去 Dry Wave（Thonglor，19:00–01:00）代替 Sing Sing。</li><li><b>想吃滷鵝</b> → 中國城 Urai（935 Song Wat Rd，10:00–13:00、16:00–19:00，只收現金）。</li><li><b>想跳舞</b> → RCA 夜店區（長褲、包鞋、有袖上衣）。</li></ul></details>
+    <details class="sub"><summary>下雨怎麼辦</summary><p>雨大就晚點出發；Sing Sing 是室內。</p></details>
+  </details>
+  <details class="day" data-date="2026-11-07">
+    <summary><span class="dlabel">D7</span> 11/7（六）<br><small>離境日</small></summary>
+    <p class="area">Phrom Phong → 機場｜睡飽、最後採買、午餐、準時到機場。</p>
+    <ul class="warn"><li>① 起床先把剩下的花丟掉，不放行李、不上飛機。</li><li>② 退稅商品不要先託運：要在報到前先給海關驗貨（BKK 4 樓 Entrance 10 ⚠ 出發前看機場公告）。</li><li>③ 13:15 一定要叫車，別拖。</li><li>④ 含肉點心、生鮮水果（連芒果糯米飯）不要帶回台灣。</li><li>⑤ 儲物間不一定給寄放：若不能寄，就拖著行李走，不要留在房裡；13:15 叫車不變。</li></ul>
+    <p class="pack">🎒 出門前：🪪 護照、訂位代號（TG636）、P.P.10 與正本發票。</p>
+    <ol class="timeline">
+      <li class="stop">
+        <div class="t">約 10:00</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🏠</span><a href="#place-jasmine-villa" data-place="jasmine-villa">退房（Jasmine Villa）</a> <a class="star" href="#place-jasmine-villa" data-place="jasmine-villa" aria-label="看完整介紹">★</a> <a class="warnmark" href="#place-jasmine-villa" data-place="jasmine-villa" aria-label="有注意事項">❗</a></p>
+          <p class="what">起床後把剩餘的花丟棄，不放行李、不上飛機；退房後沒有陽台</p>
+          <p class="next">行李寄放儲物間 ⚠ 未確認｜備案：Airbnb 行程頁的「寄放行李」服務 ⚠ 位置與價格未查</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">10:15</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🚆</span>BTS Thong Lo → Phrom Phong（通羅 → 澎蓬） </p>
+          <p class="what">Thong Lo 再過一站</p>
+          <p class="next">⚠ 先試感應，不成買票</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">10:30</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🛍️</span><a href="#place-emquartier" data-place="emquartier">EmQuartier／Emporium（商場）</a> <a class="star" href="#place-emquartier" data-place="emquartier" aria-label="看完整介紹">★</a></p>
+          <p class="what">最後採買：Harnn、Thann、Jim Thompson；11:30 前離開</p>
+          <p class="next">退稅單 P.P.10 拿好</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">12:00</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🍜</span><a href="#place-no-name-noodle" data-place="no-name-noodle">No Name Noodle（麵店）</a> <a class="star" href="#place-no-name-noodle" data-place="no-name-noodle" aria-label="看完整介紹">★</a></p>
+          <p class="what">午餐（週六 11:00–16:30；Soi Athakravi 1）</p>
+          <p class="next">不接受訂位；排隊超過 12:30 就放棄回住宿</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">13:00</div>
+        <div class="body">
+          <p class="nm"><span class="ico">🏠</span><a href="#place-jasmine-villa" data-place="jasmine-villa">回住宿提領行李</a> <a class="star" href="#place-jasmine-villa" data-place="jasmine-villa" aria-label="看完整介紹">★</a> <a class="warnmark" href="#place-jasmine-villa" data-place="jasmine-villa" aria-label="有注意事項">❗</a></p>
+          <p class="what">確認護照、P.P.10 退稅單、發票</p>
+          
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">13:15</div>
+        <div class="body">
+          <p class="nm"><span class="ico">✈️</span>叫車去 BKK 機場 </p>
+          <p class="what">約 64 分，14:45 前到</p>
+          <p class="next">高速過路費看 App 明細｜別拖到下午才叫車</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">14:45</div>
+        <div class="body">
+          <p class="nm"><span class="ico">✈️</span>BKK 機場 4 樓出境層 </p>
+          <p class="what">先帶退稅商品去找海關驗貨（BKK 4 樓 Entrance 10 ⚠），驗完才報到；每人合計未滿 ฿20,000 可免驗貨 ⚠</p>
+          <p class="next">退稅品不要先託運</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">16:30</div>
+        <div class="body">
+          <p class="nm"><span class="ico">✈️</span>TG636 關櫃（保守抓） </p>
+          <p class="what">起飛前 60 分＝16:30 前到櫃檯、行李同時交；泰航實際關櫃時間沒查到 ⚠，只查到「建議起飛前 3 小時到機場」</p>
+          
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">17:30</div>
+        <div class="body">
+          <p class="nm"><span class="ico">✈️</span>TG636 曼谷 → 桃園 T1 </p>
+          <p class="what">17:30 起飛、22:20 落地｜2026-10-25 換季改點，夏季的 17:15 已不適用</p>
+          <p class="next">免稅店買完就回候機室；機上約 3 小時 50 分</p>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="t">約 22:20</div>
+        <div class="body">
+          <p class="nm"><span class="ico">✈️</span>落地桃園 T1 </p>
+          <p class="what">22:20 落地｜機捷 A12 往台北車站末班普通車 23:37，只剩 77 分鐘</p>
+          <p class="next">⚠ 趕末班機捷要運氣（下機＋行李＋走到 A12 約 60–70 分）；趕不上直接叫車。備案國光 1819（⚠ T1 上車點未查證）</p>
+        </div>
+      </li>
+    </ol>
+    <details class="sub"><summary>備案</summary><ul><li><b>不想出門採買</b> → 11:00 退房後直接午餐＋機場；午餐改 Supanniga Thonglor（10:00–22:00）。Samlor（Charoen Krung）不順路，想吃必比登才考慮。</li></ul></details>
+    <details class="sub"><summary>下雨怎麼辦</summary><p>EmQuartier 到 Phrom Phong 都是室內，BTS 站有天橋連接（⚠ 未查證）。</p></details>
+  </details>
+</div></section>
+<section id="view-days" hidden><div id="all-days"></div></section>
+<section id="view-places" hidden>
+<nav class="chipbar"><a class="chip" href="#cat-大麻">大麻<b>2</b></a><a class="chip" href="#cat-餐廳">餐廳<b>14</b></a><a class="chip" href="#cat-酒吧">酒吧<b>7</b></a><a class="chip" href="#cat-按摩">按摩<b>3</b></a><a class="chip" href="#cat-購物">購物<b>4</b></a><a class="chip" href="#cat-景點">景點<b>3</b></a><a class="chip" href="#cat-住宿">住宿<b>1</b></a></nav>
+<section class="catblock"><h2 id="cat-大麻">大麻</h2>
+  <article class="place" id="place-choo-choo-hemp">
+    <header class="ph"><div class="icw">🌿</div>
+      <div><h3>Choo Choo Hemp（大麻店＋診所）</h3><p class="tagrow"><span class="tag">大麻</span> <span class="tag">免預約</span> <span class="tag">信用卡</span></p></div></header>
+    <p class="what">Thonglor 一帶最有名的大麻店之一，一棟四層樓：2 樓診所（開處方）、3 樓賣花、1 樓 EDIBLELAND（食品專區）。診所式流程，先面談領處方（PT33）再買貨，一棟樓辦完；有日本人員工。</p>
+    
+    <section class="blk"><h4>點什麼</h4><p>兩人各自在 2 樓面談領處方（診察費 ฿200／人 ✅ 店家 LINE 回覆），再上 3 樓買花。品種在下面。</p></section><section class="blk"><h4>先知道</h4><p>① 🪪 帶護照正本，兩人各自面談；② 醫師可以拒絕開方，有服藥或心臟、精神病史要老實說；③ 1 樓 EDIBLELAND 不買（合法上限每包 THC ≤ 1.6 mg，店裡 50 mg 軟糖屬第 5 類毒品）；④ 不要在店外或街上用，買完直接叫 Grab 回住宿；⑤ 處方量不得超過 30 天用量（TAT）；「≤30 g／月」與處方有效期 ⚠ 未查證，當天問醫師，買的量不要超過處方；⑥ 營業時間 LINE 已確認，但落地後建議再 LINE 問一次「今天（週日）醫師在診嗎」。</p></section><section class="blk"><h4>資訊</h4><ul><li>每日 10:00–01:00 ✅（店家 LINE 確認）</li><li>診察費 ฿200／人 ✅</li><li>+66 81 644 0515</li><li>花菜單 strains.choochoohemp.com</li></ul></section><section class="blk addr"><h4>地址</h4><p class="addr-en">Sukhumvit 49（108/4-5）</p><a class="btn-map" href="https://www.google.com/maps/search/?api=1&query=Sukhumvit%2049%EF%BC%88108/4-5%EF%BC%89" target="_blank" rel="noopener">📍 開地圖</a></section>
+  </article>
+  <article class="place" id="place-stash-bkk">
+    <header class="ph"><div class="icw">🌿</div>
+      <div><h3>Stash BKK（大麻店・Ekkamai）</h3><p class="tagrow"><span class="tag">大麻</span> <span class="tag">免預約</span> <span class="tag">未查</span></p></div></header>
+    <p class="what">Ekkamai 的大麻店，24 小時營業，品種約 40 款輪替；現場可遠距問診（需要補處方時）；官網寫花 ฿60／g 起。</p>
+    
+    <section class="blk"><h4>點什麼</h4><p>D4 第二家比品種——請店員報今日菜單與每款的 THC；想放鬆選 Indica、想提神選 Sativa。</p></section><section class="blk"><h4>先知道</h4><p>沒有 edibles；沒有公開菜單（現場或 LINE 問）；官網寫各分店設施不同，有客人座位、PS5／PS4、桌遊、按摩椅、WiFi，但官網沒有宣傳店內吸食，先問店員場地規定，不確定就不在店內用；門牌官網寫 379/6、地圖寫 379/3，用 Google Maps 導航。</p></section><section class="blk"><h4>資訊</h4><ul><li>24 小時 ✅（官網）</li><li>+66 99 332 0049</li><li>stashbkk.co</li></ul></section><section class="blk addr"><h4>地址</h4><p class="addr-en">Soi Sukhumvit 63 (same soi as Here Hai)</p><a class="btn-map" href="https://www.google.com/maps/search/?api=1&query=Soi%20Sukhumvit%2063%20%28same%20soi%20as%20Here%20Hai%29" target="_blank" rel="noopener">📍 開地圖</a></section>
+  </article></section>
+<section class="catblock"><h2 id="cat-餐廳">餐廳</h2>
+  <article class="place" id="place-thai-niyom">
+    <header class="ph"><div class="icw">🍜</div>
+      <div><h3>Thai Niyom（泰味）</h3><p class="tagrow"><span class="tag">餐廳</span> <span class="tag">免預約</span> <span class="tag">信用卡</span></p></div></header>
+    <p class="what">瑪哈吞廣場（Mahatun Plaza）的泰國菜餐廳，菜色涵蓋「從清邁到合艾」，泰北到泰南都有；招牌收錄米其林必比登</p>
+    
+    <section class="blk"><h4>點什麼</h4><p>普吉豬五花炒蝦醬、清邁拼盤（Chiang Mai Combo）</p></section><section class="blk"><h4>先知道</h4><p>米其林頁標示不接受訂位，想確定有位可電話 +66 2 044 1010；金額 ⚠ 未查</p></section><section class="blk"><h4>資訊</h4><ul><li>瑪哈吞廣場 888/28-29 號</li><li>週二–六 11:00–22:00 ✅（週一、日休）</li></ul></section><section class="blk addr"><h4>地址</h4><p class="addr-en">Mahatun Plaza, 888/28-29 Phloen Chit Rd, Lumphini, Pathum Wan, Bangkok 10330</p><a class="btn-map" href="https://www.google.com/maps/search/?api=1&query=Mahatun%20Plaza%2C%20888/28-29%20Phloen%20Chit%20Rd%2C%20Lumphini%2C%20Pathum%20Wan%2C%20Bangkok%2010330" target="_blank" rel="noopener">📍 開地圖</a></section>
+  </article>
+  <article class="place" id="place-red-sky">
+    <header class="ph"><div class="icw">🍜</div>
+      <div><h3>Red Sky（紅天酒吧）</h3><p class="tagrow"><span class="tag">餐廳</span> <span class="tag">需預約</span> <span class="tag">信用卡</span></p></div></header>
+    <p class="what">聖塔拉大酒店（Centara Grand）頂樓餐廳與酒吧，弧形玻璃拱頂罩住吧台，看得到拉差帕頌路口；55 樓餐廳、56 樓酒吧</p>
+    <ul class="watch"><li>服裝：禁無袖、拖鞋、運動短褲，要 smart casual（正式休閒）</li><li>20 歲以下不得進入，帶護照</li></ul>
+    <section class="blk"><h4>點什麼</h4><p>招牌海陸塔（Surf &amp; Turf Tower）、龍蝦（Thermidor）、泰式香茅雞（Klong Phai）、羊排；吃完上 56 樓喝一杯</p></section><section class="blk"><h4>先知道</h4><p>🔴 官網「Reserve a Table」（訂位）或 +66 2 100 6255；金額 ⚠ 官網未列（預算每人 ฿1,500–2,500 估算）</p></section><section class="blk"><h4>資訊</h4><ul><li>每日 17:00–01:00（最後點單 23:30）✅</li><li>+66 2 100 6255</li></ul></section><section class="blk addr"><h4>地址</h4><p class="addr-en">Centara Grand at CentralWorld, 999/99 Rama 1 Rd, Pathum Wan, Bangkok 10330</p><a class="btn-map" href="https://www.google.com/maps/search/?api=1&query=Centara%20Grand%20at%20CentralWorld%2C%20999/99%20Rama%201%20Rd%2C%20Pathum%20Wan%2C%20Bangkok%2010330" target="_blank" rel="noopener">📍 開地圖</a></section>
+  </article>
+  <article class="place" id="place-here-hai">
+    <header class="ph"><div class="icw">🍜</div>
+      <div><h3>Here Hai（炒蟹）</h3><p class="tagrow"><span class="tag">餐廳</span> <span class="tag">免預約</span> <span class="tag">現金</span></p></div></header>
+    <p class="what">Ekkamai Soi 63 的泰式海鮮店。招牌是炒蟹（香草辣椒、鑊氣），份量適合分享，可要求降辣。</p>
+    
+    <section class="blk"><h4>點什麼</h4><p>炒蟹、蟹炒飯、烤大河蝦（二手說法 ⚠，現場看菜單）。</p></section><section class="blk"><h4>先知道</h4><p>營業 10:00–15:00 與 16:00–17:30 兩段，D1 排 16:00 的下午段；熱門常排隊，可電話問位（+66 63 219 9100）；金額沒查到 ⚠。</p></section><section class="blk"><h4>資訊</h4><p>週二–日 10:00–15:00、16:00–17:30 ✅（Michelin）</p></section><section class="blk addr"><h4>地址</h4><p class="addr-en">112/1 Soi Sukhumvit 63</p><a class="btn-map" href="https://www.google.com/maps/search/?api=1&query=112/1%20Soi%20Sukhumvit%2063" target="_blank" rel="noopener">📍 開地圖</a></section>
+  </article>
+  <article class="place" id="place-gen">
+    <header class="ph"><div class="icw">🍜</div>
+      <div><h3>Gen（日式串燒）</h3><p class="tagrow"><span class="tag">餐廳</span> <span class="tag">需預約</span> <span class="tag">信用卡</span></p></div></header>
+    <p class="what">Ekkamai「Vibes Ekkamai」內的炭火日式串燒（Yakitori）。Michelin Plate 是「指南收錄」，不是必比登也不是星級；價位 ฿฿。</p>
+    
+    <section class="blk"><h4>點什麼</h4><p>雞肉類串燒（招牌品項沒查到 ⚠，點店員推薦）。份量小、容易點，適合抵達日不吃太重的一餐。</p></section><section class="blk"><h4>先知道</h4><p>Michelin 頁標示可訂位；不是泰式；用 Grab（Ekkamai Soi 63）。</p></section><section class="blk"><h4>資訊</h4><ul><li>週日、週一、週三–週六 17:00–00:00 ✅（Michelin）</li><li>+66 2 048 0008</li></ul></section><section class="blk addr"><h4>地址</h4><p class="addr-en">Vibes Ekkamai，267/31 Soi Sukhumvit 63</p><a class="btn-map" href="https://www.google.com/maps/search/?api=1&query=Vibes%20Ekkamai%EF%BC%8C267/31%20Soi%20Sukhumvit%2063" target="_blank" rel="noopener">📍 開地圖</a></section>
+  </article>
+  <article class="place" id="place-kor-panich">
+    <header class="ph"><div class="icw">🍜</div>
+      <div><h3>Kor Panich（芒果糯米飯）</h3><p class="tagrow"><span class="tag">餐廳</span> <span class="tag">免預約</span> <span class="tag">現金</span></p></div></header>
+    <p class="what">1932 年創立的古早味老店，在老城 Tanao 路。</p>
+    
+    <section class="blk"><h4>點什麼</h4><p>芒果糯米飯（一份 ฿125–140，二手資料 ⚠）。</p></section><section class="blk"><h4>先知道</h4><p>17:00 打烊，D2 排 15:30 到；11 月不是芒果產季，風味略遜但仍是曼谷最經典的一家；離 Pad Thai Fai Ta Lu 很近（步行或短程車，分鐘數未查證 ⚠）；芒果糯米飯不能帶回台灣（生鮮水果）。</p></section><section class="blk"><h4>資訊</h4><ul><li>週一–六 07:00–17:00 ✅（Michelin）</li><li>+66 2 221 3554</li></ul></section><section class="blk addr"><h4>地址</h4><p class="addr-en">431-433 Tanao Rd</p><a class="btn-map" href="https://www.google.com/maps/search/?api=1&query=431-433%20Tanao%20Rd" target="_blank" rel="noopener">📍 開地圖</a></section>
+  </article>
+  <article class="place" id="place-pad-thai-fai-ta-lu">
+    <header class="ph"><div class="icw">🍜</div>
+      <div><h3>Pad Thai Fai Ta Lu（帕泰）</h3><p class="tagrow"><span class="tag">餐廳</span> <span class="tag">免預約</span> <span class="tag">未查</span></p></div></header>
+    <p class="what">Dinso 路的炭烤 Pad Thai 專門店（Michelin 頁網址 eat-pad-thai）；用炭火鍋炒而不是瓦斯爐，有煙燻鑊氣；菜單只有 Pad Thai（蝦／豬／綜合）；價位最低一級 ฿。</p>
+    
+    <section class="blk"><h4>點什麼</h4><p>豬頸肉 Pad Thai（約 ฿250）；基本盤約 ฿150–160；大河蝦加鮭魚卵 ฿599。價格出自二手網站 ⚠。</p></section><section class="blk"><h4>先知道</h4><p>人多要排隊（早一點到較好）；D2 這餐是按摩完的午餐，晚餐在 Supanniga，兩人先點一到兩盤分著吃。付款方式沒查到 ⚠，帶現金。</p></section><section class="blk"><h4>資訊</h4><ul><li>每日 10:00–00:00 ✅（Michelin）</li><li>+66 89 811 1888</li></ul></section><section class="blk addr"><h4>地址</h4><p class="addr-en">115/5 Dinso Rd</p><a class="btn-map" href="https://www.google.com/maps/search/?api=1&query=115/5%20Dinso%20Rd" target="_blank" rel="noopener">📍 開地圖</a></section>
+  </article>
+  <article class="place" id="place-supanniga-tha-tien">
+    <header class="ph"><div class="icw">🍜</div>
+      <div><h3>Supanniga Tha Tien（河畔泰菜）</h3><p class="tagrow"><span class="tag">餐廳</span> <span class="tag">需預約</span> <span class="tag">信用卡</span></p></div></header>
+    <p class="what">Supanniga 的河畔分店，在 Maha Rat Rd，有冷氣室內座位和露台，看得到 Wat Arun；泰東部家常菜，跟 Thonglor 本店同系列；價位 ฿฿。</p>
+    
+    <section class="blk"><h4>點什麼</h4><p>傍晚坐露台當晚餐，隔河看鄭王廟日落（約 17:50）和亮燈；後面還有 Opium 和第二輪，別點太滿。菜單與價格沒查到 ⚠；可參考 Thonglor 本店官方菜單：蟹肉 Pu Jah ฿460、Tom Kha 鱸魚 ฿390，另加 10%＋7%。</p></section><section class="blk"><h4>先知道</h4><p>Michelin 頁標示可訂位，訂 17:15 並要求露台；露台雨天坐室內；想換地方就去隔壁 Rongros（Michelin，每日 11:00–15:00、17:00–22:00，可刷卡，+66 96 946 1785，露台看 Wat Arun）。</p></section><section class="blk"><h4>資訊</h4><ul><li>週一–五 11:00–22:00（週六日 10:00–22:00）✅</li><li>+66 92 253 9251 ✅</li></ul></section><section class="blk addr"><h4>地址</h4><p class="addr-en">392/25-26 Soi Phen Phat 2, Maha Rat Rd</p><a class="btn-map" href="https://www.google.com/maps/search/?api=1&query=392/25-26%20Soi%20Phen%20Phat%202%2C%20Maha%20Rat%20Rd" target="_blank" rel="noopener">📍 開地圖</a></section>
+  </article>
+  <article class="place" id="place-the-commons">
+    <header class="ph"><div class="icw">🍜</div>
+      <div><h3>The Commons（社區商場）</h3><p class="tagrow"><span class="tag">餐廳</span> <span class="tag">免預約</span> <span class="tag">未查</span></p></div></header>
+    <p class="what">2015 年開幕的露天社區型商場，四層樓，刻意做成「Thonglor 的後院」；同一棟有很多餐廳（Fowlmouth 全日餐廳、Bapsang 韓式、清酒巷、墨西哥捲餅等），到了現場挑想吃的，不用先決定。</p>
+    
+    <section class="blk"><h4>點什麼</h4><p>不用先決定吃哪家：進場繞一圈，看哪幾家有開、看菜單再選。Fowlmouth（全日餐廳）、Bapsang（韓式）、清酒巷、墨西哥捲餅都在同一棟。</p></section><section class="blk"><h4>先知道</h4><p>先到先得；禁帶外食和飲料；無行李寄放；各店可自訂營業時間，到了先看哪幾家有開；午餐人較少，離 Divana 同一條 Soi 17，走路就到。</p></section><section class="blk"><h4>資訊</h4><ul><li>每日 08:00–01:00 ✅（官網）</li><li>BTS Thong Lo 3 號出口後 Grab 5–10 分（步行 15–20 分）</li></ul></section><section class="blk addr"><h4>地址</h4><p class="addr-en">335 Soi Thong Lo 17</p><a class="btn-map" href="https://www.google.com/maps/search/?api=1&query=335%20Soi%20Thong%20Lo%2017" target="_blank" rel="noopener">📍 開地圖</a></section>
+  </article>
+  <article class="place" id="place-supanniga-thonglor">
+    <header class="ph"><div class="icw">🍜</div>
+      <div><h3>Supanniga Thonglor（泰東部菜）</h3><p class="tagrow"><span class="tag">餐廳</span> <span class="tag">需預約</span> <span class="tag">未查</span></p></div></header>
+    <p class="what">2012 年開幕的旗艦店，主打祖母家鄉東部（Trat）與伊森的家常菜，不是常見的中部泰菜；黃色是招牌色。</p>
+    
+    <section class="blk"><h4>點什麼</h4><p>Moo Cha Muang 燉豬 ฿380、炸高麗菜魚露 ฿220（這兩道有 Michelin 標示）、Tom Kha 鱸魚 ฿390、咖哩蟹肉 ฿760。</p></section><section class="blk"><h4>先知道</h4><p>價格另加 10% 服務費＋7% VAT；最後點餐 21:00；2 人約 ฿2,300–3,000（官方價推算，未含酒）。</p></section><section class="blk"><h4>資訊</h4><ul><li>每日 10:00–22:00 ✅</li><li>電話 091 774 9808 ✅</li></ul></section><section class="blk addr"><h4>地址</h4><p class="addr-en">160/11 Soi Sukhumvit 55 (BTS Thong Lo Exit 3)</p><a class="btn-map" href="https://www.google.com/maps/search/?api=1&query=160/11%20Soi%20Sukhumvit%2055%20%28BTS%20Thong%20Lo%20Exit%203%29" target="_blank" rel="noopener">📍 開地圖</a></section>
+  </article>
+  <article class="place" id="place-rung-rueang">
+    <header class="ph"><div class="icw">🍜</div>
+      <div><h3>Rung Rueang（豬肉麵）</h3><p class="tagrow"><span class="tag">餐廳</span> <span class="tag">免預約</span> <span class="tag">現金</span></p></div></header>
+    <p class="what">Sukhumvit 26 巷的老牌豬肉麵店（Rung Rueang Tung），價位最低一級 ฿。</p>
+    
+    <section class="blk"><h4>點什麼</h4><p>選清湯碎豬肉麵（Nam Sai）或冬蔭酸辣湯底，份量挑 small 或 large；配料是手打豬絞肉、豬肉片、魚丸、豬雜，麵條自己選。⚠ 隔壁 10/3 門牌是另一家同名店（家族分家後各自開），兩家都好吃，排錯隊不用換。</p></section><section class="blk"><h4>先知道</h4><p>快速、便宜，適合逛街前先吃飽；只開到 17:00；離 Bar Us 同一條 Soi 26。</p></section><section class="blk"><h4>資訊</h4><ul><li>每日 08:00–17:00 ✅（Michelin）</li><li>+66 84 527 1640</li></ul></section><section class="blk addr"><h4>地址</h4><p class="addr-en">21/2 Soi Sukhumvit 26</p><a class="btn-map" href="https://www.google.com/maps/search/?api=1&query=21/2%20Soi%20Sukhumvit%2026" target="_blank" rel="noopener">📍 開地圖</a></section>
+  </article>
+  <article class="place" id="place-sornthong">
+    <header class="ph"><div class="icw">🍜</div>
+      <div><h3>Sornthong（缸養海鮮）</h3><p class="tagrow"><span class="tag">餐廳</span> <span class="tag">免預約</span> <span class="tag">信用卡</span></p></div></header>
+    <p class="what">Rama 4 路的海鮮店，海鮮養在缸裡現點現做；炸蚝煎（蚵仔煎）與沙嗲是招牌。</p>
+    
+    <section class="blk"><h4>點什麼</h4><p>炸蚵仔煎（Fried oysters with egg，配甜酸辣醬）和烤豬肉沙嗲是常客最常點的；海鮮從門口缸子現挑，挑完先問價錢再下鍋（海鮮按重計價，金額未查 ⚠）。</p></section><section class="blk"><h4>先知道</h4><p>用 Grab（不在 BTS 區），週四傍晚塞車所以 19:45 就出發；直接到店；金額沒查到（Michelin 價位 ฿฿）⚠。</p></section><section class="blk"><h4>資訊</h4><ul><li>每日 12:30–22:00 ✅（Michelin）</li><li>+66 2 258 0118 ✅</li></ul></section><section class="blk addr"><h4>地址</h4><p class="addr-en">2829-31 Rama 4 Rd</p><a class="btn-map" href="https://www.google.com/maps/search/?api=1&query=2829-31%20Rama%204%20Rd" target="_blank" rel="noopener">📍 開地圖</a></section>
+  </article>
+  <article class="place" id="place-ann-tha-din-daeng">
+    <header class="ph"><div class="icw">🍜</div>
+      <div><h3>Ann Tha Din Daeng（海鮮）</h3><p class="tagrow"><span class="tag">餐廳</span> <span class="tag">免預約</span> <span class="tag">現金</span></p></div></header>
+    <p class="what">Thonburi 側 Khlong San 的海鮮餐廳，Michelin 文章說已經營二十多年，在一條有很多攤販的老街上賣海鮮，菜色走在地口味；價位 ฿฿。跟 Somsak Pu Ob 同在 Khlong San 一帶。</p>
+    
+    <section class="blk"><h4>點什麼</h4><p>招牌品項沒讀到（Michelin 摘要被截斷 ⚠）；現場點店員推薦的海鮮，點之前先問價錢。</p></section><section class="blk"><h4>先知道</h4><p>營業到 20:00，所以排在中午；金額沒查到 ⚠。</p></section><section class="blk"><h4>資訊</h4><ul><li>週三–日 10:30–20:00 ✅（Michelin）</li><li>+66 81 695 0597</li></ul></section><section class="blk addr"><h4>地址</h4><p class="addr-en">167 Tha Din Daeng Rd, Khlong San</p><a class="btn-map" href="https://www.google.com/maps/search/?api=1&query=167%20Tha%20Din%20Daeng%20Rd%2C%20Khlong%20San" target="_blank" rel="noopener">📍 開地圖</a></section>
+  </article>
+  <article class="place" id="place-somsak-pu-ob">
+    <header class="ph"><div class="icw">🍜</div>
+      <div><h3>Somsak Pu Ob（街頭蒸蟹）</h3><p class="tagrow"><span class="tag">餐廳</span> <span class="tag">免預約</span> <span class="tag">現金</span></p></div></header>
+    <p class="what">Khlong San（河西岸）Charoen Rat 巷的街頭海鮮店，Michelin 分類「街頭小吃、魚與海鮮」；價位 ฿฿。</p>
+    
+    <section class="blk"><h4>點什麼</h4><p>招牌蒸蟹冬粉煲、蝦（Michelin 文章推薦）。</p></section><section class="blk"><h4>先知道</h4><p>16:00 開、21:30 打烊，D6 排 16:30 到；金額沒查到 ⚠；離 BTS Wongwian Yai 站可步行（Michelin 文章說法）；從 ICONSIAM 用 Grab（距離近，分鐘數未查證 ⚠）。</p></section><section class="blk"><h4>資訊</h4><ul><li>週二–日 16:00–21:30 ✅（Michelin）</li><li>+66 81 400 0542 ✅</li></ul></section><section class="blk addr"><h4>地址</h4><p class="addr-en">199-205 Soi Charoen Rat 1, Khlong San</p><a class="btn-map" href="https://www.google.com/maps/search/?api=1&query=199-205%20Soi%20Charoen%20Rat%201%2C%20Khlong%20San" target="_blank" rel="noopener">📍 開地圖</a></section>
+  </article>
+  <article class="place" id="place-no-name-noodle">
+    <header class="ph"><div class="icw">🍜</div>
+      <div><h3>No Name Noodle（麵店）</h3><p class="tagrow"><span class="tag">餐廳</span> <span class="tag">免預約</span> <span class="tag">信用卡</span></p></div></header>
+    <p class="what">Sukhumvit 26 巷 Soi Athakravi 1 的麵店，價位 ฿฿。Michelin 文章寫招牌是 Shio Soba（鹽味蕎麥麵）和 Shoyu Tsuke Soba（醬油沾麵），每碗用 30 種以上食材；文章說「搶到位子的人才吃得到」，代表常客滿。</p>
+    
+    <section class="blk"><h4>點什麼</h4><p>兩個招牌各點一碗分著吃（店員會講哪個是湯麵）。</p></section><section class="blk"><h4>先知道</h4><p>營業 11:00–16:30，所以排在 D7 午餐；在 1 樓 P2 室，找 Soi Athakravi 1。</p></section><section class="blk"><h4>資訊</h4><ul><li>週三–日 11:00–16:30 ✅（Michelin）</li><li>+66 82 059 5417</li></ul></section><section class="blk addr"><h4>地址</h4><p class="addr-en">1F Room P2, 1/2 Soi Athakravi 1, Sukhumvit 26</p><a class="btn-map" href="https://www.google.com/maps/search/?api=1&query=1F%20Room%20P2%2C%201/2%20Soi%20Athakravi%201%2C%20Sukhumvit%2026" target="_blank" rel="noopener">📍 開地圖</a></section>
+  </article></section>
+<section class="catblock"><h2 id="cat-酒吧">酒吧</h2>
+  <article class="place" id="place-lennons">
+    <header class="ph"><div class="icw">🍸</div>
+      <div><h3>Lennon&#x27;s（藍儂酒吧）</h3><p class="tagrow"><span class="tag">酒吧</span> <span class="tag">需預約</span> <span class="tag">信用卡</span></p></div></header>
+    <p class="what">瑰麗酒店（Rosewood）30 樓的復古威士忌酒吧，主題「中世紀錄音室」：斜面玻璃牆、約 6,000 張黑膠的唱片行。亞洲 50 大酒吧 2026 第 7 名</p>
+    
+    <section class="blk"><h4>點什麼</h4><p>曼陀林（Man Do-tini，芒果糯米飯風味琴酒）、泰式酸酒（Fa-d Thai Sour，泰式炒河粉風味波本酸酒）；官方酒單約 ฿550／杯，另加 10%＋7%</p></section><section class="blk"><h4>先知道</h4><p>👟 正式休閒（smart casual）、要穿包鞋；20 歲以上、🪪 帶護照；日落時段建議先訂；吃的 ⚠ 未查，所以午餐吃飽、晚餐去紅天</p></section><section class="blk"><h4>資訊</h4><ul><li>每日 17:00–00:00 ✅</li><li>+66 2 080 0030</li></ul></section><section class="blk addr"><h4>地址</h4><p class="addr-en">1041/38 Ploenchit Rd, Rosewood Bangkok 30F, Lumphini, Pathum Wan, Bangkok 10330</p><a class="btn-map" href="https://www.google.com/maps/search/?api=1&query=1041/38%20Ploenchit%20Rd%2C%20Rosewood%20Bangkok%2030F%2C%20Lumphini%2C%20Pathum%20Wan%2C%20Bangkok%2010330" target="_blank" rel="noopener">📍 開地圖</a></section>
+  </article>
+  <article class="place" id="place-opium-bar">
+    <header class="ph"><div class="icw">🍸</div>
+      <div><h3>Opium Bar（中國城老樓酒吧）</h3><p class="tagrow"><span class="tag">酒吧</span> <span class="tag">需預約</span> <span class="tag">未查</span></p></div></header>
+    <p class="what">開在 Potong 餐廳樓上，位在有 120 年歷史的中國城老唐樓頂兩層（以前真的是鴉片館），要搭小電梯上去。官網有季節調酒菜單、50 多種額外烈酒、Food 菜單，和一間私人包廂（Black Jade）。</p>
+    
+    <section class="blk"><h4>點什麼</h4><p>當季調酒。官方酒單（Opium Menu 2026 PDF）每杯 ฿410–640（多數 ฿430–520，另加 10% 服務費與稅），兩人各喝 3 杯約 ฿3,000–3,500 ✅。</p></section><section class="blk"><h4>先知道</h4><p>🔴 先線上訂位；每週三公休；服裝規定官網沒寫 ⚠，穿 smart casual 最保險；🪪 帶護照。</p></section><section class="blk"><h4>資訊</h4><ul><li>16:00–01:00，週三公休 ✅</li><li>+66 82 979 3950</li><li>opiumbarbangkok.com</li></ul></section><section class="blk addr"><h4>地址</h4><p class="addr-en">422 Vanich 1 Rd, Samphanthawong</p><a class="btn-map" href="https://www.google.com/maps/search/?api=1&query=422%20Vanich%201%20Rd%2C%20Samphanthawong" target="_blank" rel="noopener">📍 開地圖</a></section>
+  </article>
+  <article class="place" id="place-teens-of-thailand">
+    <header class="ph"><div class="icw">🍸</div>
+      <div><h3>Teens of Thailand（琴酒吧）</h3><p class="tagrow"><span class="tag">酒吧</span> <span class="tag">需預約</span> <span class="tag">未查</span></p></div></header>
+    <p class="what">曼谷琴酒專門吧的先驅，2015 年開幕，兩層樓的老店面，約 12–15 個座位，燭光木桌，琴酒 40 多款。</p>
+    
+    <section class="blk"><h4>點什麼</h4><p>Chili-Salted Pineapple Gin Tonic、Thai Tea Gin Tonic、Jackfruit Gin Tonic（各約 ฿400）、經典 Gimlet（約 ฿380）（舊評論價 ⚠）。</p></section><section class="blk"><h4>先知道</h4><p>店很小，熱門時段可能要排隊（⚠ 沒查到官方說法），建議先訂；在中國城的 Soi Nana，不是 Sukhumvit 那個，跟司機說清楚。</p></section><section class="blk"><h4>資訊</h4><ul><li>Soi Nana（門牌 76 或 88，來源不一，看地圖）</li><li>每日 12:00–01:00</li><li>+66 81 443 3784</li></ul></section><section class="blk addr"><h4>地址</h4><p class="addr-en">Soi Nana (Yaowarat), Pom Prap Sattru Phai, Bangkok 10100</p><a class="btn-map" href="https://www.google.com/maps/search/?api=1&query=Soi%20Nana%20%28Yaowarat%29%2C%20Pom%20Prap%20Sattru%20Phai%2C%20Bangkok%2010100" target="_blank" rel="noopener">📍 開地圖</a></section>
+  </article>
+  <article class="place" id="place-octave">
+    <header class="ph"><div class="icw">🍸</div>
+      <div><h3>Octave（高空酒吧）</h3><p class="tagrow"><span class="tag">酒吧</span> <span class="tag">需預約</span> <span class="tag">未查</span></p></div></header>
+    <p class="what">Marriott 飯店最上面三層：45 樓是餐廳，往上是露天酒吧，49 樓頂是 360° 環景圓形吧台。以日落和夜景出名，當地人與外派人士愛去，觀光客比 Sky Bar 少，比較好訂位。</p>
+    
+    <section class="blk"><h4>點什麼</h4><p>18:00 上去，正好接日落尾聲（日落 17:50），再看夜景。酒價只有媒體資料（約 ฿370–450 ⚠）。</p></section><section class="blk"><h4>先知道</h4><p>smart casual（Time Out：不可穿運動服、夾腳拖、無袖背心；Phuket101：不可穿短褲與涼鞋）；想保證有位先訂（週末更建議；頂樓偶爾被活動包場）；下雨時部分空間有遮蔽，不行就先去 Dry Wave 再回來；🪪 帶護照。</p></section><section class="blk"><h4>資訊</h4><ul><li>每日 17:00–02:00 ✅（Marriott 官方餐飲頁，2026-10-18 再讀確認；Time Out 寫 01:00 或 00:00 是舊資料）</li><li>+66 2 797 0000</li><li>BTS Thong Lo 步行約 3 分</li></ul></section><section class="blk addr"><h4>地址</h4><p class="addr-en">Marriott Sukhumvit, 2 Soi 57 (45–49F)</p><a class="btn-map" href="https://www.google.com/maps/search/?api=1&query=Marriott%20Sukhumvit%2C%202%20Soi%2057%20%2845%E2%80%9349F%29" target="_blank" rel="noopener">📍 開地圖</a></section>
+  </article>
+  <article class="place" id="place-dry-wave">
+    <header class="ph"><div class="icw">🍸</div>
+      <div><h3>Dry Wave（酒吧）</h3><p class="tagrow"><span class="tag">酒吧</span> <span class="tag">需預約</span> <span class="tag">未查</span></p></div></header>
+    <p class="what">Thonglor 的雞尾酒吧（Dry Wave Cocktail Studio），招牌「Super Classic」系列：把兩款不同年代的經典調酒合在一杯。</p>
+    
+    <section class="blk"><h4>點什麼</h4><p>Newton&#x27;s Law（威士忌、青蘋果、香草、零陵香豆，最有名）、1806-1988（波本老式加柑橘）。</p></section><section class="blk"><h4>先知道</h4><p>價位 $$$（單杯實際金額沒查到 ⚠）；訂位由 Alotea 代理，客滿時看 IG（drywavecocktailstudio）；環境精緻（Smart and Elegant），避免太休閒；🪪 帶護照；Grab 回住宿，不要自己走路。</p></section><section class="blk"><h4>資訊</h4><ul><li>每日 19:00–01:00 ✅（Alotea）</li><li>+66 98 909 3962 ✅</li></ul></section><section class="blk addr"><h4>地址</h4><p class="addr-en">SODALITY 2F, 263 Thong Lo 13</p><a class="btn-map" href="https://www.google.com/maps/search/?api=1&query=SODALITY%202F%2C%20263%20Thong%20Lo%2013" target="_blank" rel="noopener">📍 開地圖</a></section>
+  </article>
+  <article class="place" id="place-bar-us">
+    <header class="ph"><div class="icw">🍸</div>
+      <div><h3>Bar Us（套餐式調酒）</h3><p class="tagrow"><span class="tag">酒吧</span> <span class="tag">需預約</span> <span class="tag">未查</span></p></div></header>
+    <p class="what">Sukhumvit 26 巷的小酒吧，還拿了永續酒吧獎。全黑裝潢，店員穿實驗袍。用發酵、蒸餾、碳酸等手法，食材用在地農場，酒單像套餐：Starter 開胃、Main 主菜、After 餐後、All night 經典變化；味道取自 Pad Thai、牛肉洋蔥、味噌等鹹香食材。</p>
+    
+    <section class="blk"><h4>點什麼</h4><p>照 Starter → Main → After 順序點，體驗最完整。官方酒單每杯 ฿480–680（多數 ฿480–500；最貴的 Orange Blossom Dry Martini ฿680），另加 7% VAT 與 10% 服務費（約 ×1.177），無酒精調酒 ฿330–360；兩人各喝 3 杯約 ฿3,100 ✅。</p></section><section class="blk"><h4>先知道</h4><p>🔴 官網寫 walk-in 隨時可以，訂位只有 18:00 與 20:00 兩個場（nightify.co/book/bar-us/web），選 18:00；官網每天營業，週日–四 18:00–午夜、週五六 18:00 起；Booking 頁寫 Smart Casual；🪪 帶護照。</p></section><section class="blk"><h4>資訊</h4><ul><li>週日–四 18:00–24:00</li><li>+66 91 721 8209</li></ul></section><section class="blk addr"><h4>地址</h4><p class="addr-en">61/37 Sukhumvit 26</p><a class="btn-map" href="https://www.google.com/maps/search/?api=1&query=61/37%20Sukhumvit%2026" target="_blank" rel="noopener">📍 開地圖</a></section>
+  </article>
+  <article class="place" id="place-sing-sing">
+    <header class="ph"><div class="icw">🍸</div>
+      <div><h3>Sing Sing Theater（夜店）</h3><p class="tagrow"><span class="tag">酒吧</span> <span class="tag">需預約</span> <span class="tag">未查</span></p></div></header>
+    <p class="what">Sukhumvit 45 巷內，四層樓、六個高低層，入口有穿紅旗袍、戴羽毛頭飾的接待，穿過厚重絲絨簾幕進入迷宮般的房間，最後是小舞池。DJ 加表演（含 burlesque 風）；比 RCA 小、更有戲劇感，適合情侶，離 Thonglor 近。</p>
+    
+    <section class="blk"><h4>點什麼</h4><p>官方酒單（singsingtheater.com/menu.html，2026-10-18 讀取）：招牌調酒 ฿380（The Dragon、Sakura、Samurai、Takeshi）、經典調酒 ฿335–395、shots ฿270–405（買 5 送 1）、啤酒 ฿230–260、無酒精 ฿195；整瓶 Chandon 氣泡酒 ฿2,350、Smirnoff 伏特加整瓶 ฿3,900；全部另加 VAT 與服務費。兩人各 3 杯招牌約 ฿2,700。</p></section><section class="blk"><h4>先知道</h4><p>① 👟 smart casual：不可涼鞋、露趾鞋、無袖背心、運動短褲 ✅；② 限 20 歲以上，🪪 帶原版護照 ✅；③ 官網（Reserve 頁與酒單）沒有任何入場費或低消的文字，活動夜是否收費沒寫，訂位時 WhatsApp 問一句最保險；④ 不帶大麻進去；⑤ 離開前先叫 Grab。</p></section><section class="blk"><h4>資訊</h4><ul><li>週二–六 21:00 起到深夜，週日、週一休 ✅（官網）</li><li>WhatsApp／電話 +66 63 225 1331 ✅、book@singsing-bangkok.com</li></ul></section><section class="blk addr"><h4>地址</h4><p class="addr-en">45 Sukhumvit Soi 45</p><a class="btn-map" href="https://www.google.com/maps/search/?api=1&query=45%20Sukhumvit%20Soi%2045" target="_blank" rel="noopener">📍 開地圖</a></section>
+  </article></section>
+<section class="catblock"><h2 id="cat-按摩">按摩</h2>
+  <article class="place" id="place-wat-pho-massage">
+    <header class="ph"><div class="icw">💆</div>
+      <div><h3>Wat Pho Massage（寺內按摩亭）</h3><p class="tagrow"><span class="tag">按摩</span> <span class="tag">免預約</span> <span class="tag">現金</span></p></div></header>
+    <p class="what">Wat Pho 傳統醫學與按摩學校旗下的「Massage pavilion at Wat Pho temple branch」，在臥佛寺院區內，泰式按摩的發源地。</p>
+    
+    <section class="blk"><h4>點什麼</h4><p>60 分鐘泰式按摩 ฿520／人；怕痛可說 “mai jeb”（不痛）。官方價（watpomassage.com/en/service，2026-10-18 讀取）：泰式或腳底按摩 30／60／120 分 ฿340／520／1,040；加香膏 60／120 分 ฿680／1,360；草藥球 ฿720／1,440。</p></section><section class="blk"><h4>先知道</h4><p>只收現金；兩人同時要排，旺季可能等 30 分鐘以上（⚠ 沒有官方等候時間），所以 D2 把午餐排在按摩之後；最後點單 18:00。</p></section><section class="blk"><h4>資訊</h4><ul><li>臥佛寺院內</li><li>每日 09:00–19:00（最後點單 18:00）✅（官網）</li><li>WhatsApp +66 63 920 6173、LINE @watpo-chetawan</li></ul></section><section class="blk addr"><h4>地址</h4><p class="addr-en">2 Sanam Chai Rd (inside Wat Pho), Phra Nakhon, Bangkok 10200</p><a class="btn-map" href="https://www.google.com/maps/search/?api=1&query=2%20Sanam%20Chai%20Rd%20%28inside%20Wat%20Pho%29%2C%20Phra%20Nakhon%2C%20Bangkok%2010200" target="_blank" rel="noopener">📍 開地圖</a></section>
+  </article>
+  <article class="place" id="place-divana">
+    <header class="ph"><div class="icw">💆</div>
+      <div><h3>Divana（花園 SPA）</h3><p class="tagrow"><span class="tag">按摩</span> <span class="tag">需預約</span> <span class="tag">信用卡</span></p></div></header>
+    <p class="what">Thonglor 的別墅花園式 SPA，9 間雙人房、4 間單人房，每間主題不同（中式、印度、羅馬、埃及等）。是這趟最有儀式感的一段。</p>
+    
+    <section class="blk"><h4>點什麼</h4><p>雙人 120 分芳療全身按摩。流程：泡腳 → 簡單清潔 → 蒸氣室 → 去角質 → 沖澡 → 按摩 → 臉部護理，結束有輕食；雙人房備浴袍。官網單價 ฿2,850／人（含服務費與稅），線上預約並付款享 10% 折扣 → 兩人約 ฿5,130；⚠ 折扣是否適用 Divine 這間，要在預約頁看實際金額。</p></section><section class="blk"><h4>先知道</h4><p>① 提早 15 分到（要先填表、泡腳）；遲到 30 分以上由店方決定、不延長時間；② 全額要在預約時間前 48 小時付清，否則自動取消；③ 取消：≥48 小時免費、24–48 小時收 50%、&lt;24 小時收全額，只能 email 申請，付款不退現金；④ 收到 email 或 LINE @divanathailand 才算訂位成立；⑤ 部分地區有免費來回接送，要在預約時就申請（Thonglor 是否在範圍 ⚠）；⑥ 帶大麻不進去。</p></section><section class="blk"><h4>資訊</h4><ul><li>11:00–23:00</li><li>+66 2-712-8986</li><li>線上預約 divana.zenoti.com/webstoreNew/services（官網 BOOK 連到這裡；網址要帶 /webstoreNew/services，只開域名會 404）</li></ul></section><section class="blk addr"><h4>地址</h4><p class="addr-en">103 Soi Thong Lo 17</p><a class="btn-map" href="https://www.google.com/maps/search/?api=1&query=103%20Soi%20Thong%20Lo%2017" target="_blank" rel="noopener">📍 開地圖</a></section>
+  </article>
+  <article class="place" id="place-health-land-asoke">
+    <header class="ph"><div class="icw">💆</div>
+      <div><h3>Health Land（按摩・Asoke）</h3><p class="tagrow"><span class="tag">按摩</span> <span class="tag">需預約</span> <span class="tag">未查</span></p></div></header>
+    <p class="what">泰國老牌連鎖按摩，Asoke 店在 Sukhumvit 21 巷，離 Terminal 21 很近（3–5 分步行或短程 Grab ⚠ 未查證）。</p>
+    
+    <section class="blk"><h4>點什麼</h4><p>逛完 Terminal 21 的下午放腳，60 分鐘泰式按摩。選項與價錢預約頁才看得到（官方地點頁沒列價格 ⚠，預算每人 ฿500–800 估算）。</p></section><section class="blk"><h4>先知道</h4><p>Ekkamai 分店（96/1 Soi Sukhumvit 63，+66 2392 2233，與 Stash 同一條巷）是 D4 的備案。</p></section><section class="blk"><h4>資訊</h4><p>每日 09:00–23:00 ✅（healthlandspa.com/en/location）</p></section><section class="blk addr"><h4>地址</h4><p class="addr-en">55/5 Sukhumvit 21 (Asoke branch)</p><a class="btn-map" href="https://www.google.com/maps/search/?api=1&query=55/5%20Sukhumvit%2021%20%28Asoke%20branch%29" target="_blank" rel="noopener">📍 開地圖</a></section>
+  </article></section>
+<section class="catblock"><h2 id="cat-購物">購物</h2>
+  <article class="place" id="place-centralworld">
+    <header class="ph"><div class="icw">🛍️</div>
+      <div><h3>CentralWorld（中央世界）</h3><p class="tagrow"><span class="tag">購物</span> <span class="tag">免預約</span> <span class="tag">信用卡</span></p></div></header>
+    <p class="what">四面佛隔壁的大商場；要買的四個泰國品牌這裡都有，一個商場逛完</p>
+    
+    <section class="blk"><h4>點什麼</h4><p>泰絲（Jim Thompson）1 樓（HugThai D101/2）、香氛 Thann 2 樓、香氛 Harnn 3 樓 A319、曼谷包 Naraya</p></section><section class="blk"><h4>先知道</h4><p>商場整體營業時間 ⚠ 未讀到官方頁；各店官方時間：香氛 Harnn、泰絲 Jim Thompson 10:00–22:00；旁邊 Big C Rajdamri 1 樓也有曼谷包 Naraya</p></section><section class="blk"><h4>資訊</h4><ul><li>拉差丹里路（Ratchadamri Rd）4 號</li><li>各店 10:00–22:00 ✅</li></ul></section><section class="blk addr"><h4>地址</h4><p class="addr-en">4 Ratchadamri Rd, Pathum Wan, Bangkok 10330</p><a class="btn-map" href="https://www.google.com/maps/search/?api=1&query=4%20Ratchadamri%20Rd%2C%20Pathum%20Wan%2C%20Bangkok%2010330" target="_blank" rel="noopener">📍 開地圖</a></section>
+  </article>
+  <article class="place" id="place-terminal-21">
+    <header class="ph"><div class="icw">🛍️</div>
+      <div><h3>Terminal 21（商場）</h3><p class="tagrow"><span class="tag">購物</span> <span class="tag">免預約</span> <span class="tag">信用卡</span></p></div></header>
+    <p class="what">2011 年開幕的機場航廈主題商場，9 層各是一座城市：LG 加勒比海、G 羅馬、M 巴黎、1 東京、2 倫敦、3 伊斯坦堡、4–5 舊金山、6 好萊塢；每層佈景都能拍照。</p>
+    
+    <section class="blk"><h4>點什麼</h4><p>約 600 間店，值得逛的是 1–3 樓的泰國獨立設計師品牌，不是連鎖店。今天順便練習退稅。</p></section><section class="blk"><h4>先知道</h4><p>Naraya 官方門市清單沒有 Terminal 21（2026-10-18 讀了官方清單），Harnn、Thann、Jim Thompson 也沒有；不是每間店都有退稅標誌，要看到標誌才辦。</p></section><section class="blk"><h4>資訊</h4><p>10:00–22:00</p></section><section class="blk addr"><h4>地址</h4><p class="addr-en">88 Sukhumvit Soi 19, Khlong Toei Nuea, Watthana, Bangkok 10110</p><a class="btn-map" href="https://www.google.com/maps/search/?api=1&query=88%20Sukhumvit%20Soi%2019%2C%20Khlong%20Toei%20Nuea%2C%20Watthana%2C%20Bangkok%2010110" target="_blank" rel="noopener">📍 開地圖</a></section>
+  </article>
+  <article class="place" id="place-iconsiam">
+    <header class="ph"><div class="icw">🛍️</div>
+      <div><h3>ICONSIAM（河畔商場）</h3><p class="tagrow"><span class="tag">購物</span> <span class="tag">免預約</span> <span class="tag">信用卡</span></p></div></header>
+    <p class="what">在 Chao Phraya 河西岸（Thonburi 側）的大商場，跟 D6 的海鮮店（Khlong San）在同一側，順路。Naraya、Thann、Harnn、Jim Thompson 四個品牌的官方門市清單全都有列 ICONSIAM，可再補買 D3 沒買到的。</p>
+    
+    <section class="blk"><h4>點什麼</h4><p>Thann 4 樓 Zone C（+66 2 288 0105）、Harnn 4 樓 416 Lobby C（+66 80 067 3584）、Jim Thompson M 樓 STK-TM07（+66 63 216 4393）、Naraya ICONSIAM。</p></section><section class="blk"><h4>先知道</h4><p>商場整體營業時間我沒讀到官方頁 ⚠，以上是各品牌官方清單的店面時間；有 Detective Conan 30 週年展覽到 11/7（官方首頁 🟡）；從 Thonglor 搭 Grab 約 30 分（TomTom 估算，座標為約略值 ⚠）。</p></section><section class="blk"><h4>資訊</h4><p>Harnn、Jim Thompson 10:00–22:00；Thann、Naraya ⚠ 未列</p></section><section class="blk addr"><h4>地址</h4><p class="addr-en">299 Charoen Nakhon Rd, Khlong San (Harnn official: 299 Soi Charoen Nakhon 5)</p><a class="btn-map" href="https://www.google.com/maps/search/?api=1&query=299%20Charoen%20Nakhon%20Rd%2C%20Khlong%20San%20%28Harnn%20official%3A%20299%20Soi%20Charoen%20Nakhon%205%29" target="_blank" rel="noopener">📍 開地圖</a></section>
+  </article>
+  <article class="place" id="place-emquartier">
+    <header class="ph"><div class="icw">🛍️</div>
+      <div><h3>EmQuartier／Emporium（商場）</h3><p class="tagrow"><span class="tag">購物</span> <span class="tag">免預約</span> <span class="tag">信用卡</span></p></div></header>
+    <p class="what">Sukhumvit 24～39 之間相鄰的兩個商場，離 Thonglor 只差一站 BTS（Thong Lo → Phrom Phong，⚠ 票價我沒在票價表核對）。Harnn、Thann、Jim Thompson 都有店，離境前最後補貨剛好。</p>
+    
+    <section class="blk"><h4>點什麼</h4><p>Harnn（SCape by HARNN，EmQuartier Waterfall Quartier 1 樓 C07，10:00–22:00）、Harnn Emporium 4 樓（10:00–22:00）、Thann Emporium 5 樓（營業時間官方清單沒列 ⚠）、Jim Thompson EmQuartier 2 樓（10:00–21:00）。</p></section><section class="blk"><h4>先知道</h4><p>買完拿 P.P.10；退稅物品要在機場報到前先給海關查驗，所以不要先託運；行李先寄放住宿 ⚠（退房後可否寄放未確認，⑤）。</p></section><section class="blk"><h4>資訊</h4><p>各店 10:00 起</p></section><section class="blk addr"><h4>地址</h4><p class="addr-en">Emporium: 622 Sukhumvit 24; EmQuartier: 693 Sukhumvit 39 (Jim Thompson official list)</p><a class="btn-map" href="https://www.google.com/maps/search/?api=1&query=Emporium%3A%20622%20Sukhumvit%2024%3B%20EmQuartier%3A%20693%20Sukhumvit%2039%20%28Jim%20Thompson%20official%20list%29" target="_blank" rel="noopener">📍 開地圖</a></section>
+  </article></section>
+<section class="catblock"><h2 id="cat-景點">景點</h2>
+  <article class="place" id="place-erawan-shrine">
+    <header class="ph"><div class="icw">⛩️</div>
+      <div><h3>Erawan Shrine（四面佛）</h3><p class="tagrow"><span class="tag">景點</span> <span class="tag">免預約</span> <span class="tag">免</span></p></div></header>
+    <p class="what">供奉印度教梵天（不是佛像）的神壇，四面各有祈願方向，就在拉差帕頌路口、緊貼中央世界商場</p>
+    
+    <section class="blk"><h4>點什麼</h4><p>從正面開始，順時針依序拜四面；可買鮮花供品（約 ฿20–50 ⚠ 未查證）</p></section><section class="blk"><h4>先知道</h4><p>不要自己點香燭，以現場公告為準；神壇區不可吃東西、抽菸；穿著端莊；不要拍正在祈禱的人</p></section><section class="blk"><h4>資訊</h4><ul><li>06:00 最清靜、11:00 人多</li><li>每日 06:00–22:00 ✅</li></ul></section><section class="blk addr"><h4>地址</h4><p class="addr-en">494 Ratchadamri Rd, Lumphini, Pathum Wan, Bangkok 10330 (in front of CentralWorld)</p><a class="btn-map" href="https://www.google.com/maps/search/?api=1&query=494%20Ratchadamri%20Rd%2C%20Lumphini%2C%20Pathum%20Wan%2C%20Bangkok%2010330%20%28in%20front%20of%20CentralWorld%29" target="_blank" rel="noopener">📍 開地圖</a></section>
+  </article>
+  <article class="place" id="place-jim-thompson-house">
+    <header class="ph"><div class="icw">🏛️</div>
+      <div><h3>Jim Thompson House（泰絲大王故居）</h3><p class="tagrow"><span class="tag">景點</span> <span class="tag">現場購票</span> <span class="tag">現金</span></p></div></header>
+    <p class="what">美國人吉姆・湯普森（Jim Thompson）的柚木老宅，他讓泰國絲綢走向世界；現在是博物館，要跟導覽進主屋（有中文導覽）</p>
+    
+    <section class="blk"><h4>點什麼</h4><p>主屋的柚木建築與收藏、庭園；園內商店可買泰絲小物</p></section><section class="blk"><h4>先知道</h4><p>進主屋要脫鞋；超過 20 公分的包要放置物櫃；不得閃光、自拍；全館禁菸與各種吸入裝置；有人說「今天休館、帶你去別處」是詐騙</p></section><section class="blk"><h4>資訊</h4><ul><li>成人 ฿250 ✅</li><li>每日 10:00–17:00（最後一場導覽 17:00）</li><li>空鐵國家體育館站（National Stadium）1 號出口</li><li>jimthompsonhouse.org</li></ul></section><section class="blk addr"><h4>地址</h4><p class="addr-en">6 Soi Kasemsan 2, Rama 1 Rd, Wang Mai, Pathum Wan, Bangkok 10330</p><a class="btn-map" href="https://www.google.com/maps/search/?api=1&query=6%20Soi%20Kasemsan%202%2C%20Rama%201%20Rd%2C%20Wang%20Mai%2C%20Pathum%20Wan%2C%20Bangkok%2010330" target="_blank" rel="noopener">📍 開地圖</a></section>
+  </article>
+  <article class="place" id="place-wat-pho">
+    <header class="ph"><div class="icw">⛩️</div>
+      <div><h3>Wat Pho（臥佛寺）</h3><p class="tagrow"><span class="tag">景點</span> <span class="tag">免預約</span> <span class="tag">現金</span></p></div></header>
+    <p class="what">曼谷最古老的大寺之一，46 公尺長、15 公尺高的金箔臥佛，1832 年建成，殿內幾乎剛好容納它；也是泰式按摩的發源地。</p>
+    
+    <section class="blk"><h4>點什麼</h4><p>佛腳——3 公尺高、鑲嵌珍珠母貝，共 108 格吉祥圖案；院內四座彩色馬賽克佛塔。中午前去，避開下午的雨和最熱時段。</p></section><section class="blk"><h4>先知道</h4><p>禁穿短褲（長褲、有袖）；進殿要脫鞋；傍晚別太晚到；路上有人說「今天休館、我帶你去別處」是詐騙，不要理。</p></section><section class="blk"><h4>資訊</h4><p>每日 08:00–19:30</p></section><section class="blk addr"><h4>地址</h4><p class="addr-en">2 Sanam Chai Rd, Phra Borom Maha Ratchawang, Phra Nakhon, Bangkok 10200</p><a class="btn-map" href="https://www.google.com/maps/search/?api=1&query=2%20Sanam%20Chai%20Rd%2C%20Phra%20Borom%20Maha%20Ratchawang%2C%20Phra%20Nakhon%2C%20Bangkok%2010200" target="_blank" rel="noopener">📍 開地圖</a></section>
+  </article></section>
+<section class="catblock"><h2 id="cat-住宿">住宿</h2>
+  <article class="place" id="place-jasmine-villa">
+    <header class="ph"><div class="icw">🏠</div>
+      <div><h3>Jasmine Villa（住宿・茉莉別墅）</h3><p class="tagrow"><span class="tag">住宿</span> <span class="tag">已訂</span> <span class="tag">信用卡</span></p></div></header>
+    <p class="what">Airbnb 包棟套房＋露台，在通羅 21 巷內；露台可用花、室內禁菸。離空鐵通羅站（BTS Thong Lo）約 15–20 分步行</p>
+    <ul class="watch"><li>室內禁菸；花只能在露台用，不帶出門</li><li>11/7 退房後無露台，剩下的大麻丟棄、不上飛機</li></ul>
+    <section class="blk"><h4>點什麼</h4><p>① 13:00 起可入住，提早到先把行李放安全儲物間；② 跟 Stan 確認門鎖密碼與 Wi-Fi；③ 進房先看陽台位置（抽菸與花都只在那裡）；④ 每天出門前把冷氣、燈關掉，貴重物品不留在房內</p></section><section class="blk"><h4>先知道</h4><ul><li>房東 Stan（Zin Home BKK）</li><li>入住 13:00 起、退房 11:00</li><li>10/25 12:00 前取消可部分退款，之後不可退</li><li>離空鐵通羅站（BTS Thong Lo）約 15–20 分步行；晚上回程建議直接 Grab 到巷口</li></ul></section><section class="blk"><h4>資訊</h4><ul><li>11/1–11/7 共 6 晚</li><li>已付清 TWD 11,506.52（5 晚 9,162.30／第 6 晚 2,344.22，信用卡）</li><li>確認碼不在網頁上，出發前看手機的訂位截圖</li></ul></section><section class="blk addr"><h4>地址</h4><p class="addr-en">399/91 Thong Lor 21 Lane, Khlong Tan Nuea, Watthana, Bangkok 10110</p><a class="btn-map" href="https://www.google.com/maps/search/?api=1&query=399/91%20Thong%20Lor%2021%20Lane%2C%20Khlong%20Tan%20Nuea%2C%20Watthana%2C%20Bangkok%2010110" target="_blank" rel="noopener">📍 開地圖</a></section>
+  </article></section>
+</section>
+<section id="view-prep" hidden>
+  <h2>每天出門前</h2>
+  <ul class="outlist"><li>🪪 護照正本</li><li>💵 現金（看今天幾個 💵）</li><li>📱 訂位截圖</li><li>👟 服裝：寺廟長褲有袖、酒吧包鞋</li><li>🔋 手機電量＋行動電源</li><li>🌿 花只在住宿陽台用，不帶出門</li></ul>
+<section class="pblk"><h3>起飛前 7 天（10/25 前）</h3><p class="plead">要花時間跑流程的事。放最前面，忘了來不及。</p><ul><li>🪪 護照效期 ≥ 2027-05-07（泰國入境 6 個月規則）；不夠就只能臨櫃換照 ✅</li><li>💳 信用卡海外交易啟用：打卡背後的客服電話開通；確認無國外消費限額 🟡</li><li>📋 旅平／不便險：Trip.com、Airbnb 刷哪張卡附帶什麼險自己查；要加買就現在 ⚠</li><li>📱 下載好：Grab、Google Maps 離線地圖（曼谷整區）、Google Translate 泰文離線包 🟡</li><li>🔌 220V type A/B/C 跟台灣相容，不用轉接頭 ✅</li></ul></section>
+<section class="pblk"><h3>起飛前 3 天（10/29 起開放填）</h3><p class="plead">TDAC 泰國數位入境卡：免費、線上填、官方只開放入境前 3 天內。沒填入境時會被請去補。</p><ul><li>入口：https://tdac.immigration.go.th/arrival-card/（移民局官方）✅</li><li>必填：姓名拼音（跟護照一字不差）、護照號碼、班機 TG637、入境日 2026-11-01 ✅</li><li>住宿地址填：103 Soi Thong Lo 17, Khlong Tan Nuea, Watthana, Bangkok 10110（Jasmine Villa）✅</li><li>填完會寄 QR 到 email，截圖存手機相簿；入境時出示 QR ✅</li><li>兩人要各自填各自的（每本護照一張）✅</li><li>⚠ TDAC 2025 年起取代紙本 TM.6，機場填紙本的窗口已經沒有了</li></ul></section>
+<section class="pblk"><h3>起飛前 24 小時（10/31 一早）</h3><p class="plead">最後一次對清單。</p><ul><li>🌦️ 查曼谷天氣與雨量；11 月是乾季，但午後雷陣雨偶爾有；折傘要不要帶看預報 🟡</li><li>🧳 行李走一遍：寺廟長褲、酒吧包鞋、充電線、泰銖現金（看今天幾個 💵）✅</li><li>💳 刷卡選泰銖（THB）不是台幣，避免 DCC 加價 ✅</li><li>📱 把機票／住宿／TDAC QR／保險 都截圖到相簿；離線也看得到 ✅</li><li>✈️ TG637 11/1 07:55 起飛：起飛前 2 小時到 T1（≤ 05:55）；往機場的桃捷首班未查證 ⚠，建議前一晚住機場或前夜叫車</li></ul></section>
+<section class="pblk"><h3>錢</h3><p class="plead">1 TWD = 1.0320 THB（2026-10-18 實查）。預算 TWD 80,000 ≈ ฿82,560，估算花 ฿78,368。</p><ul><li>出發前在台灣換約 TWD 27,000（≈ ฿27,900），不必一次換完；多要 ฿20／50／100 小鈔 🟡</li><li>⚠ 你的銀行有沒有泰銖現鈔要先問；沒有就先在機場換，或到曼谷用 ATM 領</li><li>D1 機場先換 ฿5,000 應急，匯率通常比市區差 ⚠</li><li>刷卡被問「泰銖還是台幣」→ 選泰銖（THB），避免 DCC 加價</li><li>只收現金：Here Hai、Kor Panich、Rung Rueang、Ann Tha Din Daeng、Somsak Pu Ob、Wat Pho 按摩亭、Urai ⚠</li><li>小費：按摩 ฿50–100／人、行李員 ฿20–50／件；餐廳看帳單有沒有含 10% 服務費 🟡</li><li>小費給紙鈔、不要給硬幣、當面交到對方手上 🟡</li></ul></section>
+<section class="pblk"><h3>退稅 P.P.10</h3><p class="plead">同一家店、同一天含稅滿 ฿2,000 才成立。餐廳、SPA、飯店的服務不能退稅 🟡。</p><ul><li>① 只找貼「VAT REFUND FOR TOURISTS」的店</li><li>② 結帳時出示護照，請店員填 P.P.10 並附正本發票</li><li>③ 商品 60 天內要帶出泰國</li><li>④ 機場報到前先給海關驗貨（BKK 4 樓出境層 Entrance 10）⚠ 出發前看機場公告</li><li>⑤ 每人商品合計未滿 ฿20,000 免驗貨 ⚠</li><li>策略：伴手禮集中在同一家店買（D6 ICONSIAM 或 D7 EmQuartier／Emporium）</li></ul></section>
+<section class="pblk"><h3>交通</h3><p class="plead">市區一律 Grab；不要路邊喊價。</p><ul><li>BTS Thong Lo → Chit Lom：5 站 ฿35 ✅</li><li>BTS Thong Lo → Asok：2 站 ฿25 ✅</li><li>BTS 末班：往東（Kheha）00:13、往西（Khu Khot）23:49 ✅</li><li>BTS 付款：先試感應信用卡，不成買單程票（來源衝突）⚠</li><li>機場計程車：跳表起 ฿35 ＋ 機場附加費 ฿50 ＋ 過路費 ฿25–75 🟡；1 樓 Gate 4–7 排隊</li><li>Grab 過路費是否含在 App 價內來源衝突 → 上車前看 App 車資明細</li><li>車程（TomTom 歷史車流，塞車會更久）：機場→Thonglor 64 分｜Thonglor→臥佛寺 36 分｜Thonglor→Khlong San 30 分｜Khlong San→Thonglor 42 分</li></ul></section>
+<section class="pblk"><h3>大麻三條紅線</h3><p class="plead">只在住宿陽台用；不帶出泰國、不帶回台灣。</p><ul><li>① 先領處方 PT33 再買花（D1 Choo Choo 2 樓診所，診察費 ฿200／人）✅</li><li>② 不買 edibles、vape、滴劑、萃取物：合法食品上限每包 THC ≤ 1.6 mg，50 mg 軟糖＝第 5 類毒品 ✅</li><li>③ 先喝完酒、回陽台才用花；不在街上、不在店內、不帶進酒吧</li><li>公共場所吸食罰則（官方）：1 個月以下徒刑、或 ฿2,000 以下罰金、或兩者併罰 ✅</li><li>買完直接叫 Grab 回住宿，不在街上走</li><li>D7 退房後沒有陽台，剩下的花丟棄，不放行李、不上飛機</li><li>不舒服：坐下、喝水、吃點東西；嘔吐不止或意識模糊打 1669</li></ul></section>
+<section class="pblk"><h3>服裝</h3><p class="plead">白天 33–35°C、體感 39–44°C，幾乎每天下午陣雨 🟡。</p><ul><li>寺廟（D2 臥佛寺）：長褲、有袖、肩膀與膝蓋要遮、進殿脫鞋</li><li>smart casual（Octave、Lennon&#x27;s、Red Sky、Dry Wave、Sing Sing、Bar Us）：不可涼鞋、無袖背心、運動短褲</li><li>Lennon&#x27;s、Sing Sing：一定要包鞋，不可露趾</li><li>帶：輕便雨具、防曬、薄外套（室內冷氣強）</li></ul></section>
+<section class="pblk"><h3>帶回台灣不能帶</h3><p class="plead">台灣入境（2026-10-18 讀官方頁 ✅）。</p><ul><li>❌ 大麻與一切大麻製品（台灣第二級毒品）</li><li>❌ 生鮮水果，連芒果糯米飯也不行；託運行李也不行 ✅</li><li>❌ 含肉點心（肉鬆、肉乾、香腸）—— 非洲豬瘟疫區豬肉製品，最高罰 NT$100 萬 ✅</li><li>✅ 酒類免稅 1.5 公升（18 歲以上）✅；超過走紅線申報，5 公升內補稅</li><li>⚠ 蜂蜜、水果乾、泡麵官方頁沒逐項列；要確認打防檢署 0800-761-590</li></ul></section>
+<section class="pblk"><h3>緊急電話</h3><ul><li>觀光警察 1155（24h，中英泰）✅</li><li>駐泰代表處急難 +66-81-666-4006（泰國境內直撥 081-666-4006），LINE：Taiwan119 ✅</li><li>外交部旅外急難 0800-085-095（國內）／001-886-800-085-095（國外）✅</li><li>救護車 1669 ⚠ 出發前再核對｜警察 191 ⚠</li><li>最近醫院：Samitivej Sukhumvit（133 Sukhumvit 49），Grab 約 5–10 分 ⚠</li></ul></section>
+<section class="pblk"><h3>Grab 防詐</h3><ul><li>司機說「App 壞了，現金算便宜點」→ 拒絕，不要取消 App</li><li>要繞路或推銷店家 → 說 Follow GPS, please</li><li>景點外有人說「今天休館，我帶你去別處」→ 詐騙（臥佛寺、Jim Thompson House 官方頁都有警告）</li><li>上車前核對車牌與司機照片、拍下車牌、Share Trip 給家人；坐後座、別睡著</li><li>路邊換匯只去銀行或有店面的 SuperRich</li><li>嘟嘟車 ฿20 帶你逛一圈 → 中間一定塞珠寶店、西服店</li></ul></section>
+<section class="pblk"><h3>宵夜（抽完會餓）</h3><p class="plead">住宿附近的 7-Eleven 是 24 小時；想吃熱食就用 Grab Food 點，不要半夜走遠。</p><ul><li>熱食：請櫃台幫你烤火腿起司吐司（媒體說在外國旅客間很紅）🟡</li><li>甜的：班蘭卡士達蛋糕（約 ฿38 ⚠ 舊資料）、黑芝麻奶、泰式奶茶、咖啡</li><li>鹹的：魷魚片、Mama 泡麵</li><li>水果乾：羅望子、芒果、鳳梨</li><li>⚠ 水果與含肉零食不要帶回台灣（D7 前吃掉或留在房間）</li></ul></section>
+</section>
+<section id="view-lang" hidden>
+  <p class="dim">把手機螢幕亮給對方看英文那行。男生說 ครับ（khrap），女生說 ค่ะ（kha）。</p>
+<details class="lsec" open><summary>最常用</summary><p class="lnote">一次秀完的自我介紹：We are tourists from Taiwan. Our English is limited. Please speak slowly or type it out for us. Thank you.</p><table class="ltbl"><thead><tr><th>中文</th><th>英文（亮給對方）</th><th>泰文</th></tr></thead><tbody><tr><td class="lz">你好</td><td class="le">Hello.</td><td class="lt">สวัสดีครับ<i class="ro">sa-wat-dee khrap</i></td></tr><tr><td class="lz">謝謝</td><td class="le">Thank you.</td><td class="lt">ขอบคุณครับ<i class="ro">khop khun khrap</i></td></tr><tr><td class="lz">不好意思／對不起</td><td class="le">Excuse me. / Sorry.</td><td class="lt">ขอโทษครับ<i class="ro">kho-thot khrap</i></td></tr><tr><td class="lz">請說慢一點</td><td class="le">Please speak slowly.</td><td class="lt">พูดช้าๆ หน่อยครับ<i class="ro">phut cha-cha noi khrap</i></td></tr><tr><td class="lz">請寫下來／打字給我看</td><td class="le">Please write it down.</td><td class="lt">ช่วยเขียนให้หน่อยครับ<i class="ro">chuai khian hai noi khrap</i></td></tr><tr><td class="lz">這個多少錢？</td><td class="le">How much is this?</td><td class="lt">เท่าไหร่ครับ<i class="ro">thao-rai khrap</i></td></tr><tr><td class="lz">太貴了，可以便宜點嗎</td><td class="le">Too expensive. Can you give a discount?</td><td class="lt">แพงไป ลดได้ไหมครับ<i class="ro">phaeng pai, lot dai mai khrap</i></td></tr><tr><td class="lz">可以刷卡嗎？</td><td class="le">Can I pay by card?</td><td class="lt">จ่ายบัตรได้ไหมครับ<i class="ro">chai bat dai mai khrap</i></td></tr><tr><td class="lz">好／可以</td><td class="le">OK.</td><td class="lt">ได้ครับ<i class="ro">dai khrap</i></td></tr><tr><td class="lz">不要，謝謝</td><td class="le">No, thank you.</td><td class="lt">ไม่เอาครับ<i class="ro">mai ao khrap</i></td></tr><tr><td class="lz">廁所在哪？</td><td class="le">Where is the toilet?</td><td class="lt">ห้องน้ำอยู่ที่ไหนครับ<i class="ro">hong-nam yu thi-nai khrap</i></td></tr></tbody></table></details>
+<details class="lsec"><summary>取得處方 PT33（診所）</summary><p class="lnote">醫師可以拒絕開方。有服藥、心血管或精神病史要老實說，這會影響能不能開方。</p><table class="ltbl"><thead><tr><th>中文</th><th>英文（亮給對方）</th><th>泰文</th></tr></thead><tbody><tr><td class="lz">說明來意</td><td class="le">We are tourists from Taiwan. We would like to get a cannabis prescription (PT33).</td><td class="lt">ผมต้องการพบแพทย์เพื่อขอใบสั่งกัญชาทางการแพทย์ (ภ.ท.33) ครับ</td></tr><tr><td class="lz">兩人各一張</td><td class="le">We need two separate prescriptions, one for each of us.</td><td class="lt">พวกเราสองคนต้องการใบสั่งยาคนละใบครับ</td></tr><tr><td class="lz">護照</td><td class="le">Here are our passports. We are over 20 years old.</td><td class="lt">นี่คือพาสปอร์ตของผม ผมอายุเกิน 20 ปีแล้วครับ</td></tr><tr><td class="lz">問醫師時段</td><td class="le">Is the doctor here today? What time?</td><td class="lt">ตอนนี้หมออยู่ไหมครับ หมอมากี่โมงครับ</td></tr><tr><td class="lz">問費用</td><td class="le">How much is the consultation fee? Is it free if we buy something?</td><td class="lt">ค่าพบแพทย์เท่าไหร่ครับ ถ้าซื้อสินค้าลดได้ไหมครับ</td></tr><tr><td class="lz">確認可買多少</td><td class="le">How many grams am I allowed to buy with this prescription?</td><td class="lt">ใบสั่งแพทย์นี้ซื้อได้กี่กรัมครับ</td></tr><tr><td class="lz">病史（照實回答）</td><td class="le">I have no heart problems and no mental health history. / I take this medication: ____</td><td class="lt">ผมมีโรคความดัน / โรคหัวใจ / โรคทางจิต / ทานยาอยู่ครับ（有的話才說）</td></tr><tr><td class="lz">醫師拒絕時</td><td class="le">Is there another clinic nearby that can see us today?</td><td class="lt">มีคลินิกอื่นแถวนี้ที่ตรวจให้วันนี้ไหมครับ</td></tr><tr><td class="lz">要收據</td><td class="le">May I have the prescription and the receipt?</td><td class="lt">ขอใบเสร็จและใบสั่งยาไว้ด้วยครับ</td></tr></tbody></table></details>
+<details class="lsec"><summary>買花（D1／D4）</summary><p class="lnote">品種只是參考，店內不一定有，THC% 要現場問。</p><table class="ltbl"><thead><tr><th>中文</th><th>英文（亮給對方）</th></tr></thead><tbody><tr><td class="lz">說明</td><td class="le">I have used cannabis before. I want something for relaxing.</td></tr><tr><td class="lz">問品種</td><td class="le">Is this indica, sativa, or hybrid? What is the THC percentage?</td></tr><tr><td class="lz">晚上用</td><td class="le">I want indica for evening, something relaxing.</td></tr><tr><td class="lz">白天用</td><td class="le">I want sativa for daytime, something uplifting.</td></tr><tr><td class="lz">問價</td><td class="le">How much per gram? Can I buy 3.5 grams first?</td></tr><tr><td class="lz">看與聞</td><td class="le">Can I see and smell it, please?</td></tr><tr><td class="lz">問店內規定</td><td class="le">Is it allowed to use cannabis inside the shop? What are the premises rules?</td></tr><tr><td class="lz">磨碎裝袋</td><td class="le">Please grind it and bag it.</td></tr><tr><td class="lz">使用地點</td><td class="le">I will only use it at my private balcony. Is that OK?</td></tr><tr><td class="lz">付款</td><td class="le">Do you accept credit cards, or cash only?</td></tr></tbody></table></details>
+<details class="lsec"><summary>餐廳與海鮮</summary><p class="lnote">海鮮按重量計價，點之前一定先問總價。</p><table class="ltbl"><thead><tr><th>中文</th><th>英文（亮給對方）</th><th>泰文</th></tr></thead><tbody><tr><td class="lz">兩位</td><td class="le">A table for two, please.</td><td class="lt">ขอโต๊ะสองที่ครับ</td></tr><tr><td class="lz">英文菜單</td><td class="le">Menu please. Do you have an English menu?</td><td class="lt">ขอเมนูครับ มีภาษาอังกฤษไหมครับ</td></tr><tr><td class="lz">海鮮先問價</td><td class="le">How much per kilogram? Please weigh it and tell me the total price before cooking.</td><td class="lt">ราคากิโลละเท่าไหร่ครับ ช่วยชั่งและบอกราคารวมก่อนทำ</td></tr><tr><td class="lz">不辣／小辣</td><td class="le">Not spicy. / A little spicy.</td><td class="lt">ไม่เผ็ดครับ / เผ็ดนิดหน่อยครับ</td></tr><tr><td class="lz">不要香菜</td><td class="le">No coriander, please.</td><td class="lt">ไม่ใส่ผักชีครับ</td></tr><tr><td class="lz">不要冰</td><td class="le">No ice, please.</td><td class="lt">ไม่ใส่น้ำแข็งครับ</td></tr><tr><td class="lz">推薦</td><td class="le">What do you recommend?</td><td class="lt">แนะนำอะไรดีครับ</td></tr><tr><td class="lz">這些我沒點</td><td class="le">I didn&#x27;t order this.</td><td class="lt">อันนี้ผมไม่ได้สั่งครับ</td></tr><tr><td class="lz">結帳</td><td class="le">Check, please.</td><td class="lt">เก็บเงินด้วยครับ</td></tr><tr><td class="lz">過敏</td><td class="le">I am allergic to ____.</td><td class="lt">แพ้ ____ ครับ</td></tr></tbody></table></details>
+<details class="lsec"><summary>南部泰菜（D3 備案 Jaan）</summary><p class="lnote">南部菜辣度真的高；完全去辣有時做不到，真的受不了就配白飯、別點咖哩。</p><table class="ltbl"><thead><tr><th>中文</th><th>英文（亮給對方）</th><th>泰文</th></tr></thead><tbody><tr><td class="lz">兩位</td><td class="le">A table for two, please.</td><td class="lt">ขอโต๊ะสองที่ครับ<i class="ro">kho to saawng thi khrap</i></td></tr><tr><td class="lz">英文菜單</td><td class="le">Menu please. Do you have an English menu?</td><td class="lt">ขอเมนูครับ มีภาษาอังกฤษไหมครับ<i class="ro">kho menu khrap, mi phasa angkrit mai khrap</i></td></tr><tr><td class="lz">問招牌</td><td class="le">What is your signature dish?</td><td class="lt">เมนูเด็ดคืออะไรครับ<i class="ro">menu det khue arai khrap</i></td></tr><tr><td class="lz">點招牌</td><td class="le">One Khua Kling Moo, please.</td><td class="lt">ขอคั่วกลิ้งหมูหนึ่งที่ครับ<i class="ro">kho khua-kling moo nueng thi khrap</i></td></tr><tr><td class="lz">白飯兩碗</td><td class="le">Two steamed rice, please.</td><td class="lt">ข้าวสวยสองที่ครับ<i class="ro">khao suai saawng thi khrap</i></td></tr><tr><td class="lz">不辣</td><td class="le">Not spicy, please.</td><td class="lt">ไม่เผ็ดครับ<i class="ro">mai phet khrap</i></td></tr><tr><td class="lz">一點點辣</td><td class="le">A little spicy, please.</td><td class="lt">เผ็ดนิดหน่อยครับ<i class="ro">phet nit-noi khrap</i></td></tr><tr><td class="lz">我不太能吃辣</td><td class="le">I can&#x27;t handle very spicy food.</td><td class="lt">ผมกินเผ็ดไม่เก่งครับ<i class="ro">phom kin phet mai keng khrap</i></td></tr><tr><td class="lz">不要香菜</td><td class="le">No coriander, please.</td><td class="lt">ไม่ใส่ผักชีครับ<i class="ro">mai sai phak-chi khrap</i></td></tr><tr><td class="lz">白開水不加冰</td><td class="le">Water, no ice, please.</td><td class="lt">ขอน้ำเปล่าไม่ใส่น้ำแข็งครับ<i class="ro">kho nam plao mai sai nam-khaeng khrap</i></td></tr><tr><td class="lz">好吃</td><td class="le">Very delicious!</td><td class="lt">อร่อยมากครับ<i class="ro">aroi mak khrap</i></td></tr><tr><td class="lz">結帳</td><td class="le">Check, please.</td><td class="lt">เก็บเงินด้วยครับ<i class="ro">kep ngern duai khrap</i></td></tr></tbody></table></details>
+<details class="lsec"><summary>老城街頭小吃（D2）</summary><p class="lnote">Kor Panich 只收現金；Pad Thai 付款方式未查到，都帶小鈔。</p><table class="ltbl"><thead><tr><th>中文</th><th>英文（亮給對方）</th><th>泰文</th></tr></thead><tbody><tr><td class="lz">內用兩位</td><td class="le">For here, two people.</td><td class="lt">ทานที่นี่สองคนครับ<i class="ro">than thi-ni saawng khon khrap</i></td></tr><tr><td class="lz">泰式炒河粉兩份</td><td class="le">Two Pad Thai, please.</td><td class="lt">ขอผัดไทยสองจานครับ<i class="ro">kho phat thai saawng chan khrap</i></td></tr><tr><td class="lz">芒果糯米飯</td><td class="le">Mango sticky rice, please.</td><td class="lt">ขอข้าวเหนียวมะม่วงครับ<i class="ro">kho khao-niao muang khrap</i></td></tr><tr><td class="lz">不要蝦</td><td class="le">No shrimp, please.</td><td class="lt">ไม่ใส่กุ้งครับ<i class="ro">mai sai kung khrap</i></td></tr><tr><td class="lz">外帶</td><td class="le">Take away, please.</td><td class="lt">ห่อกลับบ้านครับ<i class="ro">ho klap ban khrap</i></td></tr><tr><td class="lz">要湯匙和叉子</td><td class="le">A spoon and fork, please.</td><td class="lt">ขอช้อนกับส้อมครับ<i class="ro">kho chon kap som khrap</i></td></tr></tbody></table></details>
+<details class="lsec"><summary>宵夜與深夜點餐</summary><p class="lnote">主要靠 7-Eleven 與 Grab Food。</p><table class="ltbl"><thead><tr><th>中文</th><th>英文（亮給對方）</th><th>泰文</th></tr></thead><tbody><tr><td class="lz">蟹肉炒飯</td><td class="le">Crab fried rice, please.</td><td class="lt">ขอข้าวผัดปูครับ<i class="ro">kho khao-phat-pu khrap</i></td></tr><tr><td class="lz">再一份</td><td class="le">One more, please.</td><td class="lt">ขออีกหนึ่งครับ<i class="ro">kho ik nueng khrap</i></td></tr><tr><td class="lz">外帶</td><td class="le">Take away, please.</td><td class="lt">ขอห่อกลับครับ<i class="ro">kho ho klap khrap</i></td></tr><tr><td class="lz">白開水</td><td class="le">Water, please.</td><td class="lt">ขอน้ำเปล่าครับ<i class="ro">kho nam-plao khrap</i></td></tr><tr><td class="lz">要收據</td><td class="le">Receipt, please.</td><td class="lt">ขอใบเสร็จครับ<i class="ro">kho bai-set khrap</i></td></tr><tr><td class="lz">加辣／不辣</td><td class="le">A little spicy. / Not spicy.</td><td class="lt">เผ็ดนิดหน่อย / ไม่เผ็ด<i class="ro">phet nit-noi / mai phet</i></td></tr><tr><td class="lz">幾點打烊</td><td class="le">What time do you close?</td><td class="lt">ปิดกี่โมงครับ<i class="ro">pit ki mong khrap</i></td></tr></tbody></table></details>
+<details class="lsec"><summary>叫車與交通</summary><p class="lnote">夜間一律用 Grab 或 Bolt，上車前對車牌，不在路邊喊價。</p><table class="ltbl"><thead><tr><th>中文</th><th>英文（亮給對方）</th><th>泰文</th></tr></thead><tbody><tr><td class="lz">去這裡（亮地圖）</td><td class="le">Please take me here.</td><td class="lt">ไปที่นี่ครับ</td></tr><tr><td class="lz">請開跳表</td><td class="le">Meter, please.</td><td class="lt">เปิดมิเตอร์ด้วยครับ</td></tr><tr><td class="lz">高速公路</td><td class="le">You may take the expressway. I will pay the toll.</td><td class="lt">ขึ้นทางด่วนได้ครับ ผมจ่ายค่าทางด่วนเอง</td></tr><tr><td class="lz">在這裡停</td><td class="le">Please stop here.</td><td class="lt">จอดตรงนี้ครับ</td></tr><tr><td class="lz">去機場</td><td class="le">To Suvarnabhumi Airport, please.</td><td class="lt">ไปสนามบินสุวรรณภูมิครับ</td></tr><tr><td class="lz">回住宿</td><td class="le">To Jasmine Villa, 399/91 Thong Lor 21 Lane.</td><td class="lt">⚠ 地址以 Airbnb 入住資訊為準，貼在這裡：＿＿＿＿</td></tr></tbody></table></details>
+<details class="lsec"><summary>按摩與 SPA</summary><table class="ltbl"><thead><tr><th>中文</th><th>英文（亮給對方）</th><th>泰文</th></tr></thead><tbody><tr><td class="lz">預約兩位</td><td class="le">A booking for two people, please.</td><td class="lt">จองสองที่ครับ</td></tr><tr><td class="lz">輕一點／重一點</td><td class="le">Softer, please. / Harder, please.</td><td class="lt">เบาหน่อยครับ / แรงหน่อยครับ</td></tr><tr><td class="lz">會痛</td><td class="le">It hurts.</td><td class="lt">เจ็บครับ</td></tr><tr><td class="lz">太燙／太冷</td><td class="le">Too hot. / Too cold.</td><td class="lt">ร้อนไป / หนาวไป</td></tr><tr><td class="lz">這裡不要碰／有舊傷</td><td class="le">Please do not massage here. / I have an injury here.</td><td class="lt">ตรงนี้อย่านวดนะครับ / ผมมีอาการบาดเจ็บตรงนี้</td></tr></tbody></table></details>
+<details class="lsec"><summary>酒吧與夜生活</summary><p class="lnote">帶護照：酒吧夜店常查證件，兩人都帶（影本備用）。</p><table class="ltbl"><thead><tr><th>中文</th><th>英文（亮給對方）</th></tr></thead><tbody><tr><td class="lz">先問價</td><td class="le">How much is a beer? Please tell me the price first.</td></tr><tr><td class="lz">看帳單</td><td class="le">Please show me the bill.</td></tr><tr><td class="lz">帳單不對</td><td class="le">This is not correct. Please explain this charge.</td></tr><tr><td class="lz">不要別人請喝</td><td class="le">No, thank you. I do not want any drink.</td></tr><tr><td class="lz">要走了</td><td class="le">We are leaving now. Please bring the bill.</td></tr><tr><td class="lz">找警察</td><td class="le">I will call the tourist police.</td></tr></tbody></table></details>
+<details class="lsec"><summary>中國城酒吧（D2）</summary><p class="lnote">⚠ 是中國城 Yaowarat 旁的 Soi Nana，不是 Sukhumvit 的 Soi Nana，跟司機講清楚。</p><table class="ltbl"><thead><tr><th>中文</th><th>英文（亮給對方）</th><th>泰文</th></tr></thead><tbody><tr><td class="lz">兩位</td><td class="le">Two people, please.</td><td class="lt">สองคนครับ<i class="ro">saawng khon khrap</i></td></tr><tr><td class="lz">有位子嗎</td><td class="le">Do you have a table for two?</td><td class="lt">มีโต๊ะว่างไหมครับ<i class="ro">mi to wang mai khrap</i></td></tr><tr><td class="lz">最受歡迎的調酒</td><td class="le">What is your best-selling cocktail?</td><td class="lt">ค็อกเทลอันไหนขายดีที่สุดครับ<i class="ro">cocktail an nai khai dee thi sut khrap</i></td></tr><tr><td class="lz">想試泰式藥酒（Tep Bar，已不在主行程，僅備用）</td><td class="le">I would like to try ya dong (Thai herbal spirit).</td><td class="lt">อยากลองยาดองครับ<i class="ro">yak long ya-dong khrap</i></td></tr><tr><td class="lz">琴酒調酒</td><td class="le">A gin and tonic, please.</td><td class="lt">ขอจินโทนิคครับ<i class="ro">kho gin-tonic khrap</i></td></tr><tr><td class="lz">不要酒精</td><td class="le">A mocktail, no alcohol, please.</td><td class="lt">ขอม็อกเทลไม่ใส่แอลกอฮอล์ครับ<i class="ro">kho mocktail mai sai alcohol khrap</i></td></tr><tr><td class="lz">淡一點</td><td class="le">Please make it light.</td><td class="lt">ขอเบา ๆ ครับ<i class="ro">kho bao-bao khrap</i></td></tr><tr><td class="lz">幾點有現場音樂</td><td class="le">What time is the live music?</td><td class="lt">ดนตรีสดเริ่มกี่โมงครับ<i class="ro">dontri sot roem ki mong khrap</i></td></tr><tr><td class="lz">要收音樂費嗎</td><td class="le">Is there a music charge?</td><td class="lt">คิดค่าดนตรีไหมครับ<i class="ro">khit kha dontri mai khrap</i></td></tr><tr><td class="lz">幾點打烊</td><td class="le">What time do you close?</td><td class="lt">ปิดกี่โมงครับ<i class="ro">pit ki mong khrap</i></td></tr><tr><td class="lz">能刷卡嗎</td><td class="le">Is card OK, or cash only?</td><td class="lt">รับบัตรไหมครับ<i class="ro">rap bat mai khrap</i></td></tr><tr><td class="lz">結帳</td><td class="le">Check, please.</td><td class="lt">เก็บเงินด้วยครับ<i class="ro">kep ngern duai khrap</i></td></tr></tbody></table></details>
+<details class="lsec"><summary>酒吧與 Sing Sing</summary><p class="lnote">帶護照正本（20 歲以上）；酒類稅與服務費通常另加，結帳前確認。</p><table class="ltbl"><thead><tr><th>中文</th><th>英文（亮給對方）</th><th>泰文</th></tr></thead><tbody><tr><td class="lz">有訂位</td><td class="le">We have a reservation.</td><td class="lt">มีจองไว้ครับ<i class="ro">mi jong wai khrap</i></td></tr><tr><td class="lz">兩位，沒訂位</td><td class="le">Two people, no reservation. Do you have a table?</td><td class="lt">สองคน ไม่ได้จองครับ มีโต๊ะไหมครับ<i class="ro">saawng khon, mai dai jong khrap, mi to mai khrap</i></td></tr><tr><td class="lz">吧台座位</td><td class="le">Can we sit at the bar?</td><td class="lt">นั่งที่บาร์ได้ไหมครับ<i class="ro">nang thi bar dai mai khrap</i></td></tr><tr><td class="lz">看日落座位</td><td class="le">Can we sit near the window or outside?</td><td class="lt">ขอนั่งใกล้หน้าต่างหรือด้านนอกได้ไหมครับ<i class="ro">kho nang klai na-tang rue dan-nok dai mai khrap</i></td></tr><tr><td class="lz">有入場費嗎</td><td class="le">Is there a cover charge?</td><td class="lt">มีค่าเข้าไหมครับ<i class="ro">mi kha-khao mai khrap</i></td></tr><tr><td class="lz">這杯多少錢</td><td class="le">How much is this drink?</td><td class="lt">ค็อกเทลแก้วนี้ราคาเท่าไหร่ครับ<i class="ro">cocktail kaew-ni rakha thao-rai khrap</i></td></tr><tr><td class="lz">要看帳單</td><td class="le">Please show me the bill first.</td><td class="lt">ขอดูบิลก่อนครับ<i class="ro">kho du bill kon khrap</i></td></tr><tr><td class="lz">含服務費嗎</td><td class="le">Is service charge included?</td><td class="lt">รวมค่าบริการหรือยังครับ<i class="ro">ruam kha-borikan rue yang khrap</i></td></tr></tbody></table></details>
+<details class="lsec"><summary>購物與退稅</summary><p class="lnote">退稅規則見「準備」分頁的「退稅 P.P.10」。</p><table class="ltbl"><thead><tr><th>中文</th><th>英文（亮給對方）</th></tr></thead><tbody><tr><td class="lz">申請退稅</td><td class="le">VAT refund for tourists, please. Here is my passport.</td></tr><tr><td class="lz">索取表單</td><td class="le">Please fill in the P.P.10 form and give me the original tax invoice.</td></tr><tr><td class="lz">試穿</td><td class="le">Can I try it on?</td></tr></tbody></table></details>
+<details class="lsec"><summary>遇到問題</summary><p class="lnote">緊急電話見「準備」分頁的「緊急電話」。</p><table class="ltbl"><thead><tr><th>中文</th><th>英文（亮給對方）</th><th>泰文</th></tr></thead><tbody><tr><td class="lz">求救</td><td class="le">Help! I need help.</td><td class="lt">ช่วยด้วย</td></tr><tr><td class="lz">請叫警察</td><td class="le">Please call the police.</td><td class="lt">ช่วยเรียกตำรวจด้วยครับ</td></tr><tr><td class="lz">被偷</td><td class="le">My bag was stolen.</td><td class="lt">กระเป๋าของผมถูกขโมยครับ</td></tr><tr><td class="lz">不舒服／叫救護車</td><td class="le">I feel unwell. Please call an ambulance.</td><td class="lt">ผมไม่สบายครับ</td></tr><tr><td class="lz">去醫院</td><td class="le">Please take me to the hospital.</td><td class="lt">ช่วยพาไปโรงพยาบาลด้วยครับ</td></tr><tr><td class="lz">被亂收費</td><td class="le">You are overcharging me.</td><td class="lt">คิดเงินแพงเกินไปครับ</td></tr><tr><td class="lz">需要翻譯</td><td class="le">I need an interpreter.</td><td class="lt">ผมต้องการล่ามครับ</td></tr></tbody></table></details>
+<details class="lsec"><summary>住宿</summary><table class="ltbl"><thead><tr><th>中文</th><th>英文（亮給對方）</th></tr></thead><tbody><tr><td class="lz">訂單</td><td class="le">My booking number is on my phone — let me show you.</td></tr><tr><td class="lz">寄放行李</td><td class="le">Can I leave my luggage here?</td></tr><tr><td class="lz">門鎖進不去</td><td class="le">The door code does not work. Please help.</td></tr><tr><td class="lz">退房</td><td class="le">Check-out is on 7 November.</td></tr></tbody></table></details>
+<details class="lsec"><summary>泰拳與購物（B 計畫）</summary><p class="lnote">B 計畫才用得到。</p><table class="ltbl"><thead><tr><th>中文</th><th>英文（亮給對方）</th><th>泰文</th></tr></thead><tbody><tr><td class="lz">買兩張票</td><td class="le">Two tickets for tonight, please.</td><td class="lt">ขอตั๋วสองใบสำหรับคืนนี้ครับ<i class="ro">kho tua saawng bai samrap khuen-ni khrap</i></td></tr><tr><td class="lz">問座位等級</td><td class="le">Which seat is closer to the ring?</td><td class="lt">ที่นั่งไหนใกล้เวทีที่สุดครับ<i class="ro">thi-nang nai klai wethi thi-sut khrap</i></td></tr><tr><td class="lz">幾點開始</td><td class="le">What time does the first fight start?</td><td class="lt">คู่แรกเริ่มกี่โมงครับ<i class="ro">khu raek roem ki mong khrap</i></td></tr><tr><td class="lz">最後價錢</td><td class="le">What is your last price?</td><td class="lt">ราคาสุดท้ายเท่าไหร่ครับ<i class="ro">raka sut-thai thao-rai khrap</i></td></tr><tr><td class="lz">可以便宜嗎</td><td class="le">Can you give a discount if I buy two?</td><td class="lt">ซื้อสองชิ้น ลดได้ไหมครับ<i class="ro">sue saawng chin, lot dai mai khrap</i></td></tr><tr><td class="lz">退稅</td><td class="le">VAT refund for tourists, please. Here is my passport.</td><td class="lt">ขอคืนภาษีนักท่องเที่ยวครับ นี่พาสปอร์ตครับ<i class="ro">kho khuen phasi nak-thong-thiao khrap, ni passport khrap</i></td></tr><tr><td class="lz">要發票</td><td class="le">Please give me the original tax invoice.</td><td class="lt">ขอใบกำกับภาษีตัวจริงครับ<i class="ro">kho bai-kamkap-phasi tua-ching khrap</i></td></tr></tbody></table></details>
+</section>
+
+<dialog id="place-dlg"><button class="dlg-x" aria-label="關閉">✕</button>
+<article id="place-dlg-body"></article>
+<form method="dialog" class="dlg-close"><button>關閉</button></form></dialog>
+
+<script>
+// 靜態 HTML 已含全部日期卡；這裡只把「不是今天」的搬到「行程」分頁。
+// 沒有 JS 時：「今日」顯示全部日期（仍然可讀），分頁切換失效但內容都在。
+const cards = [...document.querySelectorAll('#today-days details.day')];
+const todayISO = new Date().toLocaleDateString('en-CA', {timeZone:'Asia/Bangkok'});
+const hit = cards.find(d => d.dataset.date === todayISO);
+const pick = hit || cards.filter(d => d.dataset.date < todayISO).pop() || cards[0];
+if (pick) {
+  cards.filter(d => d !== pick).forEach(d => document.getElementById('all-days').append(d));
+  pick.open = true;
+  if (!hit) {
+    const n = document.getElementById('today-note');
+    n.textContent = '今天不在旅程期間，先看 ' + pick.querySelector('.dlabel').textContent + '。';
+    n.hidden = false;
+  }
+}
+function showView(v) {
+  document.querySelectorAll('button[role=tab]').forEach(x => x.setAttribute('aria-selected', x.dataset.view === v));
+  ['today','days','places','prep','lang'].forEach(k => document.getElementById('view-' + k).hidden = k !== v);
+}
+document.querySelectorAll('button[role=tab]').forEach(b => b.onclick = () => showView(b.dataset.view));
+// 時間軸的 ★ 或店名 → 彈窗顯示地點卡（不切頁）
+const dlg = document.getElementById('place-dlg');
+const dlgBody = document.getElementById('place-dlg-body');
+document.querySelectorAll('a[data-place]').forEach(a => a.onclick = e => {
+  e.preventDefault();
+  const src = document.getElementById('place-' + a.dataset.place);
+  if (!src) return;
+  dlgBody.innerHTML = src.innerHTML;
+  dlg.showModal();
+  // 點 ❗ 進來的，直接把紅色那段滾到看得見的位置
+  if (a.classList.contains('warnmark')) {
+    const w = dlgBody.querySelector('.watch');
+    if (w) dlg.scrollTop = w.getBoundingClientRect().top
+      - dlg.getBoundingClientRect().top + dlg.scrollTop - 12;
+  } else {
+    dlg.scrollTop = 0;
+  }
+});
+dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
+dlg.querySelector('.dlg-x').onclick = () => dlg.close();
+</script>
+</body>
+</html>
