@@ -194,6 +194,10 @@ def render_place(p):
     if p.get("watch"):
         items = p["watch"] if isinstance(p["watch"], list) else [p["watch"]]
         watch = '<ul class="watch">' + "".join(f"<li>{esc(x)}</li>" for x in items) + "</ul>"
+    # 圖片
+    image = ""
+    if p.get("image_url"):
+        image = f'<img src="{esc(p["image_url"])}" alt="{esc(p["name"])}" class="place-img" loading="lazy">'
     sections = [
         ("點什麼", "order"),
         ("先知道", "know"),
@@ -227,6 +231,7 @@ def render_place(p):
     return f"""  <article class="place" id="place-{esc(p['id'])}">
     <header class="ph"><div class="icw">{esc(p['icon'])}</div>
       <div><h3>{esc(p['name'])}</h3><p class="tagrow">{tags}</p></div></header>
+    {image}
     <p class="what">{esc(p['what'])}</p>
     {watch}
     {blocks}{addr}{empty}
@@ -404,6 +409,8 @@ details.sub summary {{ font-weight:400; font-size:.9rem; color:var(--dim);
 .place .tagrow {{ margin:0; display:flex; flex-wrap:wrap; gap:4px; }}
 .place .tag {{ font-size:.72rem; color:var(--dim); background:var(--soft);
   padding:2px 8px; border-radius:999px; }}
+.place-img {{ width:100%; height:auto; max-height:200px; object-fit:cover;
+  border-radius:var(--radius); margin:8px 0; display:block; }}
 .place .what {{ font-size:.92rem; color:var(--fg); margin:8px 0; line-height:1.6; }}
 .place .blk {{ margin-top:12px; padding-top:10px; border-top:1px solid var(--line); }}
 .place .blk h4 {{ font-size:.75rem; margin:0 0 4px; color:var(--mute);
