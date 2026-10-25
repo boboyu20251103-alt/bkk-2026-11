@@ -1,5 +1,5 @@
-// 離線：導覽請求 network-first（有網路一律拿最新版），斷線才回快取。版本 202610250959
-const C = 'bkk-202610250959';
+// 離線：導覽請求 network-first（有網路一律拿最新版），斷線才回快取。版本 202610251004
+const C = 'bkk-202610251004';
 self.addEventListener('install', e => { self.skipWaiting(); e.waitUntil(caches.open(C).then(c => c.add('./')).catch(() => {})); });
 self.addEventListener('activate', e => e.waitUntil(
   caches.keys().then(ks => Promise.all(ks.filter(k => k !== C).map(k => caches.delete(k)))).then(() => self.clients.claim())

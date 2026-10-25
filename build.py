@@ -370,7 +370,7 @@ def stop_fields(s, places):
         "reserve_note": s.get("reserve_note", p.get("reserve_note", "")),
         "by": s.get("book_by"), "cost": s.get("cost", 0), "leg_thb": s.get("leg_thb", 0),
         "q": s.get("q") or p.get("q"), "tel": p.get("tel", "") if cat != "住宿" else "",
-        "place": s.get("place") or "", "mustdo": s.get("mustdo", p.get("mustdo", False)),
+        "place": s.get("place") or "", "pcat": p.get("cat", ""), "mustdo": s.get("mustdo", p.get("mustdo", False)),
         "must": s.get("must") if "must" in s else p.get("must", []),
         "must_kind": s.get("must_kind") or p.get("must_kind") or MUST_DEFAULT.get(cat, "必吃"),
         "watch": (s.get("watch") or []) + (p.get("watch") or []),
@@ -421,7 +421,7 @@ def stop_html(did, i, f):
         btns.append(f'<button class="btn grow" data-show="{esc(f["place"])}">{SVG["show"]}給司機看</button>')
     if f["tel"]:
         btns.append(f'<a class="btn" href="{esc(tel_href(f["tel"]))}" aria-label="打電話給 {esc(f["name"])}">{SVG["tel"]}</a>')
-    if f["place"] and f["cat"] not in ("住宿",):
+    if f["place"] and f["pcat"] != "住宿":  # 住宿沒有地點卡（隱私），不放連結
         btns.append(f'<a class="btn" href="#place-{esc(f["place"])}" data-goplace="{esc(f["place"])}">完整地點卡 →</a>')
     more.append('<div class="st-btns">' + "".join(btns) + "</div>")
     name = esc(f["name"]) + (f' <span style="font-weight:600;color:var(--ink3);font-size:var(--fs-sm)">{esc(f["sub"])}</span>' if f["sub"] else "")
@@ -738,7 +738,7 @@ def build():
             if f["place"]:
                 uses[f["place"]].append((f"D{i + 1}", j, f))
             arr.append({"t": f["t"], "l": f["label"], "n": f["name"], "s": f["sub"], "c": f["cc"], "ic": f["icon"],
-                        "w": f["what"], "leg": f["leg"], "m": f["mode"], "q": f["q"], "p": f["place"],
+                        "w": f["what"], "leg": f["leg"], "m": f["mode"], "q": f["q"], "p": f["place"], "pc": f["place"] != "" and f["pcat"] != "住宿",
                         "tel": tel_href(f["tel"]) if f["tel"] else "", "mv": f["cat"] == "交通" and f["mode"] in ("grab", "bts", "moto", "walk"),
                         "nav": maps_dir(f["q"], f["mode"] if f["mode"] != "none" else "grab"), "id": f"s-{d['id']}-{j}"})
         stops_js[d["id"]] = arr

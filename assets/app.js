@@ -16,7 +16,7 @@
   const qs = new URLSearchParams(location.search);
   const nowDate = () => {
     const q = qs.get('now');
-    if (q) { const d = new Date(q.length <= 16 ? q + ':00+07:00' : q); if (!isNaN(d)) return d; }
+    if (q) { const d = new Date(q.length === 10 ? q + 'T12:00:00+07:00' : q.length <= 16 ? q + ':00+07:00' : q); if (!isNaN(d)) return d; }
     return new Date();
   };
   const bkkParts = d => new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Bangkok', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' })
@@ -83,7 +83,7 @@
     if (mv) transit = `<div class="hero-transit">${ICON[mv.m]} <span><b>${mv.l} ${esc(mv.n)}</b> · ${esc(mv.leg || mv.w)}</span></div>`;
     else if (s.leg) transit = `<div class="hero-transit">${ICON[s.m]} <span><b>怎麼去</b> · ${esc(s.leg)}</span></div>`;
     const third = s.tel ? `<a class="act" href="${esc(s.tel)}">${SVG.tel}打電話</a>`
-      : s.p ? `<a class="act" href="#place-${esc(s.p)}" data-goplace="${esc(s.p)}">${SVG.map}地點卡</a>`
+      : s.pc ? `<a class="act" href="#place-${esc(s.p)}" data-goplace="${esc(s.p)}">${SVG.map}地點卡</a>`
       : `<a class="act" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(s.q)}" target="_blank" rel="noopener">${SVG.map}地圖</a>`;
     const showBtn = s.p ? `<button class="act" type="button" data-show="${esc(s.p)}">${SVG.show}給司機看</button>`
       : `<a class="act" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(s.q)}" target="_blank" rel="noopener">${SVG.map}地圖</a>`;
