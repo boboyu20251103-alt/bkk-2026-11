@@ -1,0 +1,2144 @@
+# 曼谷 2026-11 行程資料（build.py 只讀這份＋lang.toml）
+# 內容來源：v20 行程草案（plan.md）＋事實稽核（facts.md），2026-10-25
+#
+# ⚠ 這份會公開在 GitHub。不要寫：PNR／票號／確認碼／卡號／住宿門牌與座標／房東姓名電話／門鎖密碼。
+#    build.py 會掃描並拒絕建置（私密字串放在 git-ignored 的 data/private.local）。
+#
+# 欄位速查
+#   stop.time   "HH:MM"（05:00 前算當天最後）；label 可覆寫顯示文字（"~12:10"、"宵夜"）
+#   stop.mode   這一站「怎麼到」：grab / bts / walk / moto / plane / none
+#   stop.leg    怎麼到這一站的文字；leg_thb 交通費（฿，兩人）
+#   stop.reserve none 不用 / walkin 不接受訂位 / ask 先問 / optional 可訂 / need 需預約 / booked 已訂
+#   stop.book_by 需預約的期限（過了顯示「逾期未訂」）
+#   stop.pay    cash 只收現金 / card 可刷卡 / both / online 線上付 / unknown 未驗證 / none
+#   stop.cost   這一站花費（฿，兩人，估算）；bcat 預算分類（省略時依 cat）
+#   stop.meal   早 / 午 / 晚 / 宵夜（會進「今天吃什麼」）
+#   stop.must   必吃／必買清單；單項可寫 "必吃：xxx" 覆寫種類
+#   place.th    泰文店名（給司機看）；th_ok=false 會標「待核對」
+
+[meta]
+schema = 2
+title = "曼谷 7 天 6 夜"
+start = 2026-11-01
+end = 2026-11-07
+budget_twd = 90000
+twd_thb = 1.0362                 # 1 TWD = 1.0362 THB
+rate_src = "open.er-api.com 中間價 2026-10-25"
+reserve_thb = 5500               # 預備／小費
+edible_thc_max_mg = 1.6
+budget_note = "預算只算當地花費：機票、住宿已另外付清，不計入。數字是估算，換匯以銀行牌價為準。"
+sunset = "17:49–17:51"
+
+# ───────────────────────── 地點 ─────────────────────────
+[[place]]
+id = "home"
+name = "住宿"
+cat = "住宿"
+icon = "🏠"
+landmark_en = "Thong Lo Soi 21, near BTS Thong Lo"
+landmark_th = "ทองหล่อ ซอย 21 ใกล้ BTS ทองหล่อ"
+th_ok = false
+q = "Thong Lo Soi 21"
+what = "Airbnb 私人房間。12:00 後入住，11/7 11:00 前退房。到 BTS Thong Lo 約 1.3 km，步行 15–18 分（估），機車或 Grab 5–10 分。"
+watch = ["完整地址、入住方式看 Airbnb App，網頁不放", "大麻只在住宿陽台用；注意氣味別飄到鄰房"]
+
+[[place]]
+id = "bkk"
+name = "素萬那普機場"
+en = "Suvarnabhumi Airport (BKK)"
+th = "สนามบินสุวรรณภูมิ"
+cat = "交通"
+icon = "✈️"
+q = "Suvarnabhumi Airport"
+what = "入境層買 AIS SIM（8 天 ฿499）、SuperRich 換少量泰銖；1 樓 Gate 4 是 Grab 上車處。"
+must = ["AIS 8 天 ฿499 ×2"]
+must_kind = "必買"
+
+[[place]]
+id = "choochoo"
+name = "Choo Choo Hemp"
+en = "Choo Choo Hemp, 108/4-5 Sukhumvit 49"
+cat = "大麻"
+icon = "🌿"
+area = "108/4-5 Sukhumvit 49"
+hours = "每日 10:00–01:00 ✅（店家 LINE）"
+tel = "+66 81 644 0515"
+price = "診察 ฿200／人 ✅；花 3.5 g 起 ฿105–175"
+pay = "unknown"
+pay_note = "刷卡未確認，帶現金"
+reserve = "ask"
+reserve_note = "不用預約；落地後 LINE 問「今天醫師在診嗎」"
+what = "一棟四層：2 樓診所面談開 PT33 處方 → 3 樓買花，一次辦完。從住宿 Grab 約 5–12 分。"
+order = "2 樓面談領 PT33（🪪 護照正本、20 歲以上）→ 3 樓 Face Off OG、Cherry Tropicana 各 3.5 g"
+watch = ["1 樓 EDIBLELAND 的 50 mg 軟糖違法・不買", "牌照號碼查不到：到店看懸掛的執照", "醫師可以拒絕開方；有服藥、心血管或精神病史要老實說", "買完直接回住宿，不在店外或街上用"]
+q = "Choo Choo Hemp Sukhumvit 49"
+web = "strains.choochoohemp.com"
+
+[[place]]
+id = "stash"
+name = "Stash BKK Ekkamai"
+en = "Stash BKK, Sukhumvit 63 (Ekkamai)"
+cat = "大麻"
+icon = "🌿"
+area = "Sukhumvit 63（Ekkamai，與 Here Hai 同巷）"
+hours = "24 小時 ✅"
+tel = "+66 99 332 0049"
+price = "花 ฿60／g 起；店內遠距問診 ฿100；Baked 餅乾價格未查到"
+pay = "unknown"
+pay_note = "未確認，帶現金"
+reserve = "ask"
+reserve_note = "先 LINE／電話問 Ekkamai 店有沒有 Baked 餅乾"
+what = "唯一查到販售 Thai FDA 核准 Baked 餅乾（標示 1.6 mg THC）的店（官網文章 2026-05-31）；也是 D1 處方備案。"
+order = "Baked 1.6 mg 餅乾約 6 包（看包裝 13 碼 อย. 登記號）"
+watch = ["沒有 อย. 登記號就不買", "也有資料說 Stash 首頁寫沒有 edibles：出發前先問", "官網沒宣傳店內吸食，不確定就不在店內用"]
+q = "Stash BKK Ekkamai"
+web = "stashbkk.co"
+
+[[place]]
+id = "fourtwenty"
+name = "Four Twenty Thonglor"
+en = "Four Twenty, Major Tower, Thonglor Soi 10"
+cat = "大麻"
+icon = "🌿"
+area = "Thonglor Soi 10（Major Tower），離住宿最近"
+hours = "⚠ 官網沒列時間"
+pay = "unknown"
+reserve = "ask"
+reserve_note = "先 LINE／IG 問營業時間與執業者在不在"
+what = "官網列為分店；招牌 The Runtz、Colt 45（高 THC hybrid）。Google 評價高（🟡）。"
+order = "問 The Runtz、Colt 45 與較溫和品種的 THC；問有沒有 อย. 登記食品"
+watch = ["沒開就去 Stash"]
+q = "Four Twenty Thonglor"
+
+[[place]]
+id = "kush"
+name = "Kush House"
+en = "Kush House, Sukhumvit 22"
+cat = "大麻"
+icon = "🌿"
+backup = true
+area = "Sukhumvit 22"
+price = "診察 ฿400（消費滿 ฿900 免）"
+pay = "unknown"
+reserve = "walkin"
+what = "處方備案。官網有 COA（Zour THC 約 21–22%）。自家 FAQ 稱不賣 edibles。"
+q = "Kush House Sukhumvit 22"
+
+[[place]]
+id = "herehai"
+name = "Here Hai 喜來海鮮"
+en = "Here Hai, 112/1 Soi Sukhumvit 63"
+th = "เฮียให้"
+cat = "餐廳"
+icon = "🦀"
+area = "112/1 Soi Sukhumvit 63（Ekkamai Rd）"
+hours = "週二–日 10:00–15:00、16:00–17:30 ✅；週一休"
+tel = "+66 63 219 9100"
+price = "฿฿"
+pay = "cash"
+reserve = "walkin"
+reserve_note = "不接受訂位（可打電話問位）"
+what = "必比登炒蟹老店，常排隊。"
+must = ["蟹肉炒飯（約 2 人份）", "香草辣椒炒蟹（可降辣）", "炸蝦"]
+q = "Here Hai Sukhumvit 63"
+
+[[place]]
+id = "gen"
+name = "Gen 串燒"
+en = "Gen, Vibes Ekkamai, 267/31 Soi Sukhumvit 63"
+cat = "餐廳"
+icon = "🍢"
+area = "Vibes Ekkamai，267/31 Soi Sukhumvit 63"
+hours = "17:00–00:00 ✅；週二休"
+tel = "+66 2 048 0008"
+price = "฿฿；Michelin Plate"
+pay = "card"
+reserve = "optional"
+reserve_note = "可訂位（想保證有位就打電話）"
+what = "日式炭火雞肉串燒，Michelin Plate。"
+must = ["炭火雞肉串燒（請店員推薦招牌）"]
+q = "Gen Yakitori Vibes Ekkamai"
+
+[[place]]
+id = "sev"
+name = "7-Eleven"
+en = "7-Eleven"
+cat = "其他"
+icon = "🏪"
+what = "24 小時。宵夜、早餐、補水都靠它。"
+must = ["火腿起司烤吐司", "泰奶", "班蘭蛋糕"]
+must_kind = "必吃"
+pay = "both"
+q = "7-Eleven Thong Lo"
+
+[[place]]
+id = "gokfayuen"
+name = "谷發源 Gokfayuen"
+en = "Gokfayuen, Thong Lo Soi 9"
+cat = "餐廳"
+icon = "🍜"
+area = "Thong Lo Soi 9"
+hours = "每日 07:00–22:00 🟡"
+pay = "unknown"
+reserve = "walkin"
+what = "港式雲吞麵，Michelin 2026 收錄（🟡）。離住宿近，當早餐。"
+must = ["雲吞麵", "炸魚皮", "粥"]
+q = "Gokfayuen Thonglor"
+
+[[place]]
+id = "maevaree"
+name = "Mae Varee 芒果糯米飯"
+en = "Mae Varee, BTS Thong Lo Exit 3"
+th = "แม่วารี"
+cat = "餐廳"
+icon = "🥭"
+area = "BTS Thong Lo 3 號出口旁"
+hours = "到約 22:00 ⚠"
+pay = "cash"
+reserve = "walkin"
+what = "通羅最有名的芒果糯米飯外帶店。11 月不是芒果季；不能帶回台灣。"
+must = ["芒果糯米飯"]
+q = "Mae Varee Thong Lo"
+
+[[place]]
+id = "erawan"
+name = "四面佛"
+en = "Erawan Shrine"
+th = "ศาลท้าวมหาพรหม"
+cat = "景點"
+icon = "🛕"
+mustdo = true
+area = "494 Ratchadamri Rd（Ratchaprasong 路口，CentralWorld 前）；BTS Chit Lom 走空橋"
+hours = "每日 06:00–22:00 ✅"
+price = "免費；鮮花供品約 ฿20–50 ⚠"
+pay = "cash"
+reserve = "none"
+what = "曼谷香火最旺的神壇。園內官方攤買供品，從正面開始順時針拜四面；可付費請舞者還願。"
+must = ["順時針拜四面"]
+must_kind = "必做"
+watch = ["香燭能不能點火看現場公告", "有人說「今天休館」是詐騙，不要理"]
+q = "Erawan Shrine"
+
+[[place]]
+id = "somboon"
+name = "建興酒家 Somboon Seafood"
+en = "Somboon Seafood, CentralWorld"
+cat = "餐廳"
+icon = "🦀"
+area = "CentralWorld 內"
+hours = "11:00–22:00 或 23:00 ⚠"
+pay = "unknown"
+pay_note = "大概可刷卡（未驗）"
+reserve = "optional"
+reserve_note = "TableCheck 或 LINE @somboonseafood（建議）"
+what = "咖哩炒蟹名店；四面佛隔壁、每天開、可訂位，取代週一休的 Thai Niyom。"
+must = ["咖哩炒蟹（依蟹大小計價，先問價）", "炸軟殼蟹", "炒空心菜"]
+q = "Somboon Seafood CentralWorld"
+
+[[place]]
+id = "centralworld"
+name = "CentralWorld"
+en = "CentralWorld, 4 Ratchadamri Rd"
+th = "เซ็นทรัลเวิลด์"
+cat = "購物"
+icon = "🛍️"
+area = "4 Ratchadamri Rd；BTS Chit Lom"
+hours = "Harnn、Jim Thompson 10:00–22:00 ✅；商場整體 ⚠"
+pay = "card"
+pay_note = "刷卡；可退稅"
+reserve = "none"
+what = "市中心最大商場。同店同日含稅滿 ฿2,000 開 P.P.10 退稅單。Bangkok Art Biennale 展點之一。"
+must = ["Naraya 曼谷包", "Thann 香氛（2F）", "Harnn（3F A319）", "Jim Thompson 泰絲圍巾（1F）"]
+q = "CentralWorld"
+
+[[place]]
+id = "jimthompson"
+name = "金湯普森之家"
+en = "Jim Thompson House"
+th = "บ้านจิม ทอมป์สัน"
+cat = "景點"
+icon = "🏛️"
+area = "6 Soi Kasemsan 2, Rama 1 Rd；BTS National Stadium 1 號出口"
+hours = "每日 10:00–17:00，最後導覽 17:00 ✅"
+price = "成人 ฿250 ✅"
+pay = "unknown"
+reserve = "walkin"
+reserve_note = "不用預約，現場購票"
+what = "泰絲大王的柚木老宅，要跟導覽進主屋（有中文場）。"
+must = ["園內商店泰絲小物"]
+must_kind = "必買"
+watch = ["進屋脫鞋；不得閃光或自拍", "超過 20 cm 的包要寄物"]
+q = "Jim Thompson House"
+web = "jimthompsonhouse.org"
+
+[[place]]
+id = "lennons"
+name = "Lennon's"
+en = "Lennon's, Rosewood Bangkok 30F"
+cat = "酒吧"
+icon = "🍸"
+area = "Rosewood Bangkok 30 樓，1041/38 Ploenchit Rd；BTS Ploen Chit 空橋"
+hours = "每日 17:00–00:00 ✅"
+tel = "+66 2 080 0030"
+price = "調酒 ฿550＋10%＋7%（實付約 ฿650）✅"
+pay = "unknown"
+reserve = "need"
+reserve_note = "SevenRooms 17:15"
+what = "黑膠主題威士忌酒吧，亞洲 50 大酒吧 2026 第 7 名。日落 17:49。"
+must = ["Man Do-tini（芒果糯米飯風味）", "Fa-d Thai Sour"]
+watch = ["smart casual、要包鞋", "20 歲以上，帶護照"]
+q = "Lennon's Rosewood Bangkok"
+
+[[place]]
+id = "redsky"
+name = "Red Sky"
+en = "Red Sky, Centara Grand at CentralWorld 55F"
+th = "เรดสกาย"
+cat = "餐廳"
+icon = "🌃"
+area = "Centara Grand at CentralWorld，55 樓餐廳、56 樓酒吧；BTS Chit Lom"
+hours = "餐廳 17:00–01:00（最後點單 23:30）✅"
+tel = "+66 2 100 6255"
+price = "估每人 ฿1,500–2,500"
+pay = "unknown"
+reserve = "need"
+reserve_note = "官網 Reserve a Table 或電話"
+what = "55 樓高空晚餐看夜景，飯後上 56 樓酒吧。"
+must = ["Surf & Turf Tower", "Thermidor"]
+watch = ["smart casual：不可無袖、拖鞋、運動短褲", "20 歲以下不得進入"]
+q = "Red Sky Centara Grand CentralWorld"
+
+[[place]]
+id = "watpho"
+name = "臥佛寺"
+en = "Wat Pho, 2 Sanam Chai Rd"
+th = "วัดโพธิ์"
+cat = "景點"
+icon = "🛕"
+area = "2 Sanam Chai Rd, Phra Nakhon；MRT Sanam Chai（推定）"
+hours = "每日 08:00–19:30 ✅"
+price = "฿300／人 ✅"
+pay = "cash"
+reserve = "none"
+what = "46 m 金臥佛、佛腳珍珠母貝鑲嵌、四座彩色佛塔；Bangkok Art Biennale 展點。"
+must = ["46 m 金臥佛", "佛腳貝殼鑲嵌"]
+must_kind = "必看"
+watch = ["要長褲、有袖；進殿脫鞋", "有人說「今天休館」是詐騙"]
+q = "Wat Pho"
+
+[[place]]
+id = "watpho-massage"
+name = "臥佛寺按摩亭"
+en = "Wat Pho Thai Traditional Massage"
+cat = "按摩"
+icon = "💆"
+area = "臥佛寺院內"
+hours = "每日 09:00–19:00，最後點單 18:00 ✅"
+tel = "+66 63 920 6173"
+price = "泰式 30／60／120 分 ฿340／520／1,040 ✅"
+pay = "cash"
+reserve = "walkin"
+reserve_note = "不接受預約，現場排隊（可能等 30 分以上）"
+what = "泰式按摩的發源地，剛好躲最熱的時段。"
+q = "Wat Pho Thai Traditional Massage School"
+
+[[place]]
+id = "padthai"
+name = "Pad Thai Fai Ta Lu"
+en = "Pad Thai Fai Ta Lu, 115/5 Dinso Rd"
+cat = "餐廳"
+icon = "🍳"
+area = "115/5 Dinso Rd（民主紀念碑旁）"
+hours = "每日 10:00–00:00 ✅"
+tel = "+66 89 811 1888"
+price = "฿；豬頸肉約 ฿250（二手 ⚠）"
+pay = "unknown"
+pay_note = "沒查到，帶現金"
+reserve = "walkin"
+what = "必比登炭烤 Pad Thai。"
+must = ["炭烤豬頸肉 Pad Thai", "帶殼鮮蝦 Pad Thai"]
+q = "Pad Thai Fai Ta Lu Dinso"
+
+[[place]]
+id = "korpanich"
+name = "Kor Panich 芒果糯米飯"
+en = "Kor Panich, 431-433 Tanao Rd"
+th = "ก.พานิช"
+cat = "餐廳"
+icon = "🥭"
+area = "431-433 Tanao Rd，老城"
+hours = "週一–六 07:00–17:00 ✅；週日休"
+tel = "+66 2 221 3554"
+price = "一份約 ฿125–140（二手 ⚠）"
+pay = "cash"
+reserve = "walkin"
+what = "1932 年老店，必比登。17:00 打烊。"
+must = ["芒果糯米飯"]
+watch = ["不能帶回台灣"]
+q = "Kor Panich Tanao"
+
+[[place]]
+id = "supanniga-tt"
+name = "Supanniga Eating Room Tha Tien"
+en = "Supanniga Eating Room, 392/25-26 Maha Rat Rd (Tha Tien)"
+cat = "餐廳"
+icon = "🌅"
+area = "392/25-26 Soi Phen Phat 2, Maha Rat Rd（Tha Tien 碼頭，臥佛寺旁）"
+hours = "週一–五 11:00–22:00、週六日 10:00–22:00 ✅"
+tel = "+66 92 253 9251"
+price = "฿฿；Michelin Plate；另加 10%＋7%"
+pay = "card"
+reserve = "need"
+reserve_note = "訂 17:00，要求露台"
+what = "河畔露台看鄭王廟日落（約 17:50）與亮燈。"
+must = ["蟹肉 Pu Jah", "Tom Kha 鱸魚"]
+watch = ["菜單沒查到，參考 Thonglor 本店；點 3 道就好"]
+q = "Supanniga Eating Room Tha Tien"
+
+[[place]]
+id = "opium"
+name = "Opium Bar"
+en = "Opium Bar, 422 Vanich 1 Rd (above Potong)"
+cat = "酒吧"
+icon = "🍸"
+area = "422 Vanich 1 Rd, Samphanthawong（Potong 樓上）"
+hours = "16:00–01:00 ✅；週三休"
+tel = "+66 82 979 3950"
+price = "調酒 ฿410–640＋10%＋稅 ✅"
+pay = "unknown"
+reserve = "need"
+reserve_note = "官網／Chope 19:30（電話與 Potong 同號，要說是哪一家）"
+what = "百年唐樓頂的雞尾酒吧，亞洲 50 大第 25 名（BK Magazine）。"
+must = ["當季招牌調酒"]
+watch = ["不可無袖、男生包鞋、女生不穿夾腳拖", "帶護照"]
+q = "Opium Bar Bangkok"
+web = "opiumbarbangkok.com"
+
+[[place]]
+id = "tk"
+name = "T&K Seafood＋耀華力路"
+en = "T&K Seafood, 49-51 Phadung Dao Rd (Yaowarat)"
+cat = "餐廳"
+icon = "🦐"
+area = "49-51 Phadung Dao Rd（Soi Texas／Yaowarat 路口），綠衫"
+hours = "⚠ 四種說法，其中一種週一休；週二有開"
+tel = "+66 2 223 4519"
+pay = "cash"
+reserve = "walkin"
+reserve_note = "不用訂；晚餐時段排 20–30 分"
+what = "中國城路邊海鮮。吃完沿耀華力路逛小吃。主行程唯一沒有官方或 Michelin 來源的店（使用者選的例外）。"
+must = ["炭烤河蝦", "咖哩炒軟殼蟹", "耀華力路烤吐司", "粿汁（Guay Jub Mr Joe 等）"]
+watch = ["海鮮秤重計價，點之前先問價"]
+q = "T&K Seafood Yaowarat"
+
+[[place]]
+id = "commons"
+name = "The Commons"
+en = "The Commons, 335 Soi Thong Lo 17"
+cat = "餐廳"
+icon = "🥗"
+area = "335 Soi Thong Lo 17"
+hours = "每日 08:00–01:00 ✅（各店自訂）"
+pay = "both"
+pay_note = "看各店"
+reserve = "walkin"
+what = "通羅社區型美食商場，現場挑店（Fowlmouth 全日餐廳、Bapsang 韓式等）。"
+must = ["ROAST 早午餐盤（⚠ 舊資料）"]
+q = "The Commons Thonglor"
+
+[[place]]
+id = "divana"
+name = "Divana Divine Spa"
+en = "Divana Divine Spa, 103 Soi Thong Lo 17"
+th = "ดิวาน่า ไดวายน์ สปา"
+cat = "按摩"
+icon = "💆"
+area = "103 Soi Thong Lo 17（這不是住宿地址）"
+hours = "每日 11:00–23:00，最後預約 21:00 ✅"
+tel = "+66 2 712 8986"
+price = "฿2,850／人（含稅與服務費）；線上付款 9 折約 ฿5,130 ⚠"
+pay = "online"
+reserve = "need"
+reserve_note = "divana.zenoti.com 線上預約並付款；收到 email／LINE 確認才算成立"
+what = "雙人 120 分芳療：泡腳→蒸氣→去角質→按摩→臉部，結束有輕食。"
+watch = ["全額付款最晚 11/2（一）15:00", "≥48 小時取消免費；24–48 小時收 50%；<24 小時收全額", "提早 15 分到"]
+q = "Divana Divine Spa Thonglor"
+
+[[place]]
+id = "octave"
+name = "Octave Rooftop"
+en = "Octave Rooftop, Marriott Sukhumvit 45-49F"
+th = "ออคเทฟ รูฟท็อป เลานจ์ แอนด์ บาร์"
+cat = "酒吧"
+icon = "🌇"
+area = "Marriott Sukhumvit，2 Soi 57，45–49 樓；BTS Thong Lo 步行約 3 分"
+hours = "17:00–02:00 🟡"
+tel = "+66 2 797 0000"
+price = "媒體價約 ฿370–450 ⚠"
+pay = "unknown"
+reserve = "optional"
+reserve_note = "電話或 SevenRooms（建議）"
+what = "頂層 360° 吧台看日落。"
+must = ["日落第一杯"]
+watch = ["smart casual"]
+q = "Octave Rooftop Marriott Sukhumvit"
+
+[[place]]
+id = "supanniga-tl"
+name = "Supanniga Eating Room Thonglor"
+en = "Supanniga Eating Room, 160/11 Soi Sukhumvit 55"
+cat = "餐廳"
+icon = "🍛"
+area = "160/11 Soi Sukhumvit 55；BTS Thong Lo 3 號出口"
+hours = "每日 10:00–22:00，最後點餐 21:00 ✅"
+tel = "+66 91 774 9808"
+price = "兩人約 ฿2,300–3,000（另加 10%＋7%）✅"
+pay = "unknown"
+reserve = "optional"
+reserve_note = "Chope"
+what = "泰東部家常菜本店（官方菜單 ✅）。"
+must = ["咖哩蟹肉 ฿760", "Moo Cha Muang 燉豬 ฿380", "炸高麗菜魚露 ฿220"]
+q = "Supanniga Eating Room Thonglor"
+
+[[place]]
+id = "drywave"
+name = "Dry Wave Cocktail Studio"
+en = "Dry Wave Cocktail Studio, SODALITY 2F, 263 Thong Lo 13"
+th = "ดราย เวฟ ค็อกเทล สตูดิโอ"
+cat = "酒吧"
+icon = "🍸"
+area = "SODALITY 2 樓，263 Thong Lo 13"
+hours = "每日 19:00–01:00 ✅"
+tel = "+66 98 909 3962"
+price = "Newton's Law 約 ฿470 🟡"
+pay = "unknown"
+reserve = "optional"
+reserve_note = "Alotea；客滿看 IG drywavecocktailstudio"
+what = "亞洲 50 大酒吧 2026 第 4 名，泰國第一。"
+must = ["Newton's Law", "1806-1988"]
+watch = ["服裝：Smart and Elegant"]
+q = "Dry Wave Cocktail Studio"
+
+[[place]]
+id = "rungrueang"
+name = "Rung Rueang 豬肉麵"
+en = "Rung Rueang Pork Noodle, 21/2 Soi Sukhumvit 26"
+th = "รุ่งเรือง"
+cat = "餐廳"
+icon = "🍜"
+area = "21/2 Soi Sukhumvit 26；BTS Phrom Phong"
+hours = "每日 08:00–17:00 ✅"
+tel = "+66 84 527 1640"
+price = "฿"
+pay = "cash"
+reserve = "walkin"
+what = "必比登豬肉粿條，選清湯或冬蔭湯底、small 或 large。"
+must = ["豬肉粿條（冬蔭湯底）", "乾、湯各一"]
+watch = ["隔壁 10/3 號是另一家同名店"]
+q = "Rung Rueang Pork Noodle Sukhumvit 26"
+
+[[place]]
+id = "terminal21"
+name = "Terminal 21 Asok"
+en = "Terminal 21, 88 Sukhumvit Soi 19"
+th = "เทอร์มินอล 21 อโศก"
+cat = "購物"
+icon = "🛍️"
+area = "88 Sukhumvit Soi 19；BTS Asok"
+hours = "每日 10:00–22:00 ✅"
+pay = "card"
+pay_note = "刷卡；可退稅"
+reserve = "none"
+what = "每層一座城市的主題商場。這裡沒有 Naraya、Harnn、Thann、Jim Thompson。"
+must = ["1–3F 泰國設計師小物", "必吃：5F Pier 21 美食街 ⚠"]
+must_kind = "必買"
+q = "Terminal 21 Asok"
+
+[[place]]
+id = "wanpho"
+name = "Wanpho 大麻按摩"
+en = "Wanpho Massage & Wellness"
+cat = "按摩"
+icon = "💆"
+area = "⚠ 地址官網沒寫，預約時要問到"
+hours = "每日 09:00–20:00，最後點單 19:00 ✅"
+price = "官網 ฿1,300／60 分 ✅；部落格寫約 ฿900，以報價為準"
+pay = "unknown"
+reserve = "need"
+reserve_note = "LINE wanphowellness：問地址、是否含 THC、報價"
+what = "Master-Blend Cannabis Thai Massage：外用產品、不是吸食，兩人都能做。"
+watch = ["地址不明：車程 > 25 分就改 Health Land Asoke", "產品含不含 THC 沒寫"]
+q = "Wanpho Massage Wellness"
+
+[[place]]
+id = "healthland-asoke"
+name = "Health Land Asoke"
+en = "Health Land Asoke, 55/5 Sukhumvit 21"
+th = "เฮลท์แลนด์"
+cat = "按摩"
+icon = "💆"
+backup = true
+area = "55/5 Sukhumvit 21；離 Terminal 21 步行約 5 分"
+hours = "每日 09:00–23:00 ✅"
+price = "官網沒列 ⚠；估每人 ฿500–800"
+pay = "unknown"
+reserve = "optional"
+reserve_note = "reservation.healthlandspa.com"
+what = "D5 Wanpho 的備案。"
+q = "Health Land Asoke"
+
+[[place]]
+id = "healthland-ekkamai"
+name = "Health Land Ekkamai"
+en = "Health Land Ekkamai, 96/1 Soi Sukhumvit 63"
+th = "เฮลท์แลนด์"
+cat = "按摩"
+icon = "💆"
+backup = true
+area = "96/1 Soi Sukhumvit 63"
+hours = "每日 09:00–23:00 ✅"
+tel = "+66 2 392 2233"
+pay = "unknown"
+reserve = "optional"
+what = "D4 Divana 約不到時的備案。"
+q = "Health Land Ekkamai"
+
+[[place]]
+id = "sornthong"
+name = "Sornthong 缸養海鮮"
+en = "Sornthong Restaurant, 2829-31 Rama 4 Rd"
+cat = "餐廳"
+icon = "🦞"
+area = "2829-31 Rama 4 Rd；不在 BTS 區，搭 Grab"
+hours = "每日 12:30–22:00 ✅"
+tel = "+66 2 258 0118"
+price = "฿฿；Michelin Plate；海鮮秤重"
+pay = "card"
+reserve = "walkin"
+reserve_note = "不接受訂位（早到不用排）"
+what = "缸養海鮮現點現做。"
+must = ["炸蚝煎（蚵仔煎）", "沙嗲", "缸養蝦蟹現點現做"]
+watch = ["秤重計價，先問價", "週四傍晚 Rama 4 會塞車"]
+q = "Sornthong Restaurant Rama 4"
+
+[[place]]
+id = "barus"
+name = "Bar Us"
+en = "Bar Us, 61/37 Sukhumvit 26"
+cat = "酒吧"
+icon = "🍸"
+area = "61/37 Sukhumvit 26；BTS Phrom Phong（推定）"
+hours = "週日–四 18:00–24:00 ✅"
+tel = "+66 91 721 8209"
+price = "฿480–680／杯＋17.7%；無酒精 ฿330–360 ✅"
+pay = "unknown"
+reserve = "need"
+reserve_note = "nightify.co/book/bar-us/web，20:00 場"
+what = "套餐式酒單 Starter → Main → After，亞洲 50 大第 6 名。"
+must = ["Starter → Main → After 套餐", "無酒精調酒（吃 edible 的那位）"]
+watch = ["Smart Casual"]
+q = "Bar Us Sukhumvit 26"
+
+[[place]]
+id = "ann"
+name = "Ann Tha Din Daeng"
+en = "Ann Tha Din Daeng, 167 Tha Din Daeng Rd"
+cat = "餐廳"
+icon = "🦐"
+area = "167 Tha Din Daeng Rd, Khlong San（河西岸）"
+hours = "週三–日 10:30–20:00 ✅；週一、二休"
+tel = "+66 81 695 0597"
+price = "฿฿"
+pay = "cash"
+reserve = "walkin"
+what = "必比登河西岸海鮮熱炒。"
+must = ["鹽胡椒炒蝦", "甜辣醬羅勒炒蛤"]
+q = "Ann Tha Din Daeng"
+
+[[place]]
+id = "iconsiam"
+name = "ICONSIAM"
+en = "ICONSIAM, 299 Charoen Nakhon Rd"
+th = "ไอคอนสยาม"
+th_ok = false
+cat = "購物"
+icon = "🛍️"
+area = "299 Charoen Nakhon Rd, Khlong San；金線 Charoen Nakhon 站（推定）"
+hours = "Harnn、Jim Thompson 10:00–22:00 ✅"
+pay = "card"
+pay_note = "刷卡；可退稅"
+reserve = "none"
+what = "河畔大型商場。Diwali 節（11/3–11/29）可能有活動；Detective Conan 30 週年展到 11/7 🟡。"
+must = ["Thann 4F C 區", "Harnn 4F", "Jim Thompson M 樓", "Naraya", "必吃：G 樓 SookSiam 船麵、椰子冰淇淋 ⚠"]
+must_kind = "必買"
+q = "ICONSIAM"
+
+[[place]]
+id = "skyflyers"
+name = "SkyFlyers 巨型鞦韆"
+en = "SkyFlyers: Wings of Garudapterus, Asiatique The Riverfront"
+th = "เอเชียทีค"
+cat = "景點"
+icon = "🎢"
+mustdo = true
+area = "Asiatique The Riverfront（District 2.2），2194 Charoen Krung Rd，河東岸"
+hours = "週四–日 14:30–23:00、週一–三 15:00–22:00 🟡（Thairath 開幕報導）"
+price = "฿320／人；GoPro 另加 ฿250（2025 開幕價 ⚠）"
+pay = "both"
+reserve = "walkin"
+reserve_note = "建議看天氣現場買；Klook 等第三方時段票不退不改"
+what = "135 m、亞太最高的巨型鞦韆；每次 3–4 分、24 人，排隊 30–45 分。GoPro 錄影另加 ฿250（可選）。"
+must = ["搭一次 SkyFlyers"]
+must_kind = "必做"
+watch = ["11/6 當天搭乘前不碰酒和大麻（含 edibles）：喝了或用了會被拒絕搭乘", "身高 ≥ 120 cm；心臟、背頸、高血壓、氣喘、恐慌症不能玩", "手機、眼鏡、帽子要放置物櫃", "天候不佳可能停駛"]
+q = "SkyFlyers Asiatique"
+
+[[place]]
+id = "somsak"
+name = "Somsak Pu Ob 蒸蟹冬粉"
+en = "Somsak Pu Ob, 199-205 Soi Charoen Rat 1"
+cat = "餐廳"
+icon = "🦀"
+area = "199-205 Soi Charoen Rat 1, Khlong San；BTS Wongwian Yai 可步行"
+hours = "週二–日 16:00–21:30 ✅；週一休"
+tel = "+66 81 400 0542"
+price = "฿฿"
+pay = "cash"
+reserve = "walkin"
+what = "必比登冬粉煲。"
+must = ["蒸蟹冬粉煲", "鮮蝦冬粉煲"]
+q = "Somsak Pu Ob Charoen Rat"
+
+[[place]]
+id = "singsing"
+name = "Sing Sing Theater"
+en = "Sing Sing Theater, 45 Sukhumvit Soi 45"
+cat = "酒吧"
+icon = "🏮"
+area = "45 Sukhumvit Soi 45；從 Thonglor Grab 約 13 分"
+hours = "週二–六 21:00 起 ✅；週日、一休"
+tel = "+66 63 225 1331"
+price = "招牌調酒 ฿380＋稅與服務費 ✅；入場費官網沒寫"
+pay = "unknown"
+reserve = "need"
+reserve_note = "WhatsApp 或電話；問週五入場費／低消"
+what = "1930 年代上海歌舞廳風夜店，週五最熱鬧。"
+must = ["The Dragon", "Sakura"]
+watch = ["20 歲以上，要原版護照", "smart casual；不可涼鞋、露趾鞋、無袖背心、運動短褲", "不帶大麻進去"]
+q = "Sing Sing Theater Sukhumvit 45"
+
+[[place]]
+id = "pochana55"
+name = "55 Pochana 深夜熱炒"
+en = "55 Pochana, Thonglor"
+cat = "餐廳"
+icon = "🍤"
+area = "Thonglor"
+hours = "18:30–03:30 ⚠（媒體資料）"
+pay = "unknown"
+pay_note = "帶現金"
+reserve = "walkin"
+what = "通羅深夜海鮮熱炒，最後一晚宵夜。"
+must = ["蟹肉炒飯", "深夜海鮮熱炒"]
+q = "55 Pochana Thonglor"
+
+[[place]]
+id = "nonamenoodle"
+name = "No Name Noodle"
+en = "No Name Noodle, 1/2 Soi Athakravi 1, Sukhumvit 26"
+cat = "餐廳"
+icon = "🍜"
+area = "1F Room P2, 1/2 Soi Athakravi 1, Sukhumvit 26"
+hours = "週三–日 11:00–16:30 ✅；週一、二休"
+tel = "+66 82 059 5417"
+price = "฿฿"
+pay = "card"
+reserve = "walkin"
+reserve_note = "不接受訂位；排隊超過 12:30 就放棄"
+what = "必比登日式風格拉麵。開門就到不排隊。"
+must = ["Shio Soba 鹽味湯麵", "Shoyu Tsuke Soba 醬油沾麵"]
+q = "No Name Noodle Athakravi"
+
+[[place]]
+id = "emquartier"
+name = "EmQuartier／Emporium"
+en = "EmQuartier (693 Sukhumvit) / Emporium (622 Sukhumvit 24)"
+th = "เอ็มควอเทียร์"
+cat = "購物"
+icon = "🛍️"
+area = "BTS Phrom Phong（兩棟在站的兩側）"
+hours = "各店 10:00 起"
+pay = "card"
+pay_note = "刷卡；拿 P.P.10"
+reserve = "none"
+what = "最後補貨。Gourmet Market 買可帶回台灣的食品。"
+must = ["Harnn（EmQuartier 1F／Emporium 4F）", "Thann（Emporium 5F）", "Jim Thompson（EmQuartier 2F）", "手標泰奶茶粉", "加工水果乾、蜂蜜"]
+watch = ["肉類零食、新鮮水果、芒果糯米飯不能帶回台灣"]
+q = "EmQuartier"
+
+[[place]]
+id = "teens"
+name = "Teens of Thailand"
+en = "Teens of Thailand, Soi Nana (Chinatown)"
+th = "ทีนส์ ออฟ ไทยแลนด์"
+cat = "酒吧"
+icon = "🍸"
+backup = true
+area = "中國城 Soi Nana（不是 Sukhumvit 那條）"
+hours = "每日 12:00–01:00（店家 IG 自述）"
+tel = "+66 81 443 3784"
+pay = "unknown"
+reserve = "optional"
+reserve_note = "建議用 IG 先訂"
+what = "D3 中國城的琴酒吧備案（T&K 大雨時）。"
+q = "Teens of Thailand Soi Nana"
+
+[[place]]
+id = "potong"
+name = "Potong"
+en = "Potong, 422 Vanich 1 Rd"
+cat = "餐廳"
+icon = "⭐"
+backup = true
+area = "中國城，Opium Bar 樓下"
+hours = "15:30–23:00；週三休"
+price = "฿฿฿฿；兩人約 ฿6,000–8,000 ⚠"
+pay = "unknown"
+reserve = "need"
+what = "Michelin 1 星。D3 或 D6 晚餐升級選項（用預算餘額）。"
+q = "Potong Bangkok"
+
+[[place]]
+id = "rajadamnern"
+name = "Rajadamnern 泰拳"
+en = "Rajadamnern Stadium"
+cat = "景點"
+icon = "🥊"
+backup = true
+area = "Ratchadamnoen Nok Rd"
+hours = "每晚有賽；11/5（四）傳統 5 回合賽 17:00 開門"
+price = "Club Class 約 ฿1,800／人 ⚠"
+pay = "unknown"
+reserve = "optional"
+reserve_note = "rajadamnern.com（Ticketmelon），11/3 前"
+what = "D5 加碼備案：取代 Wanpho＋Sornthong＋Bar Us。"
+q = "Rajadamnern Stadium"
+
+[[place]]
+id = "laemcharoen"
+name = "Laem Charoen Seafood"
+en = "Laem Charoen Seafood, EmQuartier"
+cat = "餐廳"
+icon = "🐟"
+backup = true
+area = "EmQuartier 內"
+pay = "unknown"
+reserve = "walkin"
+what = "D7 No Name 休息或大排時的備案。"
+must = ["炸鱸魚淋魚露"]
+q = "Laem Charoen Seafood EmQuartier"
+
+# ───────────────────────── 每日行程 ─────────────────────────
+[[day]]
+id = "d1"
+spend = { "交通" = 1160, "SIM" = 998, "大麻" = 2700, "食品" = 1200, "餐飲" = 3150 }   # 計畫花費（฿，兩人；= 行程文件每日小計）
+date = 2026-11-01
+title = "落地・處方・edibles・第一隻蟹"
+area = "Sukhumvit 49–63（全程 Grab）"
+one = "落地放好行李就去 Choo Choo 拿處方買花，順路到 Stash 買女友的合法餅乾，第一餐吃炒蟹，晚上清爽串燒，不去酒吧。"
+notes = ["🪪 護照正本：Choo Choo 面談、Stash 買東西都要（20 歲以上）", "Choo Choo、Stash、Here Hai 帶現金", "edible：吃了等滿 2 小時，不要因為「還沒感覺」追加", "大麻買完直接回住宿，只在住宿陽台用"]
+pack = ["🪪 護照正本 ×2", "💵 現金 ≥ ฿6,000", "📱 開好 AIS SIM", "🔋 行動電源"]
+rain = ["全程 Grab，不受影響"]
+tired = ["Gen 改 Grab Food 送到住宿"]
+more = ["Choo Choo 醫師不在或要等 > 1 小時：直接在 Stash 遠距問診＋買花；再不行 Kush House（Sukhumvit 22）", "Stash 沒有 Baked：D4 去 Four Twenty 問有 อย. 登記的食品，沒有登記就不買"]
+
+  [[day.stop]]
+  time = "07:55"
+  name = "TG637 桃園 → 曼谷"
+  cat = "交通"
+  icon = "✈️"
+  mode = "plane"
+  what = "05:55 前到桃園 T1；10:50 落地 BKK。機上餐就是早餐。"
+  meal = "早"
+  must = ["機上餐", "落地後買水、麵包墊胃"]
+  must_kind = "必吃"
+  reserve = "booked"
+  reserve_note = "機票已開"
+  pay = "none"
+  cost = 200
+  bcat = "餐飲"
+  q = "Taoyuan International Airport Terminal 1"
+
+  [[day.stop]]
+  time = "10:50"
+  place = "bkk"
+  what = "入境（TDAC 要先填好）、領行李；入境層買 AIS 8 天 ฿499 ×2；SuperRich 換少量泰銖。"
+  dur = "60–80 分"
+  pay = "both"
+  cost = 998
+  bcat = "SIM"
+
+  [[day.stop]]
+  time = "12:10"
+  label = "~12:10"
+  name = "Grab → 住宿"
+  cat = "交通"
+  icon = "🚕"
+  mode = "grab"
+  what = "1 樓 Gate 4 Grab 上車處拿 PIN。"
+  leg = "Grab 45–65 分、฿450–600＋過路費"
+  pay = "card"
+  pay_note = "Grab 綁卡"
+  cost = 600
+  q = "Thong Lo Soi 21"
+
+  [[day.stop]]
+  time = "13:15"
+  label = "~13:15"
+  place = "home"
+  what = "入住（12:00 後）或先寄行李，5–10 分就走。"
+  dur = "10 分"
+
+  [[day.stop]]
+  time = "13:40"
+  place = "choochoo"
+  what = "2 樓面談領 PT33（🪪）→ 3 樓買花：Face Off OG＋Cherry Tropicana 各 3.5 g。"
+  must = ["PT33 處方 ฿200", "Face Off OG 3.5 g", "Cherry Tropicana 3.5 g"]
+  must_kind = "必買"
+  dur = "60–90 分"
+  mode = "grab"
+  leg = "Grab 8–12 分、฿80–100"
+  leg_thb = 100
+  cost = 2700
+
+  [[day.stop]]
+  time = "15:15"
+  place = "stash"
+  what = "買 Baked 1.6 mg 餅乾約 6 包，先看 อย. 登記號；Choo Choo 醫師不在時，這裡遠距問診 ฿100＋買花。"
+  must = ["Baked 餅乾 1.6 mg ×6（有 อย. 號才買）"]
+  must_kind = "必買"
+  dur = "25 分"
+  mode = "grab"
+  leg = "Grab 12–15 分、฿100"
+  leg_thb = 100
+  book_by = 2026-10-30
+  cost = 1200
+  bcat = "食品"
+
+  [[day.stop]]
+  time = "15:50"
+  place = "herehai"
+  label = "15:50"
+  what = "第一隻蟹（16:00 下午場開門，當早晚餐）。"
+  meal = "午"
+  dur = "75 分"
+  mode = "walk"
+  leg = "同條 Soi 63，步行或 Grab 5 分、฿60"
+  leg_thb = 60
+  cost = 1000
+
+  [[day.stop]]
+  time = "17:15"
+  place = "home"
+  what = "正式入住、沖澡補眠；大麻全部放房內，晚餐後才在陽台用。"
+  dur = "2 小時"
+  mode = "grab"
+  leg = "Grab 10–15 分、฿100"
+  leg_thb = 100
+
+  [[day.stop]]
+  time = "19:45"
+  place = "gen"
+  what = "清爽串燒當晚餐；女友今晚不喝或只喝一杯（要試 edible）。"
+  meal = "晚"
+  dur = "90 分"
+  mode = "grab"
+  leg = "Grab 10–15 分、฿100"
+  leg_thb = 100
+  book_by = 2026-10-31
+  cost = 1800
+
+  [[day.stop]]
+  time = "21:30"
+  place = "home"
+  name = "住宿陽台"
+  cat = "大麻"
+  icon = "🌿"
+  what = "男友：花一口，等 15 分再決定。女友：1 包 edible（1.6 mg），等滿 2 小時再判斷。"
+  mode = "grab"
+  leg = "Grab 10–15 分、฿100–160"
+  leg_thb = 160
+
+  [[day.stop]]
+  time = "22:30"
+  label = "宵夜"
+  place = "sev"
+  what = "住宿附近的 7-Eleven。"
+  meal = "宵夜"
+  mode = "walk"
+  leg = "步行"
+  cost = 150
+
+[[day]]
+id = "d2"
+spend = { "交通" = 420, "門票" = 600, "餐飲" = 6800, "酒吧" = 2600, "購物" = 3000 }   # 計畫花費（฿，兩人；= 行程文件每日小計）
+date = 2026-11-02
+title = "四面佛・泰絲老宅・雙高空"
+area = "Ratchaprasong／Siam（全程 BTS）"
+one = "週一中國城半休，所以市中心日排今天：拜四面佛、吃咖哩炒蟹、冷氣商場躲最熱時段買伴手禮、柚木老宅導覽，傍晚 Lennon's 日落接 Red Sky 晚餐。"
+notes = ["今天全程 BTS：先試感應信用卡，不成就買單程票", "Lennon's、Red Sky：smart casual＋👟 包鞋", "四面佛、Jim Thompson：有人說「今天休館」是詐騙"]
+pack = ["🪪 護照（酒吧查證件）", "👟 包鞋＋smart casual", "💵 現金 ≥ ฿2,000"]
+rain = ["四面佛拜完就進 CentralWorld", "Jim Thompson 主屋是室內", "Lennon's 有室內座"]
+tired = ["Jim Thompson 取消，14:00 BTS 回家睡，17:00 直接 BTS 到 Ploen Chit"]
+more = ["想多買：下午整段 CentralWorld＋Big C Rajdamri（Naraya）"]
+
+  [[day.stop]]
+  time = "10:00"
+  place = "gokfayuen"
+  what = "早餐。"
+  must = ["雲吞麵", "炸魚皮"]
+  meal = "早"
+  dur = "40 分"
+  mode = "moto"
+  leg = "機車／Grab 5–8 分、฿60"
+  leg_thb = 60
+  cost = 350
+
+  [[day.stop]]
+  time = "11:00"
+  name = "BTS Thong Lo → Chit Lom"
+  cat = "交通"
+  icon = "🚆"
+  mode = "bts"
+  what = "5 站。先試感應信用卡，不成就買單程票。"
+  leg = "BTS 5 站 ฿35 ×2，約 20 分"
+  pay = "both"
+  cost = 70
+  q = "BTS Thong Lo"
+
+  [[day.stop]]
+  time = "11:30"
+  place = "erawan"
+  what = "買官方攤供品，從正面開始順時針拜四面；免費入場。"
+  dur = "30 分"
+  mode = "walk"
+  leg = "Chit Lom 站空橋步行 5 分"
+  cost = 100
+
+  [[day.stop]]
+  time = "12:15"
+  place = "somboon"
+  what = "咖哩炒蟹午餐（取代週一休的 Thai Niyom）。"
+  meal = "午"
+  dur = "75 分"
+  mode = "walk"
+  leg = "步行 5 分"
+  book_by = 2026-10-31
+  cost = 1800
+
+  [[day.stop]]
+  time = "13:30"
+  place = "centralworld"
+  what = "冷氣商場躲最熱的時段，買伴手禮；順看 Art Biennale 展點。"
+  dur = "75 分"
+  mode = "walk"
+  leg = "同棟"
+  cost = 3000
+
+  [[day.stop]]
+  time = "14:45"
+  name = "BTS Chit Lom → National Stadium"
+  cat = "交通"
+  icon = "🚆"
+  mode = "bts"
+  what = "Siam 轉車，1 號出口步行 5 分。"
+  leg = "BTS 約 10 分、฿30 ×2"
+  pay = "both"
+  cost = 60
+  q = "BTS National Stadium"
+
+  [[day.stop]]
+  time = "15:00"
+  place = "jimthompson"
+  what = "跟導覽進柚木主屋（有中文場）。"
+  dur = "75 分"
+  mode = "walk"
+  leg = "1 號出口步行 5 分"
+  cost = 500
+
+  [[day.stop]]
+  time = "16:30"
+  name = "BTS → Ploen Chit"
+  cat = "交通"
+  icon = "🚆"
+  mode = "bts"
+  what = "National Stadium → Siam → Ploen Chit，走空橋到 Rosewood。"
+  leg = "BTS 15–20 分、฿35 ×2"
+  pay = "both"
+  cost = 70
+  q = "BTS Ploen Chit"
+
+  [[day.stop]]
+  time = "17:15"
+  place = "lennons"
+  what = "日落 17:49 第一杯。"
+  dur = "2 小時"
+  mode = "walk"
+  leg = "空橋步行"
+  book_by = 2026-10-27
+  cost = 2600
+
+  [[day.stop]]
+  time = "19:15"
+  place = "redsky"
+  what = "55F 晚餐看夜景；飯後上 56F 一杯。"
+  meal = "晚"
+  dur = "2.5 小時"
+  mode = "walk"
+  leg = "步行 10–12 分（空橋）"
+  book_by = 2026-10-27
+  cost = 4500
+
+  [[day.stop]]
+  time = "22:00"
+  name = "BTS → 回 Thonglor"
+  cat = "交通"
+  icon = "🚆"
+  mode = "bts"
+  what = "往東末班 00:13。Thong Lo 站下車轉機車。"
+  leg = "BTS ฿35 ×2＋機車 ฿60，約 30 分"
+  pay = "both"
+  cost = 130
+  q = "BTS Chit Lom"
+
+  [[day.stop]]
+  time = "22:30"
+  label = "宵夜"
+  name = "7-Eleven 宵夜（BTS Thong Lo 一帶）"
+  cat = "餐廳"
+  icon = "🏪"
+  q = "7-Eleven Thong Lo"
+  pay = "both"
+  what = "Mae Varee 約 22:00 就關，宵夜改 7-Eleven：烤吐司、泰式奶茶、小點；芒果糯米飯留到 D4 早餐。之後回陽台。"
+  meal = "宵夜"
+  mode = "walk"
+  leg = "BTS Thong Lo 3 號出口旁"
+  cost = 150
+
+[[day]]
+id = "d3"
+spend = { "交通" = 970, "門票" = 600, "按摩" = 1140, "餐飲" = 4350, "酒吧" = 3000 }   # 計畫花費（฿，兩人；= 行程文件每日小計）
+date = 2026-11-03
+title = "老城・河畔・中國城的夜"
+area = "Rattanakosin → Yaowarat"
+one = "週二耀華力攤販全開、Opium 有開：中午臥佛寺加按摩（剛好躲最熱時段），老城必比登炒河粉與芒果糯米飯，河畔露台看鄭王廟日落，夜裡中國城酒吧與路邊烤河蝦。"
+notes = ["臥佛寺：長褲、有袖、好脫的鞋", "Opium：男生包鞋、不可無袖", "按摩亭、Kor Panich、T&K 只收現金", "女友今晚喝酒 → 今晚不吃 edible"]
+pack = ["👖 長褲＋有袖上衣", "💵 現金 ≥ ฿4,000", "👟 包鞋", "🪪 護照"]
+rain = ["先躲按摩亭", "Supanniga 改室內座", "T&K 大雨改 Teens of Thailand（中國城 Soi Nana 琴酒吧）或對面紅衫 Lek & Rut"]
+tired = ["跳過 Kor Panich", "Opium 後直接回家"]
+more = ["想升級：晚餐換 Potong（Michelin 1 星，Opium 樓下，週二有開）"]
+
+  [[day.stop]]
+  time = "10:15"
+  place = "gokfayuen"
+  what = "早餐點少一點，今天吃很多。"
+  must = ["粥", "雲吞"]
+  meal = "早"
+  dur = "40 分"
+  mode = "moto"
+  leg = "機車 5–8 分、฿60"
+  leg_thb = 60
+  cost = 350
+
+  [[day.stop]]
+  time = "11:15"
+  name = "Grab → 臥佛寺"
+  cat = "交通"
+  icon = "🚕"
+  mode = "grab"
+  what = "穿長褲、有袖、好脫的鞋。"
+  leg = "Grab 35–45 分（離峰）、฿250–300＋過路費"
+  pay = "card"
+  cost = 300
+  q = "Wat Pho"
+
+  [[day.stop]]
+  time = "12:00"
+  place = "watpho"
+  what = "看金臥佛、佛腳貝殼鑲嵌、四座彩色佛塔。"
+  dur = "60 分"
+  cost = 600
+
+  [[day.stop]]
+  time = "13:00"
+  place = "watpho-massage"
+  what = "泰式 60 分 ฿520／人；小費 ฿50／人。"
+  dur = "60–90 分"
+  mode = "walk"
+  leg = "寺內步行"
+  cost = 1140
+
+  [[day.stop]]
+  time = "14:45"
+  place = "padthai"
+  what = "午餐。"
+  meal = "午"
+  dur = "45 分"
+  mode = "grab"
+  leg = "Grab 10 分、฿100"
+  leg_thb = 100
+  cost = 500
+
+  [[day.stop]]
+  time = "15:45"
+  place = "korpanich"
+  what = "飯後甜點；17:00 打烊。"
+  meal = "午"
+  dur = "30 分"
+  mode = "walk"
+  leg = "步行約 8 分 ⚠"
+  cost = 300
+
+  [[day.stop]]
+  time = "16:30"
+  name = "Grab → Tha Tien"
+  cat = "交通"
+  icon = "🚕"
+  mode = "grab"
+  what = "回到臥佛寺旁的河邊。"
+  leg = "Grab 10–15 分、฿120"
+  pay = "card"
+  cost = 120
+  q = "Tha Tien Pier"
+
+  [[day.stop]]
+  time = "16:45"
+  place = "supanniga-tt"
+  what = "露台看鄭王廟日落 17:50 與亮燈。"
+  meal = "晚"
+  dur = "2 小時"
+  book_by = 2026-10-27
+  cost = 2000
+
+  [[day.stop]]
+  time = "19:00"
+  name = "Grab → 中國城"
+  cat = "交通"
+  icon = "🚕"
+  mode = "grab"
+  what = "到 Potong／Opium Bar。"
+  leg = "Grab 15–20 分、฿150"
+  pay = "card"
+  cost = 150
+  q = "Opium Bar Bangkok"
+
+  [[day.stop]]
+  time = "19:30"
+  place = "opium"
+  what = "百年唐樓頂喝當季調酒。"
+  dur = "2 小時"
+  book_by = 2026-10-27
+  cost = 3000
+
+  [[day.stop]]
+  time = "21:45"
+  place = "tk"
+  what = "路邊海鮮，再沿耀華力路吃小吃。"
+  meal = "宵夜"
+  dur = "75 分"
+  mode = "walk"
+  leg = "步行 8–10 分 ⚠"
+  cost = 1200
+
+  [[day.stop]]
+  time = "23:15"
+  place = "home"
+  name = "回住宿陽台"
+  cat = "大麻"
+  icon = "🌿"
+  what = "回來才用花（女友今晚喝酒，不吃 edible）。"
+  mode = "grab"
+  leg = "Grab 25–35 分、฿300"
+  leg_thb = 300
+
+[[day]]
+id = "d4"
+spend = { "交通" = 500, "大麻" = 1500, "餐飲" = 3850, "按摩" = 5330, "酒吧" = 4200 }   # 計畫花費（฿，兩人；= 行程文件每日小計）
+date = 2026-11-04
+title = "Thonglor 休閒日：比品種・雙人 SPA・最佳酒吧"
+area = "Thonglor（不跨區）"
+one = "週三 Opium 公休，留在住處附近：睡飽去 Four Twenty 比品種，最熱時段做 2 小時雙人 SPA，Octave 看日落，晚上泰國第一酒吧。"
+notes = ["Divana：14:45 到（提早 15 分）", "Divana 全額付款最晚 11/2（一）15:00，不然預約不成立", "Dry Wave：Smart and Elegant"]
+pack = ["🪪 護照", "👟 包鞋＋smart casual（晚上）", "💵 現金 ≥ ฿2,000"]
+rain = ["Octave 有遮蔽區；雨大就 Supanniga → Dry Wave，Octave 改 22:30 看夜景"]
+tired = ["Dry Wave 取消，SPA 後直接回陽台"]
+more = ["Divana 約不到：Health Land Ekkamai（96/1 Soi 63，09:00–23:00）或 Let's Relax Ginza Thonglor（泰式 120 分 ฿1,300）"]
+
+  [[day.stop]]
+  time = "10:30"
+  place = "maevaree"
+  what = "早餐；外帶回陽台吃也可以。"
+  meal = "早"
+  dur = "20 分"
+  mode = "moto"
+  leg = "機車 5 分、฿50"
+  leg_thb = 50
+  cost = 300
+
+  [[day.stop]]
+  time = "11:30"
+  place = "fourtwenty"
+  what = "比品種：問 The Runtz、Colt 45 與較溫和品種的 THC；問有沒有 อย. 登記食品；沒開就去 Stash。"
+  dur = "45 分"
+  mode = "grab"
+  leg = "Grab 5–8 分、฿60"
+  leg_thb = 60
+  book_by = 2026-10-30
+  cost = 1500
+
+  [[day.stop]]
+  time = "12:45"
+  place = "commons"
+  what = "午餐，現場挑店。"
+  meal = "午"
+  dur = "75 分"
+  mode = "grab"
+  leg = "Grab 8 分、฿80"
+  leg_thb = 80
+  cost = 800
+
+  [[day.stop]]
+  time = "14:45"
+  place = "divana"
+  what = "15:00 雙人 120 分芳療；小費 ฿100／人。"
+  dur = "2 小時 15 分"
+  mode = "walk"
+  leg = "步行 3–5 分"
+  book_by = 2026-10-25
+  cost = 5330
+
+  [[day.stop]]
+  time = "17:15"
+  name = "Grab → Octave"
+  cat = "交通"
+  icon = "🚕"
+  mode = "grab"
+  what = "到 Marriott Sukhumvit，搭電梯上 45 樓。"
+  leg = "Grab 10–15 分、฿100"
+  pay = "card"
+  cost = 100
+  q = "Octave Rooftop Marriott Sukhumvit"
+
+  [[day.stop]]
+  time = "17:30"
+  place = "octave"
+  what = "日落 17:49；happy hour ⚠。"
+  dur = "1 小時 45 分"
+  book_by = 2026-10-31
+  cost = 1800
+
+  [[day.stop]]
+  time = "19:30"
+  place = "supanniga-tl"
+  what = "晚餐（最後點餐 21:00）。"
+  meal = "晚"
+  dur = "1 小時 45 分"
+  mode = "walk"
+  leg = "步行 5 分"
+  book_by = 2026-10-31
+  cost = 2600
+
+  [[day.stop]]
+  time = "21:30"
+  place = "drywave"
+  what = "泰國第一酒吧。"
+  dur = "2 小時"
+  mode = "grab"
+  leg = "Grab 5–10 分、฿80"
+  leg_thb = 80
+  book_by = 2026-10-31
+  cost = 2400
+
+  [[day.stop]]
+  time = "23:45"
+  label = "~23:45"
+  place = "home"
+  name = "住宿陽台"
+  cat = "大麻"
+  icon = "🌿"
+  what = "回來才用花。"
+  mode = "grab"
+  leg = "Grab ฿80"
+  leg_thb = 80
+
+  [[day.stop]]
+  time = "00:15"
+  label = "宵夜"
+  place = "sev"
+  what = "7-Eleven 補給；想吃熱炒見 D6 的 55 Pochana。"
+  meal = "宵夜"
+  mode = "walk"
+  leg = "步行"
+  cost = 150
+
+[[day]]
+id = "d5"
+spend = { "交通" = 870, "餐飲" = 2850, "購物" = 1000, "按摩" = 2800, "酒吧" = 3100 }   # 計畫花費（฿，兩人；= 行程文件每日小計）
+date = 2026-11-05
+title = "Asok・Sukhumvit 26：麵・逛街・大麻按摩・缸養海鮮"
+area = "Asok／Phrom Phong／Rama 4"
+one = "同一帶走完：必比登豬肉麵、Terminal 21 冷氣逛街、兩人一起做外用大麻按摩，先吃缸養海鮮再去 Bar Us 20:00 場，早點回家（明天有 SkyFlyers）。"
+notes = ["Bar Us 約 1.5 小時，21:30 前離開；女友的 edible 22:00 前在住宿吃完", "明天 16:00 SkyFlyers：11/6 當天搭乘前不碰酒和大麻", "Wanpho 地址要先問到（車程 > 25 分就改 Health Land Asoke）", "Rung Rueang 只收現金"]
+pack = ["💵 現金 ≥ ฿1,500", "🪪 護照", "👟 包鞋（Bar Us smart casual）"]
+rain = ["全天室內，不受影響"]
+tired = ["Terminal 21 縮到 1 小時，回住宿睡 13:30–15:00"]
+more = ["Wanpho 太遠或約不到：Health Land Asoke（55/5 Sukhumvit 21，離 Terminal 21 步行約 5 分）16:00", "想看泰拳：Terminal 21 → 16:30 Grab 去 Rajadamnern（17:00 開門，Club Class 約 ฿1,800／人 ⚠）→ 約 20:30 看完 → 55 Pochana；取消 Wanpho、Sornthong、Bar Us"]
+
+  [[day.stop]]
+  time = "10:15"
+  place = "sev"
+  what = "早餐輕一點，中午要吃麵。"
+  must = ["火腿起司烤吐司", "泰奶"]
+  meal = "早"
+  dur = "15 分"
+  mode = "walk"
+  leg = "步行"
+  cost = 150
+
+  [[day.stop]]
+  time = "11:15"
+  name = "Grab → Sukhumvit 26"
+  cat = "交通"
+  icon = "🚕"
+  mode = "grab"
+  what = "到 Rung Rueang。"
+  leg = "Grab 15–20 分、฿120"
+  pay = "card"
+  cost = 120
+  q = "Rung Rueang Pork Noodle Sukhumvit 26"
+
+  [[day.stop]]
+  time = "11:45"
+  place = "rungrueang"
+  what = "午餐，乾、湯各一。"
+  meal = "午"
+  dur = "45 分"
+  cost = 250
+
+  [[day.stop]]
+  time = "12:45"
+  place = "terminal21"
+  what = "冷氣逛街，5F 美食街喝飲料。"
+  dur = "2 小時 30 分"
+  mode = "grab"
+  leg = "Grab 10–15 分、฿80"
+  leg_thb = 80
+  cost = 1300
+
+  [[day.stop]]
+  time = "15:15"
+  name = "Grab → Wanpho"
+  cat = "交通"
+  icon = "🚕"
+  mode = "grab"
+  what = "地址官網沒寫 ⚠：預約時要問到；車程 > 25 分就改備案。"
+  leg = "Grab ฿150 ⚠"
+  pay = "card"
+  cost = 150
+  q = "Wanpho Massage Wellness"
+
+  [[day.stop]]
+  time = "15:45"
+  place = "wanpho"
+  what = "Cannabis Thai Massage 60 分 ×2；外用、不是吸食；小費 ฿100／人。"
+  dur = "75 分"
+  book_by = 2026-10-27
+  cost = 2800
+
+  [[day.stop]]
+  time = "17:15"
+  name = "Grab → Sornthong"
+  cat = "交通"
+  icon = "🚕"
+  mode = "grab"
+  what = "週四傍晚 Rama 4 塞，按完就叫車。"
+  leg = "Grab 20–35 分、฿200 ⚠"
+  pay = "card"
+  cost = 200
+  q = "Sornthong Restaurant Rama 4"
+
+  [[day.stop]]
+  time = "17:45"
+  place = "sornthong"
+  what = "晚餐；早到不用排。"
+  meal = "晚"
+  dur = "1 小時 45 分"
+  cost = 2000
+
+  [[day.stop]]
+  time = "19:40"
+  name = "Grab → Bar Us"
+  cat = "交通"
+  icon = "🚕"
+  mode = "grab"
+  what = "回到 Sukhumvit 26。"
+  leg = "Grab 15–20 分、฿100"
+  pay = "card"
+  cost = 100
+  q = "Bar Us Sukhumvit 26"
+
+  [[day.stop]]
+  time = "20:00"
+  place = "barus"
+  what = "20:00 場，約 1.5 小時、21:30 前離開。女友今晚要吃 edible，點無酒精調酒（฿330–360）。"
+  dur = "約 1.5 小時"
+  book_by = 2026-10-27
+  cost = 3100
+
+  [[day.stop]]
+  time = "21:45"
+  label = "~21:45"
+  place = "home"
+  name = "住宿陽台"
+  cat = "大麻"
+  icon = "🌿"
+  what = "女友：D1 沒感覺就 2 包（3.2 mg），22:00 前在住宿吃完；男友適量。明天 SkyFlyers 前要清醒。"
+  mode = "grab"
+  leg = "Grab 15 分、฿100"
+  leg_thb = 100
+
+  [[day.stop]]
+  time = "22:15"
+  label = "宵夜"
+  place = "sev"
+  what = "7-Eleven。"
+  must = ["班蘭蛋糕", "水果乾"]
+  meal = "宵夜"
+  mode = "walk"
+  leg = "步行"
+  cost = 150
+
+[[day]]
+id = "d6"
+spend = { "交通" = 1190, "餐飲" = 3500, "購物" = 3000, "門票" = 740, "酒吧" = 3300 }   # 計畫花費（฿，兩人；= 行程文件每日小計）
+date = 2026-11-06
+title = "河岸海鮮・SkyFlyers・最後大夜"
+area = "Khlong San／Asiatique → Sukhumvit 45"
+one = "中午河西岸海鮮、ICONSIAM 補伴手禮，傍晚過河玩 SkyFlyers（搭乘前不碰酒和大麻），玩完吃蒸蟹冬粉煲，BTS 避開週五晚高峰回家睡一覺，最後一晚 Sing Sing。"
+notes = ["11/6 當天 SkyFlyers 搭乘前不碰酒和大麻（含 edibles）", "Sing Sing：原版護照、不可露趾、不帶大麻", "Ann、Somsak 只收現金"]
+pack = ["🪪 原版護照", "💵 現金 ≥ ฿3,000", "👟 包鞋＋smart casual", "🎒 小包（SkyFlyers 要寄物）"]
+rain = ["SkyFlyers 可能因天候暫停：先到 Asiatique 現場看，停駛就改 11/5（四）傍晚（把 D5 Bar Us 後移）或放棄", "ICONSIAM、Sing Sing 都在室內"]
+tired = ["ICONSIAM 縮短", "Sing Sing 改離家 5 分的 Dry Wave，或直接回陽台"]
+more = ["想升級：晚餐換 Potong（中國城，週五有開），再去 Sing Sing"]
+
+  [[day.stop]]
+  time = "10:15"
+  place = "gokfayuen"
+  what = "早餐。"
+  must = ["雲吞麵"]
+  meal = "早"
+  dur = "40 分"
+  mode = "moto"
+  leg = "機車 5–8 分、฿60"
+  leg_thb = 60
+  cost = 350
+
+  [[day.stop]]
+  time = "11:30"
+  name = "Grab → Khlong San"
+  cat = "交通"
+  icon = "🚕"
+  mode = "grab"
+  what = "過河到西岸。"
+  leg = "Grab 30–45 分、฿300＋過路費"
+  pay = "card"
+  cost = 300
+  q = "Ann Tha Din Daeng"
+
+  [[day.stop]]
+  time = "12:15"
+  place = "ann"
+  what = "午餐；不喝啤酒（下午要搭 SkyFlyers）。"
+  meal = "午"
+  dur = "75 分"
+  cost = 1200
+
+  [[day.stop]]
+  time = "13:30"
+  place = "iconsiam"
+  what = "補伴手禮；同店滿 ฿2,000 退稅。"
+  dur = "2 小時"
+  mode = "grab"
+  leg = "Grab 8–12 分、฿100"
+  leg_thb = 100
+  cost = 3300
+
+  [[day.stop]]
+  time = "15:30"
+  name = "Grab → Asiatique"
+  cat = "交通"
+  icon = "🚕"
+  mode = "grab"
+  what = "過 Taksin 橋；接駁船 16:00 才開，所以搭 Grab。"
+  leg = "Grab 20–25 分、฿150"
+  pay = "card"
+  cost = 150
+  q = "Asiatique The Riverfront"
+
+  [[day.stop]]
+  time = "16:00"
+  place = "skyflyers"
+  what = "搭乘 3–4 分＋排隊 30–45 分，再逛 Asiatique。"
+  dur = "75 分＋逛"
+  cost = 740
+
+  [[day.stop]]
+  time = "17:30"
+  name = "Asiatique 河岸"
+  cat = "其他"
+  icon = "🌅"
+  what = "日落 17:49 在河邊散步；玩完才開始喝（一瓶啤酒可以）。"
+  dur = "20 分"
+  mode = "walk"
+  leg = "步行"
+  q = "Asiatique The Riverfront"
+
+  [[day.stop]]
+  time = "17:50"
+  name = "Grab → Somsak"
+  cat = "交通"
+  icon = "🚕"
+  mode = "grab"
+  what = "過 Krung Thep 橋回河西岸。"
+  leg = "Grab 20–30 分（週五傍晚）、฿200"
+  pay = "card"
+  cost = 200
+  q = "Somsak Pu Ob Charoen Rat"
+
+  [[day.stop]]
+  time = "18:20"
+  place = "somsak"
+  what = "晚餐；21:30 打烊。"
+  meal = "晚"
+  dur = "60 分"
+  cost = 1000
+
+  [[day.stop]]
+  time = "19:20"
+  name = "BTS → 回 Thonglor"
+  cat = "交通"
+  icon = "🚆"
+  mode = "bts"
+  what = "週五晚高峰不搭 Grab：步行到 BTS Wongwian Yai → Siam 轉車 → Thong Lo。"
+  leg = "步行 10 分＋BTS 約 40 分、฿55 ×2＋機車 ฿60"
+  pay = "both"
+  cost = 170
+  q = "BTS Wongwian Yai"
+
+  [[day.stop]]
+  time = "20:20"
+  place = "home"
+  what = "沖澡、睡 40 分、換 smart casual＋包鞋；喝酒前不用花。"
+  dur = "70 分"
+  cost = 150
+  bcat = "餐飲"
+
+  [[day.stop]]
+  time = "21:30"
+  place = "singsing"
+  what = "最後一晚。"
+  dur = "3 小時"
+  mode = "grab"
+  leg = "Grab 10–15 分、฿120"
+  leg_thb = 120
+  book_by = 2026-10-28
+  cost = 3300
+
+  [[day.stop]]
+  time = "00:30"
+  label = "~00:30"
+  place = "pochana55"
+  what = "最後一晚宵夜，之後回陽台用花。"
+  meal = "宵夜"
+  dur = "45 分"
+  mode = "grab"
+  leg = "Grab 10 分、฿150"
+  leg_thb = 150
+  cost = 500
+
+[[day]]
+id = "d7"
+spend = { "交通" = 800, "餐飲" = 1400, "購物" = 2000 }   # 計畫花費（฿，兩人；= 行程文件每日小計）
+date = 2026-11-07
+title = "離境日"
+area = "Phrom Phong → BKK"
+one = "起床先把剩下的花和餅乾全部丟掉，11:00 前退房寄行李，No Name Noodle 開門就吃，EmQuartier 最後補貨，13:00 出發去機場。"
+notes = ["起床先丟：花、edibles、研磨器殘留，一律不帶出泰國、不帶回台灣", "11:00 前退房", "14:30 前到機場；TG636 櫃檯 16:40 關"]
+pack = ["🪪 護照", "🧾 P.P.10 退稅單＋發票", "🧳 退稅品放隨身"]
+rain = ["EmQuartier 室內", "去機場改 BTS → Phaya Thai 轉機場快線 ARL"]
+tired = ["No Name 吃完直接回住宿，12:30 出發"]
+more = ["No Name 臨時休或大排：EmQuartier 的 Laem Charoen Seafood（必吃：炸鱸魚淋魚露）"]
+
+  [[day.stop]]
+  time = "09:30"
+  place = "home"
+  name = "丟棄剩下的大麻・打包"
+  icon = "🗑️"
+  what = "剩下的花、edibles 全部丟棄（不放行李、不上飛機、不帶出泰國）；檢查口袋與研磨器殘留；退稅品與 P.P.10 放隨身。"
+
+  [[day.stop]]
+  time = "10:00"
+  label = "早餐"
+  place = "maevaree"
+  name = "Mae Varee／7-Eleven"
+  what = "輕早餐，中午要吃麵。"
+  meal = "早"
+  dur = "15 分"
+  mode = "moto"
+  leg = "機車／步行"
+  cost = 200
+
+  [[day.stop]]
+  time = "10:20"
+  place = "home"
+  name = "退房・寄行李"
+  what = "11:00 前退房，行李寄放儲物間。"
+  reserve = "ask"
+  reserve_note = "⚠ 跟房東確認寄到 13:00（目前沒有書面）"
+  dur = "10 分"
+
+  [[day.stop]]
+  time = "10:35"
+  name = "Grab → No Name Noodle"
+  cat = "交通"
+  icon = "🚕"
+  mode = "grab"
+  what = "到 Sukhumvit 26。"
+  leg = "Grab 15–20 分、฿100"
+  pay = "card"
+  cost = 100
+  q = "No Name Noodle Athakravi"
+
+  [[day.stop]]
+  time = "11:00"
+  place = "nonamenoodle"
+  what = "開門就到，兩碗分著吃。"
+  meal = "午"
+  dur = "45 分"
+  cost = 700
+
+  [[day.stop]]
+  time = "11:50"
+  place = "emquartier"
+  what = "最後補貨。"
+  dur = "45 分"
+  mode = "grab"
+  leg = "Grab 8 分、฿80"
+  leg_thb = 80
+  cost = 2000
+
+  [[day.stop]]
+  time = "12:35"
+  name = "BTS → 回住宿"
+  cat = "交通"
+  icon = "🚆"
+  mode = "bts"
+  what = "BTS Phrom Phong → Thong Lo＋機車。"
+  leg = "約 15 分、฿100"
+  pay = "both"
+  cost = 100
+  q = "BTS Phrom Phong"
+
+  [[day.stop]]
+  time = "12:50"
+  place = "home"
+  name = "取行李"
+  what = "確認護照、P.P.10、發票、登機證截圖。"
+  dur = "10 分"
+
+  [[day.stop]]
+  time = "13:00"
+  name = "Grab → BKK 機場"
+  cat = "交通"
+  icon = "🚕"
+  mode = "grab"
+  what = "週六午後 45–70 分 ⚠；塞車或大雨改 BTS → Phaya Thai 轉 ARL（60–70 分、穩定）。"
+  leg = "Grab ฿450–600＋過路費"
+  pay = "card"
+  cost = 600
+  q = "Suvarnabhumi Airport Departures"
+
+  [[day.stop]]
+  time = "14:10"
+  label = "~14:10"
+  place = "bkk"
+  name = "BKK 4 樓出境層"
+  what = "退稅品每人 ≥ ฿20,000 → 先到 Entrance 10 海關驗貨再報到；16:40 關櫃；機場點心。"
+  reserve = "ask"
+  reserve_note = "TG636 線上報到 11/6 17:30 起"
+  cost = 500
+  bcat = "餐飲"
+
+  [[day.stop]]
+  time = "17:30"
+  name = "TG636 曼谷 → 桃園"
+  cat = "交通"
+  icon = "✈️"
+  mode = "plane"
+  what = "22:20 到桃園 T1；機上餐當晚餐。機捷 A12 末班普通車 23:37。"
+  meal = "晚"
+  reserve = "booked"
+  reserve_note = "機票已開"
+  pay = "none"
+  q = "Suvarnabhumi Airport"
+
+# ───────────────────────── 大麻：品種 ─────────────────────────
+# thc_level：1 低、2 中、3 高（店家菜單沒列 THC%，不寫假數字）
+[[strain]]
+name = "Face Off OG"
+shop = "choochoo"
+price = "3.5 g 起 ฿105"
+type = "hybrid"
+type_note = "偏放鬆"
+thc_level = 2
+thc_text = "第一晚挑 ≤ 18–20%，菜單沒列，現場問"
+fx_up = ["想睡", "放鬆", "身體酥麻"]
+fx_down = ["隔天可能昏沉"]
+when = "D1、D4 晚上回陽台"
+
+[[strain]]
+name = "Sherb Cream Pie"
+shop = "choochoo"
+price = "฿175"
+type = "indica"
+type_note = "Indica 70%"
+thc_level = 2
+thc_text = "中（現場問）"
+fx_up = ["開心", "放鬆", "想睡"]
+fx_down = ["很餓"]
+when = "喝完酒回陽台"
+
+[[strain]]
+name = "Cherry Tropicana"
+shop = "choochoo"
+price = "฿105"
+type = "sativa"
+type_note = "Sativa 60%"
+thc_level = 2
+thc_text = "中（現場問）"
+fx_up = ["愉悅", "開心", "白天感"]
+fx_down = ["可能心跳快"]
+when = "不出門的下午（D6 SkyFlyers 前不用）"
+
+[[strain]]
+name = "Mochi／White Runtz"
+shop = "choochoo"
+price = "฿160–175"
+type = "hybrid"
+thc_level = 2
+thc_text = "中（現場問）"
+fx_up = ["放鬆", "開心"]
+when = "任一晚"
+
+[[strain]]
+name = "The Runtz／Colt 45"
+shop = "fourtwenty"
+price = "現場問"
+type = "hybrid"
+type_note = "高 THC"
+thc_level = 3
+thc_text = "高：第三晚以後再試"
+fx_up = ["強", "放鬆"]
+fx_down = ["新手易焦慮、心悸"]
+when = "D4 以後"
+
+[[strain]]
+name = "CBD 為主或 1:1"
+shop = ""
+price = "ACDC、Cannatonic、Harlequin（有沒有貨 ⚠）"
+type = "cbd"
+thc_level = 1
+thc_text = "低 THC"
+fx_up = ["放鬆", "不太茫"]
+when = "想要溫和的時候"
+
+# ───────────────────────── 大麻：食品（edibles） ─────────────────────────
+# thc_mg_per_pack > meta.edible_thc_max_mg → build 自動標「違法・不買」
+[[edible]]
+name = "Baked 大麻餅乾（Thai FDA 核准）"
+shop = "stash"
+price = "價格未查到 ⚠；估 6 包 ฿1,200"
+thc_mg_per_pack = 1.6
+unit = "包"
+note = "Stash 官網 2026-05-31：這是它唯一的 edible，核准不涵蓋 Baked 其他產品。每包或每片以包裝標示為準。"
+
+[[edible]]
+name = "EDIBLELAND 等店的 50 mg 軟糖／巧克力"
+shop = "choochoo"
+price = ""
+thc_mg_per_pack = 250
+unit = "包"
+note = "每顆 50 mg、一包約 250 mg，是上限的 156 倍；依 vault 查到的法規屬第 5 類毒品，持有有刑責。很多店照樣在賣，不代表合法。"
+
+[[edible]]
+name = "THC 油、vape、菸彈、萃取物"
+shop = ""
+price = ""
+illegal = true
+note = "萃取物 THC > 0.2% 屬第 5 類毒品。"
+
+# ───────────────────────── 行前待辦 ─────────────────────────
+# group: late 已逾期／今天 · week 本週 · bkk 到曼谷才做
+[[todo]]
+group = "late"
+icon = "💆"
+text = "Divana Divine 雙人 120 分（11/4 15:00）"
+how = "divanawellness.com → divana.zenoti.com；等 email／LINE 確認"
+due = 2026-10-25
+note = "全額付款最晚 11/2（一）15:00"
+
+[[todo]]
+group = "late"
+icon = "🌃"
+text = "Red Sky 晚餐（11/2 週一 19:15）"
+how = "官網或 +66 2 100 6255"
+due = 2026-10-27
+
+[[todo]]
+group = "late"
+icon = "🍸"
+text = "Lennon's（11/2 週一 17:15）"
+how = "Rosewood SevenRooms"
+due = 2026-10-27
+
+[[todo]]
+group = "late"
+icon = "🍸"
+text = "Opium Bar（11/3 週二 19:30）"
+how = "官網／Chope；+66 82 979 3950（與 Potong 同號）"
+due = 2026-10-27
+
+[[todo]]
+group = "late"
+icon = "🌅"
+text = "Supanniga Tha Tien（11/3 週二 17:00，要露台）"
+how = "+66 92 253 9251"
+due = 2026-10-27
+
+[[todo]]
+group = "late"
+icon = "🍸"
+text = "Bar Us（11/5 週四 20:00 場）"
+how = "nightify.co/book/bar-us/web"
+due = 2026-10-27
+
+[[todo]]
+group = "late"
+icon = "💆"
+text = "Wanpho 大麻按摩（11/5 週四 15:45）"
+how = "LINE wanphowellness；問地址、THC、價格（太遠改訂 Health Land Asoke 16:00）"
+due = 2026-10-27
+
+[[todo]]
+group = "late"
+icon = "🏮"
+text = "Sing Sing Theater（11/6 週五 21:30）"
+how = "WhatsApp +66 63 225 1331；問入場費／低消"
+due = 2026-10-28
+
+[[todo]]
+group = "week"
+icon = "🏠"
+text = "跟房東確認 11/7 行李寄到 13:00"
+how = "Airbnb 訊息"
+due = 2026-10-28
+
+[[todo]]
+group = "week"
+icon = "📝"
+text = "TDAC 泰國數位入境卡（兩人各填一張）"
+how = "官方 tdac.immigration.go.th，免費；班機 TG637；住址照 Airbnb App 的住宿門牌填（不是 103 Soi Thong Lo 17，那是 Divana）"
+due = 2026-10-31
+open = 2026-10-29
+
+[[todo]]
+group = "week"
+icon = "🌿"
+text = "問 Stash 有沒有 Baked 餅乾；問 Four Twenty 11/4 營業時間"
+how = "LINE／電話 +66 99 332 0049；Four Twenty LINE／IG"
+due = 2026-10-30
+
+[[todo]]
+group = "week"
+icon = "✈️"
+text = "TG637 線上報到＋選位（兩人坐一起）"
+how = "泰航官網 MY BOOKING；10/31（六）07:55 台北時間開放"
+due = 2026-10-31
+open = 2026-10-31
+
+[[todo]]
+group = "week"
+icon = "🚖"
+text = "11/1 清晨去桃園 T1 的交通（05:55 前到）"
+how = "叫車或前一晚住機場附近（機捷首班 ⚠ 未查）"
+due = 2026-10-31
+
+[[todo]]
+group = "week"
+icon = "🦀"
+text = "Somboon Seafood CentralWorld（11/2 12:15，建議）"
+how = "TableCheck／LINE @somboonseafood"
+due = 2026-10-31
+
+[[todo]]
+group = "week"
+icon = "🍸"
+text = "Octave／Dry Wave／Gen（可選）"
+how = "電話／SevenRooms／Alotea"
+due = 2026-10-31
+
+[[todo]]
+group = "week"
+icon = "💵"
+text = "準備泰銖現金 ฿22,000–26,000、信用卡開海外刷卡、抄發卡行掛失電話"
+how = "只收現金的店見「救急 › 錢與退稅」"
+due = 2026-10-31
+
+[[todo]]
+group = "week"
+icon = "📱"
+text = "Grab 註冊綁卡、Google 地圖離線、Google 翻譯泰文離線包"
+how = "兩支手機都做"
+due = 2026-10-31
+
+[[todo]]
+group = "week"
+icon = "🛡️"
+text = "旅平險／不便險；護照效期到 2027-05 以後"
+how = "查刷票的信用卡附帶什麼保險"
+due = 2026-10-31
+
+[[todo]]
+group = "week"
+icon = "🥊"
+text = "泰拳門票（只有選加碼時）"
+how = "rajadamnern.com（Ticketmelon）"
+due = 2026-11-03
+
+[[todo]]
+group = "bkk"
+icon = "🌿"
+text = "LINE Choo Choo：「今天（週日）醫師在診嗎」"
+how = "落地後"
+due = 2026-11-01
+
+[[todo]]
+group = "bkk"
+icon = "🎢"
+text = "SkyFlyers 看天氣現場買票"
+how = "或前一天 14:00 前買第三方時段票（不可退）"
+due = 2026-11-06
+
+[[todo]]
+group = "bkk"
+icon = "✈️"
+text = "TG636 線上報到"
+how = "11/6 17:30 起～11/7 16:30（泰航 MY BOOKING）"
+due = 2026-11-06
+open = 2026-11-06
+
+[[todo]]
+group = "bkk"
+icon = "🗑️"
+text = "丟掉剩下的花與 edibles"
+how = "11/7 起床，退房前"
+due = 2026-11-07
+
+# ───────────────────────── 這週外部條件 ─────────────────────────
+[[cond]]
+k = "天氣"
+v = "乾季開頭，平均 32.6°C／24.4°C、雨日約 5 天；13:00–16:00 盡量排室內。日落 17:49–17:51。"
+[[cond]]
+k = "節慶"
+v = "11/1–11/7 沒有國定假日、沒查到禁酒日。水燈節是 11/24，不在行程內。"
+[[cond]]
+k = "展覽"
+v = "Bangkok Art Biennale（10/29 起）：臥佛寺、CentralWorld 有展點；Diwali 節（11/3 起）以 ICONSIAM 為主。"
+[[cond]]
+k = "週一"
+v = "中國城很多攤販週一休；Here Hai、Somsak、Thai Niyom、Sing Sing、Ann、No Name 也週一休 → 中國城排週二。"
+[[cond]]
+k = "大麻法規"
+v = "現行：買花要 PT33 處方。內閣 9/22 通過「僅限醫療」草案，還不是法律；10/22 總理說會加強稽查。草案若在行程中突然生效，店家可能停業 → 落地當天看新聞。"
+
+# ───────────────────────── 救急 ─────────────────────────
+[[call]]
+num = "1155"
+tel = "1155"
+label = "觀光警察 · 24h 中英泰"
+main = true
+[[call]]
+num = "1669"
+tel = "1669"
+label = "救護車"
+main = true
+[[call]]
+num = "191"
+tel = "191"
+label = "警察"
+[[call]]
+num = "1672"
+tel = "1672"
+label = "TAT 觀光局"
+[[call]]
+num = "081-666-4006"
+tel = "+66816664006"
+label = "駐泰代表處急難 · LINE Taiwan119"
+[[call]]
+num = "+886 800-085-095"
+tel = "+886800085095"
+label = "外交部旅外急難（國外撥）"
+
+[[rule]]
+t = "只在住宿陽台用"
+d = "公共場所、店外、街上都不行；不帶進酒吧、SPA。公共場所吸食有罰則（DTAM：1 個月以下或 ฿2,000 以下）。"
+[[rule]]
+t = "花要處方；食品只買合法登記的"
+d = "花要泰國執業者開的 PT33（20 歲以上、護照、≤ 30 天用量）。食品只買有 อย. 登記、每包 THC ≤ 1.6 mg 的；50 mg 軟糖、THC 油、vape 都違法・不買。"
+[[rule]]
+t = "不帶出泰國"
+d = "11/7 起床把剩下的全部丟掉，不放行李、不上飛機。台灣列第二級毒品，運輸可處無期或 10 年以上。"
+[[rule]]
+t = "11/6 當天 SkyFlyers 搭乘前不碰酒和大麻"
+d = "喝酒或用藥會被拒絕搭乘；edibles 也算。"
+
+[[info]]
+t = "錢與退稅"
+items = [
+  "只收現金：Here Hai、臥佛寺按摩亭、Kor Panich、T&K、Rung Rueang、Ann、Somsak、Mae Varee；未確認（帶現金）：Choo Choo、Stash、Pad Thai Fai Ta Lu",
+  "全程準備 ฿22,000–26,000 現金；其他刷卡，被問幣別選 THB",
+  "退稅：同一家店、同一天含稅 ≥ ฿2,000 開 P.P.10＋發票正本；60 天內帶出泰國",
+  "機場：退稅品每人 ≥ ฿20,000 要先到 4 樓 Entrance 10 海關驗貨，再報到",
+]
+[[info]]
+t = "叫車與防詐"
+items = [
+  "夜間一律 Grab 或 Bolt；上車前對車牌，不在路邊喊價",
+  "有人說「寺廟今天休館」是詐騙，不要跟著去別處",
+  "BTS：先試感應信用卡，不成就買單程票；往東末班 00:13、往西 23:49",
+  "機場 Grab 上車處：1 樓 Gate 4，App 會給 PIN",
+]
+[[info]]
+t = "帶回台灣不能帶"
+items = [
+  "大麻任何形式（第二級毒品）",
+  "新鮮水果，包括芒果糯米飯",
+  "非洲豬瘟疫區的豬肉製品、肉類零食",
+  "酒類免稅 1.5 L；手標泰奶茶粉、加工水果乾、蜂蜜可以",
+]
+[[info]]
+t = "身體不舒服"
+items = [
+  "吃 edible 太茫：喝水、吃東西、躺下休息，幾小時會退；嚴重打 1669",
+  "最近的大醫院：Samitivej Sukhumvit（Sukhumvit 49），叫 Grab 去",
+]
