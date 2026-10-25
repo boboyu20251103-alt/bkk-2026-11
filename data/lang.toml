@@ -1,0 +1,228 @@
+# 泰語對照表 —— 由 gen_lang.py 從 vault 06-泰語對照表.md 產生，不要手改
+# 男生說 ครับ（khrap），女生說 ค่ะ／คะ（kha）。⚠ 自編近似發音，沒有母語者校對；念不準就亮手機。
+
+[[lang]]
+sec = "最常用"
+note = "一次秀完的自我介紹：We are tourists from Taiwan. Our English is limited. Please speak slowly or type it out for us. Thank you."
+rows = [
+  { zh = "你好", en = "Hello.", th = "สวัสดีครับ", roman = "sa-wat-dee khrap" },
+  { zh = "謝謝", en = "Thank you.", th = "ขอบคุณครับ", roman = "khop khun khrap" },
+  { zh = "不好意思／對不起", en = "Excuse me. / Sorry.", th = "ขอโทษครับ", roman = "kho-thot khrap" },
+  { zh = "請說慢一點", en = "Please speak slowly.", th = "พูดช้าๆ หน่อยครับ", roman = "phut cha-cha noi khrap" },
+  { zh = "請寫下來／打字給我看", en = "Please write it down.", th = "ช่วยเขียนให้หน่อยครับ", roman = "chuai khian hai noi khrap" },
+  { zh = "這個多少錢？", en = "How much is this?", th = "เท่าไหร่ครับ", roman = "thao-rai khrap" },
+  { zh = "太貴了，可以便宜點嗎", en = "Too expensive. Can you give a discount?", th = "แพงไป ลดได้ไหมครับ", roman = "phaeng pai, lot dai mai khrap" },
+  { zh = "可以刷卡嗎？", en = "Can I pay by card?", th = "จ่ายบัตรได้ไหมครับ", roman = "chai bat dai mai khrap" },
+  { zh = "好／可以", en = "OK.", th = "ได้ครับ", roman = "dai khrap" },
+  { zh = "不要，謝謝", en = "No, thank you.", th = "ไม่เอาครับ", roman = "mai ao khrap" },
+  { zh = "廁所在哪？", en = "Where is the toilet?", th = "ห้องน้ำอยู่ที่ไหนครับ", roman = "hong-nam yu thi-nai khrap" },
+]
+
+[[lang]]
+sec = "取得處方 PT33（診所）"
+note = "醫師可以拒絕開方。有服藥、心血管或精神病史要老實說，這會影響能不能開方。"
+rows = [
+  { zh = "說明來意", en = "We are tourists from Taiwan. We would like to get a cannabis prescription (PT33).", th = "ผมต้องการพบแพทย์เพื่อขอใบสั่งกัญชาทางการแพทย์ (ภ.ท.33) ครับ" },
+  { zh = "兩人各一張", en = "We need two separate prescriptions, one for each of us.", th = "พวกเราสองคนต้องการใบสั่งยาคนละใบครับ" },
+  { zh = "護照", en = "Here are our passports. We are over 20 years old.", th = "นี่คือพาสปอร์ตของผม ผมอายุเกิน 20 ปีแล้วครับ" },
+  { zh = "問醫師時段", en = "Is the doctor here today? What time?", th = "ตอนนี้หมออยู่ไหมครับ หมอมากี่โมงครับ" },
+  { zh = "問費用", en = "How much is the consultation fee? Is it free if we buy something?", th = "ค่าพบแพทย์เท่าไหร่ครับ ถ้าซื้อสินค้าลดได้ไหมครับ" },
+  { zh = "確認可買多少", en = "How many grams am I allowed to buy with this prescription?" },
+  { zh = "病史（照實回答）", en = "I have no heart problems and no mental health history. / I take this medication: ____", th = "ผมมีโรคความดัน / โรคหัวใจ / โรคทางจิต / ทานยาอยู่ครับ（有的話才說）" },
+  { zh = "醫師拒絕時", en = "Is there another clinic nearby that can see us today?" },
+  { zh = "要收據", en = "May I have the prescription and the receipt?", th = "ขอใบเสร็จและใบสั่งยาไว้ด้วยครับ" },
+]
+
+[[lang]]
+sec = "買花與合法食品"
+note = "花要先有 PT33 處方。食品只買包裝上有 13 碼 อย. 登記號、每包 THC ≤ 1.6 mg 的；不要問「最強的」。"
+rows = [
+  { zh = "說明", en = "I have used cannabis before. I want something for relaxing." },
+  { zh = "問品種", en = "Is this indica, sativa, or hybrid? What is the THC percentage?" },
+  { zh = "晚上用", en = "I want indica for evening, something relaxing." },
+  { zh = "白天用", en = "I want sativa for daytime, something uplifting." },
+  { zh = "問價", en = "How much per gram? Can I buy 3.5 grams first?" },
+  { zh = "看與聞", en = "Can I see and smell it, please?" },
+  { zh = "問店內規定", en = "Is it allowed to use cannabis inside the shop? What are the premises rules?" },
+  { zh = "磨碎裝袋", en = "Please grind it and bag it." },
+  { zh = "說明需求", en = "She does not smoke. She has experience with edibles. We want edibles only.", th = "แฟนผมไม่สูบ มีแบบกินไหมครับ เรามีประสบการณ์แล้ว" },
+  { zh = "問登記與上限", en = "Is this FDA (อย.) registered? How many mg per package?", th = "อันนี้จดทะเบียน อย. ไหมครับ ทั้งห่อมีกี่ mg ครับ" },
+  { zh = "一份吃多少", en = "How much should I take per serving of this one?", th = "อันนี้ควรกินครั้งละเท่าไหร่ครับ" },
+  { zh = "單顆販售？", en = "Can I buy a single piece first?" },
+  { zh = "多久有感覺", en = "How long until it takes effect? How long does it last?", th = "กินแล้วนานแค่ไหนถึงจะออกฤทธิ์ครับ ฤทธิ์อยู่นานแค่ไหนครับ" },
+  { zh = "怎麼吃", en = "Should she eat something first?" },
+  { zh = "形式", en = "Do you have gummies, brownies, or cookies?" },
+  { zh = "保存", en = "How should I store it? Does it need refrigeration?" },
+  { zh = "買太多", en = "That is too much. We only need it for seven days." },
+  { zh = "使用地點", en = "I will only use it at my private balcony. Is that OK?" },
+  { zh = "付款", en = "Do you accept credit cards, or cash only?" },
+]
+
+[[lang]]
+sec = "餐廳與海鮮"
+note = "海鮮按重量計價，點之前一定先問總價。"
+rows = [
+  { zh = "兩位", en = "A table for two, please.", th = "ขอโต๊ะสองที่ครับ" },
+  { zh = "英文菜單", en = "Menu please. Do you have an English menu?", th = "ขอเมนูครับ มีภาษาอังกฤษไหมครับ" },
+  { zh = "海鮮先問價", en = "How much per kilogram? Please weigh it and tell me the total price before cooking.", th = "ราคากิโลละเท่าไหร่ครับ ช่วยชั่งและบอกราคารวมก่อนทำ" },
+  { zh = "不辣／小辣", en = "Not spicy. / A little spicy.", th = "ไม่เผ็ดครับ / เผ็ดนิดหน่อยครับ" },
+  { zh = "不要香菜", en = "No coriander, please.", th = "ไม่ใส่ผักชีครับ" },
+  { zh = "不要冰", en = "No ice, please.", th = "ไม่ใส่น้ำแข็งครับ" },
+  { zh = "推薦", en = "What do you recommend?", th = "แนะนำอะไรดีครับ" },
+  { zh = "這些我沒點", en = "I didn't order this.", th = "อันนี้ผมไม่ได้สั่งครับ" },
+  { zh = "結帳", en = "Check, please.", th = "เก็บเงินด้วยครับ" },
+  { zh = "過敏", en = "I am allergic to ____.", th = "แพ้ ____ ครับ" },
+]
+
+[[lang]]
+sec = "南部泰菜"
+note = "南部菜辣度真的高；完全去辣有時做不到。"
+rows = [
+  { zh = "兩位", en = "A table for two, please.", th = "ขอโต๊ะสองที่ครับ", roman = "kho to saawng thi khrap" },
+  { zh = "英文菜單", en = "Menu please. Do you have an English menu?", th = "ขอเมนูครับ มีภาษาอังกฤษไหมครับ", roman = "kho menu khrap, mi phasa angkrit mai khrap" },
+  { zh = "問招牌", en = "What is your signature dish?", th = "เมนูเด็ดคืออะไรครับ", roman = "menu det khue arai khrap" },
+  { zh = "點招牌", en = "One Khua Kling Moo, please.", th = "ขอคั่วกลิ้งหมูหนึ่งที่ครับ", roman = "kho khua-kling moo nueng thi khrap" },
+  { zh = "白飯兩碗", en = "Two steamed rice, please.", th = "ข้าวสวยสองที่ครับ", roman = "khao suai saawng thi khrap" },
+  { zh = "不辣", en = "Not spicy, please.", th = "ไม่เผ็ดครับ", roman = "mai phet khrap" },
+  { zh = "一點點辣", en = "A little spicy, please.", th = "เผ็ดนิดหน่อยครับ", roman = "phet nit-noi khrap" },
+  { zh = "我不太能吃辣", en = "I can't handle very spicy food.", th = "ผมกินเผ็ดไม่เก่งครับ", roman = "phom kin phet mai keng khrap" },
+  { zh = "不要香菜", en = "No coriander, please.", th = "ไม่ใส่ผักชีครับ", roman = "mai sai phak-chi khrap" },
+  { zh = "白開水不加冰", en = "Water, no ice, please.", th = "ขอน้ำเปล่าไม่ใส่น้ำแข็งครับ", roman = "kho nam plao mai sai nam-khaeng khrap" },
+  { zh = "好吃", en = "Very delicious!", th = "อร่อยมากครับ", roman = "aroi mak khrap" },
+  { zh = "結帳", en = "Check, please.", th = "เก็บเงินด้วยครับ", roman = "kep ngern duai khrap" },
+]
+
+[[lang]]
+sec = "老城街頭小吃"
+note = "Kor Panich 只收現金；Pad Thai Fai Ta Lu 付款方式未查到，都帶小鈔。"
+rows = [
+  { zh = "內用兩位", en = "For here, two people.", th = "ทานที่นี่สองคนครับ", roman = "than thi-ni saawng khon khrap" },
+  { zh = "泰式炒河粉兩份", en = "Two Pad Thai, please.", th = "ขอผัดไทยสองจานครับ", roman = "kho phat thai saawng chan khrap" },
+  { zh = "芒果糯米飯", en = "Mango sticky rice, please.", th = "ขอข้าวเหนียวมะม่วงครับ", roman = "kho khao-niao muang khrap" },
+  { zh = "不要蝦", en = "No shrimp, please.", th = "ไม่ใส่กุ้งครับ", roman = "mai sai kung khrap" },
+  { zh = "外帶", en = "Take away, please.", th = "ห่อกลับบ้านครับ", roman = "ho klap ban khrap" },
+  { zh = "要湯匙和叉子", en = "A spoon and fork, please.", th = "ขอช้อนกับส้อมครับ", roman = "kho chon kap som khrap" },
+]
+
+[[lang]]
+sec = "宵夜與深夜點餐"
+note = "主要靠 7-Eleven 與 Grab Food。"
+rows = [
+  { zh = "蟹肉炒飯", en = "Crab fried rice, please.", th = "ขอข้าวผัดปูครับ", roman = "kho khao-phat-pu khrap" },
+  { zh = "再一份", en = "One more, please.", th = "ขออีกหนึ่งครับ", roman = "kho ik nueng khrap" },
+  { zh = "外帶", en = "Take away, please.", th = "ขอห่อกลับครับ", roman = "kho ho klap khrap" },
+  { zh = "白開水", en = "Water, please.", th = "ขอน้ำเปล่าครับ", roman = "kho nam-plao khrap" },
+  { zh = "要收據", en = "Receipt, please.", th = "ขอใบเสร็จครับ", roman = "kho bai-set khrap" },
+  { zh = "加辣／不辣", en = "A little spicy. / Not spicy.", th = "เผ็ดนิดหน่อย / ไม่เผ็ด", roman = "phet nit-noi / mai phet" },
+  { zh = "幾點打烊", en = "What time do you close?", th = "ปิดกี่โมงครับ", roman = "pit ki mong khrap" },
+]
+
+[[lang]]
+sec = "叫車與交通"
+note = "夜間一律用 Grab 或 Bolt，上車前對車牌，不在路邊喊價。"
+rows = [
+  { zh = "去這裡（亮地圖）", en = "Please take me here.", th = "ไปที่นี่ครับ" },
+  { zh = "請開跳表", en = "Meter, please.", th = "เปิดมิเตอร์ด้วยครับ" },
+  { zh = "高速公路", en = "You may take the expressway. I will pay the toll.", th = "ขึ้นทางด่วนได้ครับ ผมจ่ายค่าทางด่วนเอง" },
+  { zh = "在這裡停", en = "Please stop here.", th = "จอดตรงนี้ครับ" },
+  { zh = "去機場", en = "To Suvarnabhumi Airport, please.", th = "ไปสนามบินสุวรรณภูมิครับ" },
+  { zh = "回住宿（到巷口）", en = "To Thong Lo Soi 21, near BTS Thong Lo, please.", th = "ไปทองหล่อ ซอย 21 ใกล้ BTS ทองหล่อครับ" },
+]
+
+[[lang]]
+sec = "按摩與 SPA"
+rows = [
+  { zh = "預約兩位", en = "A booking for two people, please.", th = "จองสองที่ครับ" },
+  { zh = "輕一點／重一點", en = "Softer, please. / Harder, please.", th = "เบาหน่อยครับ / แรงหน่อยครับ" },
+  { zh = "會痛", en = "It hurts.", th = "เจ็บครับ" },
+  { zh = "太燙／太冷", en = "Too hot. / Too cold.", th = "ร้อนไป / หนาวไป" },
+  { zh = "這裡不要碰／有舊傷", en = "Please do not massage here. / I have an injury here." },
+]
+
+[[lang]]
+sec = "酒吧與夜生活"
+note = "帶護照：酒吧夜店常查證件，兩人都帶。"
+rows = [
+  { zh = "先問價", en = "How much is a beer? Please tell me the price first." },
+  { zh = "看帳單", en = "Please show me the bill." },
+  { zh = "帳單不對", en = "This is not correct. Please explain this charge." },
+  { zh = "不要別人請喝", en = "No, thank you. I do not want any drink." },
+  { zh = "要走了", en = "We are leaving now. Please bring the bill." },
+  { zh = "找警察", en = "I will call the tourist police." },
+]
+
+[[lang]]
+sec = "中國城酒吧"
+note = "⚠ Teens of Thailand 在中國城 Yaowarat 旁的 Soi Nana，不是 Sukhumvit 的 Soi Nana，跟司機講清楚。"
+rows = [
+  { zh = "兩位", en = "Two people, please.", th = "สองคนครับ", roman = "saawng khon khrap" },
+  { zh = "有位子嗎", en = "Do you have a table for two?", th = "มีโต๊ะว่างไหมครับ", roman = "mi to wang mai khrap" },
+  { zh = "最受歡迎的調酒", en = "What is your best-selling cocktail?", th = "ค็อกเทลอันไหนขายดีที่สุดครับ", roman = "cocktail an nai khai dee thi sut khrap" },
+  { zh = "想試泰式藥酒（Tep Bar，已不在主行程，僅備用）", en = "I would like to try ya dong (Thai herbal spirit).", th = "อยากลองยาดองครับ", roman = "yak long ya-dong khrap" },
+  { zh = "琴酒調酒", en = "A gin and tonic, please.", th = "ขอจินโทนิคครับ", roman = "kho gin-tonic khrap" },
+  { zh = "不要酒精", en = "A mocktail, no alcohol, please.", th = "ขอม็อกเทลไม่ใส่แอลกอฮอล์ครับ", roman = "kho mocktail mai sai alcohol khrap" },
+  { zh = "淡一點", en = "Please make it light.", th = "ขอเบา ๆ ครับ", roman = "kho bao-bao khrap" },
+  { zh = "幾點有現場音樂", en = "What time is the live music?", th = "ดนตรีสดเริ่มกี่โมงครับ", roman = "dontri sot roem ki mong khrap" },
+  { zh = "要收音樂費嗎", en = "Is there a music charge?", th = "คิดค่าดนตรีไหมครับ", roman = "khit kha dontri mai khrap" },
+  { zh = "幾點打烊", en = "What time do you close?", th = "ปิดกี่โมงครับ", roman = "pit ki mong khrap" },
+  { zh = "能刷卡嗎", en = "Is card OK, or cash only?", th = "รับบัตรไหมครับ", roman = "rap bat mai khrap" },
+  { zh = "結帳", en = "Check, please.", th = "เก็บเงินด้วยครับ", roman = "kep ngern duai khrap" },
+]
+
+[[lang]]
+sec = "高空酒吧與 Sing Sing"
+note = "帶護照正本（20 歲以上）；酒類稅與服務費通常另加，結帳前確認。"
+rows = [
+  { zh = "有訂位", en = "We have a reservation.", th = "มีจองไว้ครับ", roman = "mi jong wai khrap" },
+  { zh = "兩位，沒訂位", en = "Two people, no reservation. Do you have a table?", th = "สองคน ไม่ได้จองครับ มีโต๊ะไหมครับ", roman = "saawng khon, mai dai jong khrap, mi to mai khrap" },
+  { zh = "吧台座位", en = "Can we sit at the bar?", th = "นั่งที่บาร์ได้ไหมครับ", roman = "nang thi bar dai mai khrap" },
+  { zh = "看日落座位", en = "Can we sit near the window or outside?", th = "ขอนั่งใกล้หน้าต่างหรือด้านนอกได้ไหมครับ", roman = "kho nang klai na-tang rue dan-nok dai mai khrap" },
+  { zh = "有入場費嗎", en = "Is there a cover charge?", th = "มีค่าเข้าไหมครับ", roman = "mi kha-khao mai khrap" },
+  { zh = "這杯多少錢", en = "How much is this drink?", th = "ค็อกเทลแก้วนี้ราคาเท่าไหร่ครับ", roman = "cocktail kaew-ni rakha thao-rai khrap" },
+  { zh = "要看帳單", en = "Please show me the bill first.", th = "ขอดูบิลก่อนครับ", roman = "kho du bill kon khrap" },
+  { zh = "含服務費嗎", en = "Is service charge included?", th = "รวมค่าบริการหรือยังครับ", roman = "ruam kha-borikan rue yang khrap" },
+]
+
+[[lang]]
+sec = "購物與退稅"
+note = "退稅規則見「救急」分頁的「錢與退稅」。"
+rows = [
+  { zh = "申請退稅", en = "VAT refund for tourists, please. Here is my passport." },
+  { zh = "索取表單", en = "Please fill in the P.P.10 form and give me the original tax invoice." },
+  { zh = "試穿", en = "Can I try it on?" },
+]
+
+[[lang]]
+sec = "遇到問題"
+note = "緊急電話見「救急」分頁。"
+rows = [
+  { zh = "求救", en = "Help! I need help.", th = "ช่วยด้วย" },
+  { zh = "請叫警察", en = "Please call the police.", th = "ช่วยเรียกตำรวจด้วยครับ" },
+  { zh = "被偷", en = "My bag was stolen." },
+  { zh = "不舒服／叫救護車", en = "I feel unwell. Please call an ambulance.", th = "ผมไม่สบายครับ" },
+  { zh = "去醫院", en = "Please take me to the hospital.", th = "ช่วยพาไปโรงพยาบาลด้วยครับ" },
+  { zh = "被亂收費", en = "You are overcharging me.", th = "คิดเงินแพงเกินไปครับ" },
+  { zh = "需要翻譯", en = "I need an interpreter.", th = "ผมต้องการล่ามครับ" },
+]
+
+[[lang]]
+sec = "住宿"
+rows = [
+  { zh = "寄放行李", en = "Can I leave my luggage here?" },
+  { zh = "門鎖進不去", en = "The door code does not work. Please help." },
+  { zh = "退房", en = "Check-out is on 7 November." },
+]
+
+[[lang]]
+sec = "泰拳與殺價（備案）"
+note = "只有選泰拳備案時才用得到。"
+rows = [
+  { zh = "買兩張票", en = "Two tickets for tonight, please.", th = "ขอตั๋วสองใบสำหรับคืนนี้ครับ", roman = "kho tua saawng bai samrap khuen-ni khrap" },
+  { zh = "問座位等級", en = "Which seat is closer to the ring?", th = "ที่นั่งไหนใกล้เวทีที่สุดครับ", roman = "thi-nang nai klai wethi thi-sut khrap" },
+  { zh = "幾點開始", en = "What time does the first fight start?", th = "คู่แรกเริ่มกี่โมงครับ", roman = "khu raek roem ki mong khrap" },
+  { zh = "最後價錢", en = "What is your last price?", th = "ราคาสุดท้ายเท่าไหร่ครับ", roman = "raka sut-thai thao-rai khrap" },
+  { zh = "可以便宜嗎", en = "Can you give a discount if I buy two?", th = "ซื้อสองชิ้น ลดได้ไหมครับ", roman = "sue saawng chin, lot dai mai khrap" },
+  { zh = "退稅", en = "VAT refund for tourists, please. Here is my passport.", th = "ขอคืนภาษีนักท่องเที่ยวครับ นี่พาสปอร์ตครับ", roman = "kho khuen phasi nak-thong-thiao khrap, ni passport khrap" },
+  { zh = "要發票", en = "Please give me the original tax invoice.", th = "ขอใบกำกับภาษีตัวจริงครับ", roman = "kho bai-kamkap-phasi tua-ching khrap" },
+]
+
